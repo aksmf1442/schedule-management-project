@@ -1,4 +1,6 @@
-const colors = {};
+const colors = {
+	GRAY: 'GRAY_400',
+};
 
 const theme = {
 	colors,

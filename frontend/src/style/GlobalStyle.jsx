@@ -54,6 +54,11 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+html {
+    font-size: 4px;
+
+  }
+
 body {
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 12px;
