@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import NavBarButton from './NavBarButton';
+import SideBarButton from './SideBarButton';
 import { useSetRecoilState } from 'recoil';
-import navBarState from '../recoil/navBarState';
+import sideBarState from '../recoil/sideBarState';
 
 const HeaderContainer = styled.div`
 	display: flex;
@@ -16,7 +16,7 @@ const HeaderContainer = styled.div`
 
 	width: 100%;
 	height: 60px;
-	padding: 6rem 6rem 3rem 3rem;
+	padding: 6rem 6rem 2rem 2rem;
 
 	background: white;
 	box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
@@ -30,16 +30,16 @@ const ContentBox = styled.div`
 `;
 
 function Header() {
-	const setNavBarOpen = useSetRecoilState(navBarState);
+	const setSideBarOpen = useSetRecoilState(sideBarState);
 
-	const handleNavBarOpen = () => {
-		setNavBarOpen(prev => !prev);
+	const handleSideBarOpen = () => {
+		setSideBarOpen(prev => !prev);
 	};
 
 	return (
 		<HeaderContainer>
 			<ContentBox>
-				<NavBarButton handleNavBarOpen={handleNavBarOpen} />
+				<SideBarButton handleSideBarOpen={handleSideBarOpen} />
 			</ContentBox>
 		</HeaderContainer>
 	);

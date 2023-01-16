@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import navBarState from '../recoil/navBarState';
+import sideBarState from '../recoil/sideBarState';
 
-const NavBarContainer = styled.div`
+const SideBarContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -17,10 +17,10 @@ const NavBarContainer = styled.div`
 	transition: width 0.5s;
 `;
 
-function NavBar() {
-	const navBarOpen = useRecoilValue(navBarState);
+function SideBar() {
+	const sideBarOpen = useRecoilValue(sideBarState);
 
-	return <NavBarContainer isOpen={navBarOpen} />;
+	return <SideBarContainer isOpen={sideBarOpen} />;
 }
 
-export default NavBar;
+export default SideBar;

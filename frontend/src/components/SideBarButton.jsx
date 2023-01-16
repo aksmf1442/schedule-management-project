@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import Button from './utils/Button';
 
 import { useRecoilValue } from 'recoil';
-import navBarState from '../recoil/navBarState';
+import sideBarState from '../recoil/sideBarState';
 import { RiMenuFill, RiMenuFoldFill } from 'react-icons/ri';
 
-const NavBarButtonContainer = styled.div`
+const SideBarButtonContainer = styled.div`
 	position: relative;
 
 	width: 11rem;
@@ -29,15 +29,15 @@ const NavBarButtonContainer = styled.div`
 	}
 `;
 
-function NavBarButton({ handleNavBarOpen }) {
-	const navBarOpen = useRecoilValue(navBarState);
+function SideBarButton({ handleSideBarOpen }) {
+	const sideBarOpen = useRecoilValue(sideBarState);
 	return (
-		<NavBarButtonContainer>
-			<Button onClick={handleNavBarOpen}>
-				{navBarOpen ? <RiMenuFoldFill size={27} /> : <RiMenuFill size={27} />}
+		<SideBarButtonContainer>
+			<Button onClick={handleSideBarOpen}>
+				{sideBarOpen ? <RiMenuFoldFill size={27} /> : <RiMenuFill size={27} />}
 			</Button>
-		</NavBarButtonContainer>
+		</SideBarButtonContainer>
 	);
 }
 
-export default NavBarButton;
+export default SideBarButton;
