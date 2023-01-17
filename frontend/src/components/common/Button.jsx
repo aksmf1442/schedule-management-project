@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ButtonBox = styled.button`
+	${({ css }) => css}
 	background: transparent;
 
 	font-family: inherit;
@@ -15,8 +16,12 @@ const ButtonBox = styled.button`
 	}
 `;
 
-function Button({ onClick, children }) {
-	return <ButtonBox onClick={onClick}>{children}</ButtonBox>;
+function Button({ css, onClick, children }) {
+	return (
+		<ButtonBox css={css} onClick={onClick}>
+			{children}
+		</ButtonBox>
+	);
 }
 
 export default Button;
