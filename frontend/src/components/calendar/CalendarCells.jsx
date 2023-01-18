@@ -30,9 +30,9 @@ function CalendarCells({ currentDate, originDate }) {
 			days.push(
 				<CalendarCell
 					day={day}
-					currentDate={currentDate}
 					originDate={originDate}
 					formattedDate={formattedDate}
+					currentDate={currentDate}
 				/>,
 			);
 			day = addDays(day, 1);

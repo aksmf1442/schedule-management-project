@@ -7,12 +7,13 @@ const CalendarCell = styled.div`
 	position: relative;
 
 	height: 100%;
-	border-right: 1px solid #dee2e6;
-	border-bottom: 1px solid #dee2e6;
-	border-left: ${({ day }) => day === 0 && `1px solid #dee2e6`};
+	border-right: 1px solid ${({ theme }) => theme.colors.GRAY};
+	border-bottom: 1px solid ${({ theme }) => theme.colors.GRAY};
+	border-left: ${({ day, theme }) => day === 0 && `1px solid ${theme.colors.GRAY}`};
 
 	&:hover {
-		background: grey;
+		background: ${({ theme }) => theme.colors.GRAY};
+		cursor: pointer;
 	}
 `;
 
@@ -26,17 +27,17 @@ const CalendarCellText = styled.span`
 	padding: 1rem;
 	border-radius: 50%;
 
-	background: ${({ isToday }) => isToday && 'red'};
+	background: ${({ isToday, theme }) => isToday && theme.colors.LIGHT_BLUE};
 
 	font-size: 2.5rem;
 	font-weight: 500;
 
-	color: ${({ isToday, isCurrentMonth, day }) =>
+	color: ${({ isToday, isCurrentMonth, day, theme }) =>
 		isToday
-			? 'white'
+			? theme.colors.BLUE
 			: day === 0
-			? `red ${isCurrentMonth ? '' : '80'}`
-			: `grey ${isCurrentMonth ? '' : '80'}`};
+			? `${theme.colors.RED}${isCurrentMonth ? '' : '70'}`
+			: `${theme.colors.BLACK}${isCurrentMonth ? '' : '70'}`};
 	text-align: ${({ isToday }) => (isToday ? 'center' : 'right')};
 
 	line-height: 3rem;
@@ -46,7 +47,7 @@ function DateCell({ day, currentDate, originDate, formattedDate }) {
 	return (
 		<CalendarCell key={day} day={getDay(day)}>
 			<CalendarCellText
-				isCurrentMonth={isSameMonth(currentDate, originDate)}
+				isCurrentMonth={isSameMonth(day, currentDate)}
 				isToday={isSameDay(day, originDate)}
 				day={getDay(day)}
 			>

@@ -10,8 +10,8 @@ const SideBarContainer = styled.div`
 
 	width: ${({ isOpen }) => (isOpen ? '64rem' : '0')};
 	height: 100vh;
-	border: 1px solid #ced4da;
-	background: white;
+	border: 1px solid ${({ theme }) => theme.colors.GRAY};
+	background: ${({ theme }) => theme.colors.WHITE};
 
 	transition: width 0.5s;
 `;

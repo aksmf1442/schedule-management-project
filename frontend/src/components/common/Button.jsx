@@ -12,7 +12,7 @@ const ButtonBox = styled.button`
 
 	&:hover {
 		border-radius: 50%;
-		background: #f1f3f5;
+		background: ${({ theme }) => theme.colors.GRAY};
 	}
 `;
 

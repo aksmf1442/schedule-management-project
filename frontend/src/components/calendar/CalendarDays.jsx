@@ -10,12 +10,12 @@ const CalendarDaysContainer = styled.div`
 
 const CalendarDay = styled.span`
 	padding: 2rem;
-	border-top: 1px solid #dee2e6;
-	border-right: 1px solid #dee2e6;
-	border-left: ${({ day, DAYS }) => day === DAYS[0] && `1px solid #dee2e6`};
+	border-top: 1px solid ${({ theme }) => theme.colors.GRAY};
+	border-right: 1px solid ${({ theme }) => theme.colors.GRAY};
+	border-left: ${({ day, DAYS, theme }) => day === DAYS[0] && `1px solid ${theme.colors.GRAY}`};
 
 	font-size: 3rem;
-	color: ${({ day, DAYS }) => day === DAYS[0] && '#ff8787'};
+	color: ${({ day, DAYS, theme }) => day === DAYS[0] && theme.colors.RED};
 	text-align: right;
 `;
 

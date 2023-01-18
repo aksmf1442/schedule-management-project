@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from 'react-icons/bs';
+import { IoIosArrowDropleft, IoIosArrowDropright } from 'react-icons/io';
 import { format } from 'date-fns';
 import styled, { css } from 'styled-components';
 import Button from '../common/Button';
@@ -16,10 +16,10 @@ const CalendarHeaderContainer = styled.div`
 
 	font-size: 5rem;
 	font-weight: 500;
-	color: black;
+	color: ${({ theme }) => theme.colors.BLACK};
 `;
 
-const MonthPickerStyle = styled.div`
+const MonthPicker = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -35,12 +35,12 @@ const headerMenuStyle = css`
 
 	font-size: 4rem;
 	line-height: 4rem;
-	color: black;
+	color: ${({ theme }) => theme.colors.BLACK};
 
 	&:hover {
 		border-radius: 50%;
 
-		background: grey;
+		background: ${({ theme }) => theme.colors.GRAY};
 
 		filter: none;
 	}
@@ -58,7 +58,7 @@ const todayButtonStyle = css`
 
 	font-size: 4rem;
 	font-weight: 500;
-	color: black;
+	color: ${({ theme }) => theme.colors.BLACK};
 	line-height: 4rem;
 `;
 
@@ -69,17 +69,17 @@ function CalendarHeader({ currentDate, resetDate, prevMonth, nextMonth }) {
 				{format(currentDate, 'yyyy')}년
 				<span className="text month">{format(currentDate, 'M')}월</span>
 			</span>
-			<MonthPickerStyle>
+			<MonthPicker>
 				<Button css={headerMenuStyle} onClick={prevMonth}>
-					<BsFillArrowLeftCircleFill size={24} />
+					<IoIosArrowDropleft size={24} />
 				</Button>
 				<Button css={todayButtonStyle} onClick={resetDate}>
 					<span>오늘</span>
 				</Button>
 				<Button css={headerMenuStyle} onClick={nextMonth}>
-					<BsFillArrowRightCircleFill size={24} />
+					<IoIosArrowDropright size={24} />
 				</Button>
-			</MonthPickerStyle>
+			</MonthPicker>
 		</CalendarHeaderContainer>
 	);
 }

@@ -36,12 +36,12 @@ border-spacing: 0;
 }
 
 a {
-color: black;
+color: ${({ theme }) => theme.colors.BLACK};
 text-decoration: none;
 }
 
 a:visited {
-color: black;
+  color: ${({ theme }) => theme.colors.BLACK};
 }
 `;
 
