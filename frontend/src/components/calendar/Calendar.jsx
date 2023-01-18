@@ -3,11 +3,13 @@ import { addMonths, subMonths } from 'date-fns';
 
 import CalendarHeader from './CalendarHeader';
 import CalendarDays from './CalendarDays';
+import CalendarCells from './CalendarCells';
 
 const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 function Calendar() {
 	const [currentDate, setCurrentDate] = useState(new Date());
+	const [originDate, setOriginDate] = useState(new Date());
 
 	const prevMonth = () => {
 		setCurrentDate(subMonths(currentDate, 1));
@@ -30,6 +32,7 @@ function Calendar() {
 				nextMonth={nextMonth}
 			/>
 			<CalendarDays DAYS={DAYS} />
+			<CalendarCells currentDate={currentDate} originDate={originDate} />
 		</>
 	);
 }
