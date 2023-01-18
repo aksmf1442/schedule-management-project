@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from './utils/Button';
+import Button from '../common/Button';
 
 import { useRecoilValue } from 'recoil';
-import sideBarState from '../recoil/sideBarState';
+import sideBarState from '../../recoil/sideBarState';
 import { RiMenuFill, RiMenuFoldFill } from 'react-icons/ri';
 
 const SideBarButtonContainer = styled.div`

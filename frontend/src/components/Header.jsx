@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SideBarButton from './SideBarButton';
+import SideBarButton from './sidebar/SideBarButton';
 import { useSetRecoilState } from 'recoil';
 import sideBarState from '../recoil/sideBarState';
 
@@ -15,7 +15,7 @@ const HeaderContainer = styled.div`
 	z-index: 15;
 
 	width: 100%;
-	height: 60px;
+	height: 64px;
 	padding: 6rem 6rem 2rem 2rem;
 
 	background: white;
