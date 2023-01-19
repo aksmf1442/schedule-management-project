@@ -7,25 +7,27 @@ import sideBarState from '../../recoil/sideBarState';
 import { RiMenuFill, RiMenuFoldFill } from 'react-icons/ri';
 
 const SideBarButtonContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
 	position: relative;
 
 	width: 11rem;
 	height: 11rem;
 
+	top: 0.6rem;
+
 	background: transparent;
 
 	font-size: 7rem;
 	font-weight: bold;
-	color: white;
 
 	&:hover {
 		border-radius: 50%;
 
 		background: white;
-	}
-
-	&:hover span {
-		visibility: visible;
 	}
 `;
 
@@ -34,7 +36,7 @@ function SideBarButton({ handleSideBarOpen }) {
 	return (
 		<SideBarButtonContainer>
 			<Button onClick={handleSideBarOpen}>
-				{sideBarOpen ? <RiMenuFoldFill size={27} /> : <RiMenuFill size={27} />}
+				{sideBarOpen ? <RiMenuFoldFill size={24} /> : <RiMenuFill size={24} />}
 			</Button>
 		</SideBarButtonContainer>
 	);

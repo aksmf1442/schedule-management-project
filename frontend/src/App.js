@@ -1,4 +1,5 @@
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Header from './components/Header';
 import SideBar from './components/sidebar/SideBar';
 import CalendarPage from './pages/CalendarPage';
@@ -6,9 +7,13 @@ import CalendarPage from './pages/CalendarPage';
 function App() {
 	return (
 		<>
-			<Header />
-			<SideBar />
-			<CalendarPage />
+			<BrowserRouter>
+				<Header />
+				<SideBar />
+				<Routes>
+					<Route path="" element={<CalendarPage />}></Route>
+				</Routes>
+			</BrowserRouter>
 		</>
 	);
 }
