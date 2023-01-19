@@ -29,6 +29,7 @@ function CalendarCells({ currentDate, originDate }) {
 			formattedDate = format(day, 'd');
 			days.push(
 				<CalendarCell
+					key={day}
 					day={day}
 					originDate={originDate}
 					formattedDate={formattedDate}
