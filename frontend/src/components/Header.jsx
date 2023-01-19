@@ -5,6 +5,8 @@ import { useSetRecoilState } from 'recoil';
 import sideBarState from '../recoil/sideBarState';
 import Button from './common/Button';
 
+import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai';
+
 const HeaderContainer = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -31,6 +33,10 @@ const ContentBox = styled.div`
 	align-items: center;
 `;
 
+const Content = styled.div`
+	margin-right: 3rem;
+`;
+
 const ContentText = styled.span`
 	color: ${({ theme }) => theme.colors.LIGHT_BLACK};
 	font-size: 5rem;
@@ -52,10 +58,26 @@ function Header() {
 	return (
 		<HeaderContainer>
 			<ContentBox>
-				<SideBarButton handleSideBarOpen={handleSideBarOpen} />
-				<Button onClick={handleClickMainButton}>
-					<ContentText>일치</ContentText>
-				</Button>
+				<Content>
+					<SideBarButton handleSideBarOpen={handleSideBarOpen} />
+				</Content>
+				<Content>
+					<Button onClick={handleClickMainButton}>
+						<ContentText>일치</ContentText>
+					</Button>
+				</Content>
+			</ContentBox>
+			<ContentBox>
+				<Content>
+					<Button>
+						<AiOutlineSearch size={24} />
+					</Button>
+				</Content>
+				<Content>
+					<Button>
+						<AiOutlineUser size={24} />
+					</Button>
+				</Content>
 			</ContentBox>
 		</HeaderContainer>
 	);
