@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Calendar from '../components/calendar/Calendar';
 import sideBarState from '../recoil/sideBarState';
 import { useRecoilValue } from 'recoil';
+import searchBarState from '../recoil/searchBarState';
 
 const CalendarPageContainer = styled.div`
 	overflow-y: auto;
@@ -14,16 +15,17 @@ const CalendarPageContainer = styled.div`
 
 	@media screen and (min-width: 1024px) {
 		margin-left: ${({ isSideBarOpen }) => (isSideBarOpen ? '64rem' : '0')};
-
-		transition: margin-left 0.5s;
+		margin-right: ${({ isSearchBarOpen }) => (isSearchBarOpen ? '64rem' : '0')};
+		transition: margin 0.5s;
 	}
 `;
 
 function CalendarPage() {
 	const isSideBarOpen = useRecoilValue(sideBarState);
+	const isSearchBarOpen = useRecoilValue(searchBarState);
 
 	return (
-		<CalendarPageContainer isSideBarOpen={isSideBarOpen}>
+		<CalendarPageContainer isSideBarOpen={isSideBarOpen} isSearchBarOpen={isSearchBarOpen}>
 			<Calendar />
 		</CalendarPageContainer>
 	);
