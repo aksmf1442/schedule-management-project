@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import SideBarButton from './sidebar/SideBarButton';
 import { useSetRecoilState } from 'recoil';
 import sideBarState from '../recoil/sideBarState';
+import searchBarState from '../recoil/searchBarState';
 import Button from './common/Button';
 
 import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai';
@@ -20,7 +21,7 @@ const HeaderContainer = styled.div`
 
 	width: 100%;
 	height: 64px;
-	padding: 2rem 6rem 2rem 2rem;
+	padding: 2rem 3rem 2rem 2rem;
 
 	background: white;
 	box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
@@ -46,9 +47,14 @@ const ContentText = styled.span`
 function Header() {
 	const navigate = useNavigate();
 	const setSideBarOpen = useSetRecoilState(sideBarState);
+	const setSearchBarOpen = useSetRecoilState(searchBarState);
 
 	const handleSideBarOpen = () => {
 		setSideBarOpen(prev => !prev);
+	};
+
+	const handleSearchBarOpen = () => {
+		setSearchBarOpen(prev => !prev);
 	};
 
 	const handleClickMainButton = () => {
@@ -69,7 +75,7 @@ function Header() {
 			</ContentBox>
 			<ContentBox>
 				<Content>
-					<Button>
+					<Button onClick={handleSearchBarOpen}>
 						<AiOutlineSearch size={24} />
 					</Button>
 				</Content>

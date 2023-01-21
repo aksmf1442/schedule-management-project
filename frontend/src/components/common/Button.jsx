@@ -11,14 +11,14 @@ const ButtonBox = styled.button`
 	cursor: pointer;
 
 	&:hover {
-		border-radius: 50%;
+		border-radius: 10%;
 		background: ${({ theme }) => theme.colors.GRAY};
 	}
 `;
 
-function Button({ css, onClick, children }) {
+function Button({ type, css, onClick, children }) {
 	return (
-		<ButtonBox css={css} onClick={onClick}>
+		<ButtonBox type={type} css={css} onClick={onClick}>
 			{children}
 		</ButtonBox>
 	);
