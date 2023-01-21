@@ -11,7 +11,7 @@ const ButtonBox = styled.button`
 	cursor: pointer;
 
 	&:hover {
-		border-radius: 50%;
+		border-radius: 10%;
 		background: ${({ theme }) => theme.colors.GRAY};
 	}
 `;

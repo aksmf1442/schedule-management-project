@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import Button from '../common/Button';
 
 import SearchBox from './SearchBox';
 
@@ -16,12 +17,14 @@ const SearchHeaderText = styled.span`
 	width: 100%;
 	height: 8rem;
 
+	margin-bottom: 4rem;
+
 	color: ${({ theme }) => theme.colors.LIGHT_BLACK};
 
 	font-weight: bold;
 `;
 
-const Contents = styled.div`
+const SearchResults = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -37,15 +40,41 @@ const Contents = styled.div`
 	transition: height 0.2s ease-in-out;
 `;
 
-const Content = styled.div`
+const SearchResultHeader = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
+
+	width: 100%;
+	height: 100%;
+`;
+
+const SearchResultDate = styled.div`
+	font-size: 3rem;
+`;
+
+const ColorBox = styled.div`
+	width: 1rem;
+	height: 100%;
+	background: red;
+
+	margin-right: 1.5rem;
+
+	border-radius: 20%;
+`;
+
+const searchResultStyle = css`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 
 	width: 100%;
 	height: 7rem;
 	margin-top: 4rem;
+
+	color: ${({ theme }) => theme.colors.LIGHT_BLACK};
 `;
 
 function SearchList({ css, children }) {
@@ -63,9 +92,16 @@ function SearchList({ css, children }) {
 	return (
 		<SearchContainer css={css}>
 			<SearchHeaderText>{children}</SearchHeaderText>
-			<Content>
-				<SearchBox onSubmit={handleSubmitSearch} kewordRef={keywordRef} />
-			</Content>
+			<SearchBox onSubmit={handleSubmitSearch} kewordRef={keywordRef} />
+			<SearchResults listLength={listLength}>
+				<Button css={searchResultStyle}>
+					<SearchResultHeader>
+						<ColorBox />
+						{keyword}
+					</SearchResultHeader>
+					<SearchResultDate>2023.01.23(월)</SearchResultDate>
+				</Button>
+			</SearchResults>
 		</SearchContainer>
 	);
 }
