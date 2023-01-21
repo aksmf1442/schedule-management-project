@@ -15,7 +15,7 @@ const CalendarPageContainer = styled.div`
 
 	@media screen and (min-width: 1024px) {
 		margin-left: ${({ isSideBarOpen }) => (isSideBarOpen ? '64rem' : '0')};
-		margin-right: ${({ isSearchBarOpen }) => (isSearchBarOpen ? '64rem' : '0')};
+		margin-right: ${({ isSearchBarOpen }) => (isSearchBarOpen ? '80rem' : '0')};
 		transition: margin 0.5s;
 	}
 `;
