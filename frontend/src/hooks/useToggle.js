@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function useToggle() {
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
 
 	const toggleClick = () => {
 		setIsOpen(prev => !prev);
