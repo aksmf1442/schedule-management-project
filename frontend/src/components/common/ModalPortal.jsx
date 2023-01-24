@@ -8,7 +8,7 @@ const ModalPortalContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 30;
@@ -16,7 +16,7 @@ const ModalPortalContainer = styled.div`
 	width: 100%;
 	height: 100%;
 
-	background: ${({ isOpen, theme }) => isOpen && 'transparent'};
+	background: ${({ isOpen, theme }) => isOpen && `${theme.colors.BLACK}bb`};
 `;
 
 function ModalPortal({ isOpen, closeModal, children }) {

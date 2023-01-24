@@ -39,7 +39,6 @@ function CalendarCells({ currentDate, originDate }) {
 					originDate={originDate}
 					formattedDate={formattedDate}
 					currentDate={currentDate}
-					monthStart={monthStart}
 					isSideBarOpen={isSideBarOpen}
 				/>,
 			);

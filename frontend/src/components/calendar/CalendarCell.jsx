@@ -47,7 +47,7 @@ const CalendarCellText = styled.span`
 	line-height: 3rem;
 `;
 
-function CalendarCell({ day, monthStart, currentDate, originDate, formattedDate, isSideBarOpen }) {
+function CalendarCell({ day, currentDate, originDate, formattedDate, isSideBarOpen }) {
 	const { isOpen: isProfileModalOpen, toggleClick: toggleProfileModalOpen } = useToggle();
 
 	const currentRef = useRef(null);
@@ -55,11 +55,6 @@ function CalendarCell({ day, monthStart, currentDate, originDate, formattedDate,
 	const handleClickProfileMenuButton = () => {
 		toggleProfileModalOpen();
 	};
-
-	const weekOfMonth =
-		startOfWeek(day, { weekStartsOn: 0 }) < monthStart
-			? 1
-			: Math.ceil((startOfWeek(day, { weekStartsOn: 0 }).getDate() + 6) / 7);
 
 	return (
 		<Button onClick={handleClickProfileMenuButton} aria-expanded={isProfileModalOpen}>
@@ -76,9 +71,9 @@ function CalendarCell({ day, monthStart, currentDate, originDate, formattedDate,
 				<ScheduleAdder
 					currentTop={currentRef?.current?.offsetTop}
 					currentLeft={currentRef?.current?.offsetLeft}
+					currentWidth={currentRef?.current?.offsetWidth}
 					isSideBarOpen={isSideBarOpen}
 					day={getDay(day)}
-					weekOfMonth={weekOfMonth}
 				>
 					asdf
 				</ScheduleAdder>
