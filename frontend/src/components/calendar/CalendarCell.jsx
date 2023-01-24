@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 
 import styled from 'styled-components';
-import { isSameMonth, isSameDay, getDay } from 'date-fns';
+import { isSameMonth, isSameDay, getDay, startOfWeek } from 'date-fns';
 import ModalPortal from '../common/ModalPortal';
 import Button from '../common/Button';
 import useToggle from '../../hooks/useToggle';
 import ScheduleAdder from '../schedule/ScheduleAdder';
 
-const CalendarCell = styled.div`
+const CalendarCellContainer = styled.div`
 	position: relative;
 
 	height: 100%;
@@ -47,7 +47,15 @@ const CalendarCellText = styled.span`
 	line-height: 3rem;
 `;
 
-function DateCell({ day, currentDate, originDate, formattedDate, isSideBarOpen }) {
+function CalendarCell({
+	day,
+	monthStart,
+	monthEnd,
+	currentDate,
+	originDate,
+	formattedDate,
+	isSideBarOpen,
+}) {
 	const { isOpen: isProfileModalOpen, toggleClick: toggleProfileModalOpen } = useToggle();
 
 	const currentRef = useRef(null);
@@ -56,9 +64,16 @@ function DateCell({ day, currentDate, originDate, formattedDate, isSideBarOpen }
 		toggleProfileModalOpen();
 	};
 
+	const weekOfMonth =
+		monthStart > day
+			? 1
+			: monthEnd < day
+			? Math.ceil((startOfWeek(monthEnd, { weekStartsOn: getDay(monthStart) }).getDate() + 1) / 7)
+			: Math.ceil((startOfWeek(day, { weekStartsOn: getDay(monthStart) }).getDate() + 1) / 7);
+
 	return (
 		<Button onClick={handleClickProfileMenuButton} aria-expanded={isProfileModalOpen}>
-			<CalendarCell key={day} day={getDay(day)} ref={currentRef}>
+			<CalendarCellContainer key={day} day={getDay(day)} ref={currentRef}>
 				<CalendarCellText
 					isCurrentMonth={isSameMonth(day, currentDate)}
 					isToday={isSameDay(day, originDate)}
@@ -66,12 +81,14 @@ function DateCell({ day, currentDate, originDate, formattedDate, isSideBarOpen }
 				>
 					{formattedDate}
 				</CalendarCellText>
-			</CalendarCell>
+			</CalendarCellContainer>
 			<ModalPortal isOpen={isProfileModalOpen} closeModal={toggleProfileModalOpen}>
 				<ScheduleAdder
 					currentTop={currentRef?.current?.offsetTop}
 					currentLeft={currentRef?.current?.offsetLeft}
 					isSideBarOpen={isSideBarOpen}
+					day={getDay(day)}
+					weekOfMonth={weekOfMonth}
 				>
 					asdf
 				</ScheduleAdder>
@@ -80,4 +97,4 @@ function DateCell({ day, currentDate, originDate, formattedDate, isSideBarOpen }
 	);
 }
 
-export default DateCell;
+export default CalendarCell;
