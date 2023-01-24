@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import styled from 'styled-components';
-import { isSameMonth, isSameDay, getDay } from 'date-fns';
+import { isSameMonth, isSameDay, getDay, startOfWeek } from 'date-fns';
+import ModalPortal from '../common/ModalPortal';
+import Button from '../common/Button';
+import useToggle from '../../hooks/useToggle';
+import ScheduleAdder from '../schedule/ScheduleAdder';
 
-const CalendarCell = styled.div`
+const CalendarCellContainer = styled.div`
 	position: relative;
 
 	height: 100%;
@@ -12,7 +16,7 @@ const CalendarCell = styled.div`
 	border-left: ${({ day, theme }) => day === 0 && `1px solid ${theme.colors.GRAY}`};
 
 	&:hover {
-		background: ${({ theme }) => theme.colors.GRAY};
+		background: ${({ theme }) => theme.colors.WHITE};
 		cursor: pointer;
 	}
 `;
@@ -43,18 +47,44 @@ const CalendarCellText = styled.span`
 	line-height: 3rem;
 `;
 
-function DateCell({ day, currentDate, originDate, formattedDate }) {
+function CalendarCell({ day, monthStart, currentDate, originDate, formattedDate, isSideBarOpen }) {
+	const { isOpen: isProfileModalOpen, toggleClick: toggleProfileModalOpen } = useToggle();
+
+	const currentRef = useRef(null);
+
+	const handleClickProfileMenuButton = () => {
+		toggleProfileModalOpen();
+	};
+
+	const weekOfMonth =
+		startOfWeek(day, { weekStartsOn: 0 }) < monthStart
+			? 1
+			: Math.ceil((startOfWeek(day, { weekStartsOn: 0 }).getDate() + 6) / 7);
+
 	return (
-		<CalendarCell key={day} day={getDay(day)}>
-			<CalendarCellText
-				isCurrentMonth={isSameMonth(day, currentDate)}
-				isToday={isSameDay(day, originDate)}
-				day={getDay(day)}
-			>
-				{formattedDate}
-			</CalendarCellText>
-		</CalendarCell>
+		<Button onClick={handleClickProfileMenuButton} aria-expanded={isProfileModalOpen}>
+			<CalendarCellContainer key={day} day={getDay(day)} ref={currentRef}>
+				<CalendarCellText
+					isCurrentMonth={isSameMonth(day, currentDate)}
+					isToday={isSameDay(day, originDate)}
+					day={getDay(day)}
+				>
+					{formattedDate}
+				</CalendarCellText>
+			</CalendarCellContainer>
+			<ModalPortal isOpen={isProfileModalOpen} closeModal={toggleProfileModalOpen}>
+				<ScheduleAdder
+					currentTop={currentRef?.current?.offsetTop}
+					currentLeft={currentRef?.current?.offsetLeft}
+					isSideBarOpen={isSideBarOpen}
+					day={getDay(day)}
+					weekOfMonth={weekOfMonth}
+				>
+					asdf
+				</ScheduleAdder>
+			</ModalPortal>
+		</Button>
 	);
 }
 
-export default DateCell;
+export default CalendarCell;
