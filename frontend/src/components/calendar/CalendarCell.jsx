@@ -47,15 +47,7 @@ const CalendarCellText = styled.span`
 	line-height: 3rem;
 `;
 
-function CalendarCell({
-	day,
-	monthStart,
-	monthEnd,
-	currentDate,
-	originDate,
-	formattedDate,
-	isSideBarOpen,
-}) {
+function CalendarCell({ day, monthStart, currentDate, originDate, formattedDate, isSideBarOpen }) {
 	const { isOpen: isProfileModalOpen, toggleClick: toggleProfileModalOpen } = useToggle();
 
 	const currentRef = useRef(null);
@@ -65,11 +57,9 @@ function CalendarCell({
 	};
 
 	const weekOfMonth =
-		monthStart > day
+		startOfWeek(day, { weekStartsOn: 0 }) < monthStart
 			? 1
-			: monthEnd < day
-			? Math.ceil((startOfWeek(monthEnd, { weekStartsOn: getDay(monthStart) }).getDate() + 1) / 7)
-			: Math.ceil((startOfWeek(day, { weekStartsOn: getDay(monthStart) }).getDate() + 1) / 7);
+			: Math.ceil((startOfWeek(day, { weekStartsOn: 0 }).getDate() + 6) / 7);
 
 	return (
 		<Button onClick={handleClickProfileMenuButton} aria-expanded={isProfileModalOpen}>

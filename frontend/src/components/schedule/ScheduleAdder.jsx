@@ -176,8 +176,6 @@ function ScheduleAdder({ currentTop, currentLeft, isSideBarOpen, day, weekOfMont
 		setAllDay(prev => !prev);
 	};
 
-	console.log(weekOfMonth);
-
 	return (
 		<ScheduleAdderContainer
 			currentTop={currentTop}
