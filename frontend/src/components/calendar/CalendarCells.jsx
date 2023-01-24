@@ -26,9 +26,10 @@ function CalendarCells({ currentDate, originDate }) {
 	let days = [];
 	let day = startDate;
 	let formattedDate = '';
-	let rowLength = 5;
+	let rowLength = 0;
 
 	while (day <= endDate) {
+		rowLength++;
 		for (let i = 0; i < 7; i++) {
 			formattedDate = format(day, 'd');
 			days.push(
