@@ -7,9 +7,6 @@ const ScheduleAdderContainer = styled.div`
 	justify-content: space-around;
 	gap: 2rem;
 	position: fixed;
-	top: ${({ currentTop, weekOfMonth }) => currentTop + (weekOfMonth >= 4 ? -200 : 100)}px;
-	left: ${({ currentLeft, isSideBarOpen, day }) =>
-		currentLeft + (isSideBarOpen ? 256 : 0) + (day < 2 ? 0 + 190 : -330)}px;
 
 	width: 81rem;
 	padding: 5.5rem;
@@ -169,7 +166,7 @@ const FormControlButtons = styled.div`
 	width: 100%;
 `;
 
-function ScheduleAdder({ currentTop, currentLeft, isSideBarOpen, day, weekOfMonth }) {
+function ScheduleAdder({ currentTop, currentLeft, currentWidth, isSideBarOpen, day }) {
 	const [isAllDay, setAllDay] = useState(true);
 
 	const handleClickAllDayButton = () => {
@@ -180,9 +177,9 @@ function ScheduleAdder({ currentTop, currentLeft, isSideBarOpen, day, weekOfMont
 		<ScheduleAdderContainer
 			currentTop={currentTop}
 			currentLeft={currentLeft}
+			currentWidth={currentWidth}
 			isSideBarOpen={isSideBarOpen}
 			day={day}
-			weekOfMonth={weekOfMonth}
 		>
 			<ScheduleAdderForm>
 				<InputContainer>
