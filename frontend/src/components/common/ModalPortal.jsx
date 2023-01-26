@@ -16,10 +16,15 @@ const ModalPortalContainer = styled.div`
 	width: 100%;
 	height: 100%;
 
-	background: ${({ isOpen, theme }) => isOpen && `${theme.colors.BLACK}bb`};
+	background: ${({ theme, dimmerBackground, isOpen }) =>
+		dimmerBackground !== undefined
+			? dimmerBackground
+			: isOpen
+			? `${theme.colors.BLACK}bb`
+			: 'transparent'};
 `;
 
-function ModalPortal({ isOpen, closeModal, children }) {
+function ModalPortal({ isOpen, closeModal, dimmerBackground, children }) {
 	const modalElement = document.getElementById('modal');
 
 	if (!(modalElement instanceof HTMLElement)) {
@@ -35,7 +40,11 @@ function ModalPortal({ isOpen, closeModal, children }) {
 	};
 
 	const element = isOpen && (
-		<ModalPortalContainer isOpen={isOpen} onClick={handleClickDimmer}>
+		<ModalPortalContainer
+			isOpen={isOpen}
+			onClick={handleClickDimmer}
+			dimmerBackground={dimmerBackground}
+		>
 			{children}
 		</ModalPortalContainer>
 	);

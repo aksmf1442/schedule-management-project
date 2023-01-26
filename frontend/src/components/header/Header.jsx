@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import SideBarButton from './sidebar/SideBarButton';
+import SideBarButton from '../sidebar/SideBarButton';
 import { useSetRecoilState } from 'recoil';
-import sideBarState from '../recoil/sideBarState';
-import searchBarState from '../recoil/searchBarState';
-import Button from './common/Button';
+import sideBarState from '../../recoil/sideBarState';
+import searchBarState from '../../recoil/searchBarState';
+import Button from '../common/Button';
 
 import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai';
+import ModalPortal from '../common/ModalPortal';
+import useToggle from '../../hooks/useToggle';
+import Profile from '../profile/Profile';
 
 const HeaderContainer = styled.div`
 	display: flex;
@@ -49,6 +52,8 @@ function Header() {
 	const setSideBarOpen = useSetRecoilState(sideBarState);
 	const setSearchBarOpen = useSetRecoilState(searchBarState);
 
+	const { isOpen: isProfileModalOpen, toggleClick: toggleProfileModalOpen } = useToggle();
+
 	const handleSideBarOpen = () => {
 		setSideBarOpen(prev => !prev);
 	};
@@ -59,6 +64,10 @@ function Header() {
 
 	const handleClickMainButton = () => {
 		navigate('');
+	};
+
+	const handleClickProfileMenuButton = () => {
+		toggleProfileModalOpen();
 	};
 
 	return (
@@ -80,8 +89,15 @@ function Header() {
 					</Button>
 				</Content>
 				<Content>
-					<Button>
+					<Button onClick={handleClickProfileMenuButton}>
 						<AiOutlineUser size={24} />
+						<ModalPortal
+							isOpen={isProfileModalOpen}
+							closeModal={toggleProfileModalOpen}
+							dimmerBackground={'transparent'}
+						>
+							<Profile />
+						</ModalPortal>
 					</Button>
 				</Content>
 			</ContentBox>
