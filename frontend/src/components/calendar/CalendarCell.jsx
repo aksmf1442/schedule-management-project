@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 
 import styled from 'styled-components';
-import { isSameMonth, isSameDay, getDay, startOfWeek } from 'date-fns';
+import { isSameMonth, isSameDay, getDay } from 'date-fns';
 import ModalPortal from '../common/ModalPortal';
 import Button from '../common/Button';
 import useToggle from '../../hooks/useToggle';
@@ -48,17 +48,15 @@ const CalendarCellText = styled.span`
 `;
 
 function CalendarCell({ day, currentDate, originDate, formattedDate, isSideBarOpen }) {
-	const { isOpen: isProfileModalOpen, toggleClick: toggleProfileModalOpen } = useToggle();
+	const { isOpen: isProfileModalOpen, toggleClick: toggleScheduleAdderModalOpen } = useToggle();
 
-	const currentRef = useRef(null);
-
-	const handleClickProfileMenuButton = () => {
-		toggleProfileModalOpen();
+	const handleClickScheduleAdderButton = () => {
+		toggleScheduleAdderModalOpen();
 	};
 
 	return (
-		<Button onClick={handleClickProfileMenuButton} aria-expanded={isProfileModalOpen}>
-			<CalendarCellContainer key={day} day={getDay(day)} ref={currentRef}>
+		<Button onClick={handleClickScheduleAdderButton} aria-expanded={isProfileModalOpen}>
+			<CalendarCellContainer key={day} day={getDay(day)}>
 				<CalendarCellText
 					isCurrentMonth={isSameMonth(day, currentDate)}
 					isToday={isSameDay(day, originDate)}
@@ -67,16 +65,8 @@ function CalendarCell({ day, currentDate, originDate, formattedDate, isSideBarOp
 					{formattedDate}
 				</CalendarCellText>
 			</CalendarCellContainer>
-			<ModalPortal isOpen={isProfileModalOpen} closeModal={toggleProfileModalOpen}>
-				<ScheduleAdder
-					currentTop={currentRef?.current?.offsetTop}
-					currentLeft={currentRef?.current?.offsetLeft}
-					currentWidth={currentRef?.current?.offsetWidth}
-					isSideBarOpen={isSideBarOpen}
-					day={getDay(day)}
-				>
-					asdf
-				</ScheduleAdder>
+			<ModalPortal isOpen={isProfileModalOpen} closeModal={toggleScheduleAdderModalOpen}>
+				<ScheduleAdder isSideBarOpen={isSideBarOpen} day={getDay(day)} />
 			</ModalPortal>
 		</Button>
 	);

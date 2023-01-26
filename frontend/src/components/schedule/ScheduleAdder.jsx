@@ -166,7 +166,7 @@ const FormControlButtons = styled.div`
 	width: 100%;
 `;
 
-function ScheduleAdder({ currentTop, currentLeft, currentWidth, isSideBarOpen, day }) {
+function ScheduleAdder({ isSideBarOpen, day }) {
 	const [isAllDay, setAllDay] = useState(true);
 
 	const handleClickAllDayButton = () => {
@@ -174,13 +174,7 @@ function ScheduleAdder({ currentTop, currentLeft, currentWidth, isSideBarOpen, d
 	};
 
 	return (
-		<ScheduleAdderContainer
-			currentTop={currentTop}
-			currentLeft={currentLeft}
-			currentWidth={currentWidth}
-			isSideBarOpen={isSideBarOpen}
-			day={day}
-		>
+		<ScheduleAdderContainer isSideBarOpen={isSideBarOpen} day={day}>
 			<ScheduleAdderForm>
 				<InputContainer>
 					<ScheduleInput placeholder="일정 제목 추가" autoFocus />
