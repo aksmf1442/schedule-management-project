@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
-import Button from '../common/Button';
+import Button from '../../common/Button';
+import useToggle from '../../../hooks/useToggle';
+import ModalPortal from '../../common/ModalPortal';
 import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
-
 import { MdCheckBoxOutlineBlank, MdMoreVert, MdClose } from 'react-icons/md';
+import MyCalendarAdder from './MyCalendarAdder';
 
 const ListBox = styled.div`
 	${({ css }) => css}
@@ -91,21 +93,21 @@ const listButtonStyle = css`
 	margin-left: 4rem;
 `;
 
-function SideMyCalendarList({ css, children }) {
-	const [isMyListOpen, setIsMyListOpen] = useState(true);
-
-	const handleMyListOpen = () => {
-		setIsMyListOpen(prev => !prev);
-	};
+function MyCalendarList({ css, children }) {
+	const { isOpen: isMyListOpen, toggleClick: toggleMyListOpen } = useToggle(true);
+	const { isOpen: isMyCalendarAdderOpen, toggleClick: toggleMyCalendarAdderOpen } = useToggle();
 
 	return (
 		<ListBox css={css}>
 			<ListHeader>
 				<ListHeaderText>{children}</ListHeaderText>
-				<Button css={listButtonStyle}>
+				<Button onClick={toggleMyCalendarAdderOpen} css={listButtonStyle}>
 					<AiOutlinePlus size={16} />
+					<ModalPortal isOpen={isMyCalendarAdderOpen} closeModal={toggleMyCalendarAdderOpen}>
+						<MyCalendarAdder claseModal={toggleMyCalendarAdderOpen} />
+					</ModalPortal>
 				</Button>
-				<Button onClick={handleMyListOpen} css={listButtonStyle}>
+				<Button onClick={toggleMyListOpen} css={listButtonStyle}>
 					{isMyListOpen ? <AiOutlineUp size={16} /> : <AiOutlineDown size={16} />}
 				</Button>
 			</ListHeader>
@@ -143,4 +145,4 @@ function SideMyCalendarList({ css, children }) {
 	);
 }
 
-export default SideMyCalendarList;
+export default MyCalendarList;
