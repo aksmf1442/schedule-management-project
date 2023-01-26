@@ -48,14 +48,15 @@ const CalendarCellText = styled.span`
 `;
 
 function CalendarCell({ day, currentDate, originDate, formattedDate, isSideBarOpen }) {
-	const { isOpen: isProfileModalOpen, toggleClick: toggleScheduleAdderModalOpen } = useToggle();
+	const { isOpen: isScheduleAdderModalOpen, toggleClick: toggleScheduleAdderModalOpen } =
+		useToggle();
 
 	const handleClickScheduleAdderButton = () => {
 		toggleScheduleAdderModalOpen();
 	};
 
 	return (
-		<Button onClick={handleClickScheduleAdderButton} aria-expanded={isProfileModalOpen}>
+		<Button onClick={handleClickScheduleAdderButton} aria-expanded={isScheduleAdderModalOpen}>
 			<CalendarCellContainer key={day} day={getDay(day)}>
 				<CalendarCellText
 					isCurrentMonth={isSameMonth(day, currentDate)}
@@ -65,7 +66,7 @@ function CalendarCell({ day, currentDate, originDate, formattedDate, isSideBarOp
 					{formattedDate}
 				</CalendarCellText>
 			</CalendarCellContainer>
-			<ModalPortal isOpen={isProfileModalOpen} closeModal={toggleScheduleAdderModalOpen}>
+			<ModalPortal isOpen={isScheduleAdderModalOpen} closeModal={toggleScheduleAdderModalOpen}>
 				<ScheduleAdder isSideBarOpen={isSideBarOpen} day={getDay(day)} />
 			</ModalPortal>
 		</Button>
