@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import sideBarState from '../../recoil/sideBarState';
 import MyCalendarList from './calendarlist/MyCalendarList';
-import SideSubscribedCalendarList from './SideSubscribedCalendarList';
+import SubscribeCalendarList from './subscribecalendarlist/SubscribeCalendarList';
 
 const SideBarContainer = styled.div`
 	overflow: hidden;
@@ -44,7 +44,7 @@ function SideBar() {
 	return (
 		<SideBarContainer isSideBarOpen={isSideBarOpen}>
 			<MyCalendarList css={sideListStyle}>내 캘린더</MyCalendarList>
-			<SideSubscribedCalendarList css={sideListStyle}>구독한 캘린더</SideSubscribedCalendarList>
+			<SubscribeCalendarList css={sideListStyle}>구독한 캘린더</SubscribeCalendarList>
 		</SideBarContainer>
 	);
 }

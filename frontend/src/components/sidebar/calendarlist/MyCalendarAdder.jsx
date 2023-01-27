@@ -32,7 +32,7 @@ const MyCalendarAdderForm = styled.form`
 	height: 100%;
 `;
 
-const MyCalendarContent = styled.div`
+const MyCalendarAdderContent = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -42,7 +42,7 @@ const MyCalendarContent = styled.div`
 	height: 100%;
 `;
 
-const MyCalendarInput = styled.input`
+const MyCalendarAdderInput = styled.input`
 	width: 100%;
 	background: inherit;
 	border: 0;
@@ -77,7 +77,7 @@ const saveButtonStyle = css`
 	color: ${({ theme }) => theme.colors.BLUE};
 `;
 
-const MyCalendarControlButtons = styled.div`
+const MyCalendarAdderControlButtons = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -90,17 +90,17 @@ const MyCalendarControlButtons = styled.div`
 function MyCalendarAdder({ closeModal }) {
 	return (
 		<MyCalendarAdderContainer>
-			<MyCalendarAdderTitle>내 캘린더 추가</MyCalendarAdderTitle>
+			<MyCalendarAdderTitle>캘린더 추가</MyCalendarAdderTitle>
 			<MyCalendarAdderForm>
-				<MyCalendarContent>
-					<MyCalendarInput placeholder="캘린더 제목" autoFocus={true} />
-				</MyCalendarContent>
-				<MyCalendarControlButtons>
+				<MyCalendarAdderContent>
+					<MyCalendarAdderInput placeholder="캘린더 제목" autoFocus={true} />
+				</MyCalendarAdderContent>
+				<MyCalendarAdderControlButtons>
 					<Button css={cancelButtonStyle} onClick={closeModal}>
 						취소
 					</Button>
-					<Button css={saveButtonStyle}>저장</Button>
-				</MyCalendarControlButtons>
+					<Button css={saveButtonStyle}>추가</Button>
+				</MyCalendarAdderControlButtons>
 			</MyCalendarAdderForm>
 		</MyCalendarAdderContainer>
 	);
