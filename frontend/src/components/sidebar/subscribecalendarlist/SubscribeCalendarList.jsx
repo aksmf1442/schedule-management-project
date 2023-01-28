@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import Button from '../common/Button';
+import Button from '../../common/Button';
 import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 
 import { MdCheckBoxOutlineBlank, MdMoreVert, MdClose } from 'react-icons/md';
+import useToggle from '../../../hooks/useToggle';
+import ModalPortal from '../../common/ModalPortal';
+import SubscribeCalendarAdder from './SubscribeCalendarAdder';
 
 const ListBox = styled.div`
 	${({ css }) => css}
@@ -91,25 +94,25 @@ const listButtonStyle = css`
 	margin-left: 4rem;
 `;
 
-function SideSubscribedCalendarList({ css, children }) {
-	const [isSubscriebedListOpen, setIsSubscriebedListOpen] = useState(true);
-
-	const handleMyListOpen = () => {
-		setIsSubscriebedListOpen(prev => !prev);
-	};
+function SubscribeCalendarList({ css, children }) {
+	const { isOpen: isSubscriebeListOpen, toggleClick: toggleSubscriebeListOpen } = useToggle(true);
+	const { isOpen: isSubscriebeAdderOpen, toggleClick: toggleSubscriebeAdderOpen } = useToggle();
 
 	return (
 		<ListBox css={css}>
 			<ListHeader>
 				<ListHeaderText>{children}</ListHeaderText>
-				<Button css={listButtonStyle}>
+				<Button onClick={toggleSubscriebeAdderOpen} css={listButtonStyle}>
 					<AiOutlinePlus size={16} />
+					<ModalPortal isOpen={isSubscriebeAdderOpen} closeModal={toggleSubscriebeAdderOpen}>
+						<SubscribeCalendarAdder claseModal={toggleSubscriebeAdderOpen} />
+					</ModalPortal>
 				</Button>
-				<Button onClick={handleMyListOpen} css={listButtonStyle}>
-					{isSubscriebedListOpen ? <AiOutlineUp size={16} /> : <AiOutlineDown size={16} />}
+				<Button onClick={toggleSubscriebeListOpen} css={listButtonStyle}>
+					{isSubscriebeListOpen ? <AiOutlineUp size={16} /> : <AiOutlineDown size={16} />}
 				</Button>
 			</ListHeader>
-			<ListContents isMyListOpen={isSubscriebedListOpen} listLength={2}>
+			<ListContents isMyListOpen={isSubscriebeListOpen} listLength={2}>
 				<ListContent>
 					<ListContentNameContainer>
 						<MdCheckBoxOutlineBlank />
@@ -143,4 +146,4 @@ function SideSubscribedCalendarList({ css, children }) {
 	);
 }
 
-export default SideSubscribedCalendarList;
+export default SubscribeCalendarList;
