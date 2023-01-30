@@ -22,7 +22,7 @@ const SubscribeCalendarAdderTitle = styled.h1`
 	color: ${({ theme }) => theme.colors.GRAY};
 `;
 
-function SubscribeCalendarAdder({ closeModal }) {
+function SubscribeCalendarAdder() {
 	return (
 		<SubscribeCalendarAdderContainer>
 			<SubscribeCalendarAdderTitle>캘린더 구독</SubscribeCalendarAdderTitle>
