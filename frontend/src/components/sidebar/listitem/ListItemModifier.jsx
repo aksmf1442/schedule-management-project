@@ -1,8 +1,10 @@
 import React from 'react';
 import { MdSettings, MdOutlineDelete } from 'react-icons/md';
 import styled, { css } from 'styled-components';
-import useToggle from '../../../../hooks/useToggle';
-import Button from '../../../common/Button';
+import useToggle from '../../../hooks/useToggle';
+import Button from '../../common/Button';
+import ModalPortal from '../../common/ModalPortal';
+import CalendarModifier from './CalendarModifier';
 
 const controlButtonStyle = css`
 	display: flex;
@@ -71,14 +73,10 @@ function ListItemModifier({ modalPos, closeModal }) {
 	const { isOpen: isCalendarManageModalOpen, toggleClick: toggleCalendarManageModalOpen } =
 		useToggle();
 
-	const handleClickManageButton = () => {
-		toggleCalendarManageModalOpen();
-	};
-
 	return (
 		<ModalPosContainer modalPos={modalPos}>
 			{canEditSubscription && (
-				<Button css={controlButtonStyle} onClick={handleClickManageButton}>
+				<Button css={controlButtonStyle} onClick={toggleCalendarManageModalOpen}>
 					<MdSettings size={24} />
 					관리
 				</Button>
@@ -94,6 +92,9 @@ function ListItemModifier({ modalPos, closeModal }) {
 					return <Button key={color} css={colorStyle} color={color} />;
 				})}
 			</ColorsContainer>
+			<ModalPortal isOpen={isCalendarManageModalOpen} closeModal={toggleCalendarManageModalOpen}>
+				<CalendarModifier clasModal={toggleCalendarManageModalOpen} />
+			</ModalPortal>
 		</ModalPosContainer>
 	);
 }

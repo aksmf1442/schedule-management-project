@@ -6,7 +6,7 @@ import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 import useToggle from '../../../hooks/useToggle';
 import ModalPortal from '../../common/ModalPortal';
 import SubscribeCalendarAdder from './SubscribeCalendarAdder';
-import ListItem from '../calendarlist/listcontent/ListItem';
+import ListItem from '../listitem/ListItem';
 
 const ListBox = styled.div`
 	${({ css }) => css}
@@ -60,26 +60,24 @@ function SubscribeCalendarList({ css, children }) {
 	const { isOpen: isSubscriebeAdderOpen, toggleClick: toggleSubscriebeAdderOpen } = useToggle();
 
 	return (
-		<>
-			<ListBox css={css}>
-				<ListHeader>
-					<ListHeaderText>{children}</ListHeaderText>
-					<Button onClick={toggleSubscriebeAdderOpen} css={listButtonStyle}>
-						<AiOutlinePlus size={16} />
-					</Button>
-					<Button onClick={toggleSubscriebeListOpen} css={listButtonStyle}>
-						{isSubscriebeListOpen ? <AiOutlineUp size={16} /> : <AiOutlineDown size={16} />}
-					</Button>
-				</ListHeader>
-				<ListContents isMyListOpen={isSubscriebeListOpen} listLength={2}>
-					<ListItem>구독한 캘린더1</ListItem>
-					<ListItem>구독한 캘린더2</ListItem>
-				</ListContents>
-			</ListBox>
+		<ListBox css={css}>
+			<ListHeader>
+				<ListHeaderText>{children}</ListHeaderText>
+				<Button onClick={toggleSubscriebeAdderOpen} css={listButtonStyle}>
+					<AiOutlinePlus size={16} />
+				</Button>
+				<Button onClick={toggleSubscriebeListOpen} css={listButtonStyle}>
+					{isSubscriebeListOpen ? <AiOutlineUp size={16} /> : <AiOutlineDown size={16} />}
+				</Button>
+			</ListHeader>
+			<ListContents isMyListOpen={isSubscriebeListOpen} listLength={2}>
+				<ListItem>구독한 캘린더1</ListItem>
+				<ListItem>구독한 캘린더2</ListItem>
+			</ListContents>
 			<ModalPortal isOpen={isSubscriebeAdderOpen} closeModal={toggleSubscriebeAdderOpen}>
 				<SubscribeCalendarAdder claseModal={toggleSubscriebeAdderOpen} />
 			</ModalPortal>
-		</>
+		</ListBox>
 	);
 }
 

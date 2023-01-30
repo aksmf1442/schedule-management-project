@@ -5,7 +5,7 @@ import useToggle from '../../../hooks/useToggle';
 import ModalPortal from '../../common/ModalPortal';
 import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 import MyCalendarAdder from './MyCalendarAdder';
-import ListItem from './listcontent/ListItem';
+import ListItem from '../listitem/ListItem';
 
 const ListBox = styled.div`
 	${({ css }) => css}
@@ -64,9 +64,6 @@ function MyCalendarList({ css, children }) {
 				<ListHeaderText>{children}</ListHeaderText>
 				<Button onClick={toggleMyCalendarAdderOpen} css={listButtonStyle}>
 					<AiOutlinePlus size={16} />
-					<ModalPortal isOpen={isMyCalendarAdderOpen} closeModal={toggleMyCalendarAdderOpen}>
-						<MyCalendarAdder claseModal={toggleMyCalendarAdderOpen} />
-					</ModalPortal>
 				</Button>
 				<Button onClick={toggleMyListOpen} css={listButtonStyle}>
 					{isMyListOpen ? <AiOutlineUp size={16} /> : <AiOutlineDown size={16} />}
@@ -76,6 +73,9 @@ function MyCalendarList({ css, children }) {
 				<ListItem>내 캘린더1</ListItem>
 				<ListItem>내 캘린더2</ListItem>
 			</ListContents>
+			<ModalPortal isOpen={isMyCalendarAdderOpen} closeModal={toggleMyCalendarAdderOpen}>
+				<MyCalendarAdder claseModal={toggleMyCalendarAdderOpen} />
+			</ModalPortal>
 		</ListBox>
 	);
 }
