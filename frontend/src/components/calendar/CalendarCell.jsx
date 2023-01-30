@@ -56,20 +56,22 @@ function CalendarCell({ day, currentDate, originDate, formattedDate, isSideBarOp
 	};
 
 	return (
-		<Button onClick={handleClickScheduleAdderButton} aria-expanded={isScheduleAdderModalOpen}>
-			<CalendarCellContainer key={day} day={getDay(day)}>
-				<CalendarCellText
-					isCurrentMonth={isSameMonth(day, currentDate)}
-					isToday={isSameDay(day, originDate)}
-					day={getDay(day)}
-				>
-					{formattedDate}
-				</CalendarCellText>
-			</CalendarCellContainer>
+		<>
+			<Button onClick={handleClickScheduleAdderButton} aria-expanded={isScheduleAdderModalOpen}>
+				<CalendarCellContainer key={day} day={getDay(day)}>
+					<CalendarCellText
+						isCurrentMonth={isSameMonth(day, currentDate)}
+						isToday={isSameDay(day, originDate)}
+						day={getDay(day)}
+					>
+						{formattedDate}
+					</CalendarCellText>
+				</CalendarCellContainer>
+			</Button>
 			<ModalPortal isOpen={isScheduleAdderModalOpen} closeModal={toggleScheduleAdderModalOpen}>
 				<ScheduleAdder isSideBarOpen={isSideBarOpen} day={getDay(day)} />
 			</ModalPortal>
-		</Button>
+		</>
 	);
 }
 

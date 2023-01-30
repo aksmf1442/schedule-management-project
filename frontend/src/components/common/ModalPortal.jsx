@@ -32,7 +32,7 @@ function ModalPortal({ isOpen, closeModal, dimmerBackground, children }) {
 	}
 
 	const handleClickDimmer = e => {
-		if (e.target === e.currentTarget) {
+		if (e.target !== e.currentTarget) {
 			return;
 		}
 

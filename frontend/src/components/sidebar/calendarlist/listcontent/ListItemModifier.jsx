@@ -76,27 +76,25 @@ function ListItemModifier({ modalPos, closeModal }) {
 	};
 
 	return (
-		<>
-			<ModalPosContainer modalPos={modalPos}>
-				{canEditSubscription && (
-					<Button css={controlButtonStyle} onClick={handleClickManageButton}>
-						<MdSettings size={24} />
-						관리
-					</Button>
-				)}
-				{canDeleteSubscription && (
-					<Button css={controlButtonStyle}>
-						<MdOutlineDelete size={24} />
-						구독 해제
-					</Button>
-				)}
-				<ColorsContainer>
-					{COLORS.map(color => {
-						return <Button key={color} css={colorStyle} color={color} />;
-					})}
-				</ColorsContainer>
-			</ModalPosContainer>
-		</>
+		<ModalPosContainer modalPos={modalPos}>
+			{canEditSubscription && (
+				<Button css={controlButtonStyle} onClick={handleClickManageButton}>
+					<MdSettings size={24} />
+					관리
+				</Button>
+			)}
+			{canDeleteSubscription && (
+				<Button css={controlButtonStyle}>
+					<MdOutlineDelete size={24} />
+					구독 해제
+				</Button>
+			)}
+			<ColorsContainer>
+				{COLORS.map(color => {
+					return <Button key={color} css={colorStyle} color={color} />;
+				})}
+			</ColorsContainer>
+		</ModalPosContainer>
 	);
 }
 

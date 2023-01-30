@@ -47,7 +47,7 @@ const listItemModalButtonStyle = css`
 
 function ListItem({ children }) {
 	const { isModalOpen, toggleModalOpen, handleClickOpen, modalPos } = useModalPosition();
-
+	console.log(isModalOpen);
 	return (
 		<ListContentContainer>
 			<ListContentNameContainer>
@@ -60,6 +60,8 @@ function ListItem({ children }) {
 				</Button>
 				<Button css={listItemModalButtonStyle} onClick={handleClickOpen}>
 					<MdMoreVert />
+				</Button>
+				{isModalOpen && (
 					<ModalPortal
 						isOpen={isModalOpen}
 						closeModal={toggleModalOpen}
@@ -67,7 +69,7 @@ function ListItem({ children }) {
 					>
 						<ListItemModifier closeModal={toggleModalOpen} modalPos={modalPos} />
 					</ModalPortal>
-				</Button>
+				)}
 			</ListContentModalOpenContainer>
 		</ListContentContainer>
 	);
