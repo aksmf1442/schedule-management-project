@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ButtonBox = styled.button`
-	${({ css }) => css}
-	background: transparent;
+	background: ${({ color }) => (color ? color : 'transparent')};
 
 	font-family: inherit;
 	text-align: center;
@@ -14,11 +13,12 @@ const ButtonBox = styled.button`
 		border-radius: 10%;
 		background: ${({ theme }) => theme.colors.GRAY};
 	}
+	${({ css }) => css}
 `;
 
-function Button({ type, css, onClick, children, ...props }) {
+function Button({ type, css, onClick, children, color, ...props }) {
 	return (
-		<ButtonBox {...props} type={type} css={css} onClick={onClick}>
+		<ButtonBox {...props} type={type} css={css} color={color} onClick={onClick}>
 			{children}
 		</ButtonBox>
 	);

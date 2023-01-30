@@ -2,6 +2,9 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdCheckBoxOutlineBlank, MdMoreVert, MdClose } from 'react-icons/md';
 import Button from '../../../common/Button';
+import ModalPortal from '../../../common/ModalPortal';
+import ListItemModifier from './ListItemModifier';
+import useModalPosition from '../../../../hooks/ useModalPosition';
 
 const ListContentContainer = styled.div`
 	display: flex;
@@ -38,11 +41,13 @@ const ListContentModalOpenContainer = styled.div`
 	position: relative;
 `;
 
-const listContentModalButtonStyle = css`
+const listItemModalButtonStyle = css`
 	visibility: hidden;
 `;
 
 function ListItem({ children }) {
+	const { isModalOpen, toggleModalOpen, handleClickOpen, modalPos } = useModalPosition();
+
 	return (
 		<ListContentContainer>
 			<ListContentNameContainer>
@@ -50,11 +55,18 @@ function ListItem({ children }) {
 				{children}
 			</ListContentNameContainer>
 			<ListContentModalOpenContainer>
-				<Button css={listContentModalButtonStyle}>
+				<Button css={listItemModalButtonStyle}>
 					<MdClose />
 				</Button>
-				<Button css={listContentModalButtonStyle}>
+				<Button css={listItemModalButtonStyle} onClick={handleClickOpen}>
 					<MdMoreVert />
+					<ModalPortal
+						isOpen={isModalOpen}
+						closeModal={toggleModalOpen}
+						dimmerBackground={'transparent'}
+					>
+						<ListItemModifier closeModal={toggleModalOpen} modalPos={modalPos} />
+					</ModalPortal>
 				</Button>
 			</ListContentModalOpenContainer>
 		</ListContentContainer>
