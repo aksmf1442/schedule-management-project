@@ -71,37 +71,39 @@ function Header() {
 	};
 
 	return (
-		<HeaderContainer>
-			<ContentBox>
-				<Content>
-					<SideBarButton handleSideBarOpen={handleSideBarOpen} />
-				</Content>
-				<Content>
-					<Button onClick={handleClickMainButton}>
-						<ContentText>일치</ContentText>
-					</Button>
-				</Content>
-			</ContentBox>
-			<ContentBox>
-				<Content>
-					<Button onClick={handleSearchBarOpen}>
-						<AiOutlineSearch size={24} />
-					</Button>
-				</Content>
-				<Content>
-					<Button onClick={handleClickProfileMenuButton}>
-						<AiOutlineUser size={24} />
-						<ModalPortal
-							isOpen={isProfileModalOpen}
-							closeModal={toggleProfileModalOpen}
-							dimmerBackground={'transparent'}
-						>
-							<Profile />
-						</ModalPortal>
-					</Button>
-				</Content>
-			</ContentBox>
-		</HeaderContainer>
+		<>
+			<HeaderContainer>
+				<ContentBox>
+					<Content>
+						<SideBarButton handleSideBarOpen={handleSideBarOpen} />
+					</Content>
+					<Content>
+						<Button onClick={handleClickMainButton}>
+							<ContentText>일치</ContentText>
+						</Button>
+					</Content>
+				</ContentBox>
+				<ContentBox>
+					<Content>
+						<Button onClick={handleSearchBarOpen}>
+							<AiOutlineSearch size={24} />
+						</Button>
+					</Content>
+					<Content>
+						<Button onClick={handleClickProfileMenuButton}>
+							<AiOutlineUser size={24} />
+						</Button>
+					</Content>
+				</ContentBox>
+			</HeaderContainer>
+			<ModalPortal
+				isOpen={isProfileModalOpen}
+				closeModal={toggleProfileModalOpen}
+				dimmerBackground={'transparent'}
+			>
+				<Profile />
+			</ModalPortal>
+		</>
 	);
 }
 

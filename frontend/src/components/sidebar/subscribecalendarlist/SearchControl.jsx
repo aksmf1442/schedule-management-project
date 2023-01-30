@@ -97,7 +97,7 @@ const SearchResultContainer = styled.div`
 	justify-content: space-around;
 	position: relative;
 
-	height: 20rem;
+	height: 15rem;
 	border-bottom: 1px solid ${({ theme }) => theme.colors.GRAY};
 
 	font-size: 4rem;
