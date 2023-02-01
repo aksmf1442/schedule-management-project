@@ -214,7 +214,7 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 		initialCalendar: '내 캘린더',
 	});
 
-	const handleSubmitShcduleAdderForm = e => {
+	const handleSubmitScheduleAdderForm = e => {
 		e.preventDefault();
 		closeModal();
 	};
@@ -225,7 +225,7 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 
 	return (
 		<ScheduleAdderContainer isSideBarOpen={isSideBarOpen}>
-			<ScheduleAdderForm onSubmit={handleSubmitShcduleAdderForm}>
+			<ScheduleAdderForm onSubmit={handleSubmitScheduleAdderForm}>
 				<InputContainer>
 					<ScheduleInput
 						placeholder="일정 제목 추가"

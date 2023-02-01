@@ -74,7 +74,7 @@ function MyCalendarList({ css, children }) {
 				<ListItem>내 캘린더2</ListItem>
 			</ListContents>
 			<ModalPortal isOpen={isMyCalendarAdderOpen} closeModal={toggleMyCalendarAdderOpen}>
-				<MyCalendarAdder claseModal={toggleMyCalendarAdderOpen} />
+				<MyCalendarAdder closeModal={toggleMyCalendarAdderOpen} />
 			</ModalPortal>
 		</ListBox>
 	);
