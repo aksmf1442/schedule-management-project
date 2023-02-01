@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Button from '../../common/Button';
 
@@ -88,18 +89,38 @@ const MyCalendarAdderControlButtons = styled.div`
 `;
 
 function MyCalendarAdder({ closeModal }) {
+	const [myCalendarTitle, setMyCalendarTitle] = useState('');
+
+	const onChangeMyCalendarTitle = ({ target }) => {
+		if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
+			setMyCalendarTitle(target.value);
+		}
+	};
+
+	const handleSubmitMyCalendarAdderForm = e => {
+		e.preventDefault();
+		closeModal();
+	};
+
 	return (
 		<MyCalendarAdderContainer>
 			<MyCalendarAdderTitle>캘린더 추가</MyCalendarAdderTitle>
-			<MyCalendarAdderForm>
+			<MyCalendarAdderForm onSubmit={handleSubmitMyCalendarAdderForm}>
 				<MyCalendarAdderContent>
-					<MyCalendarAdderInput placeholder="캘린더 제목" autoFocus={true} />
+					<MyCalendarAdderInput
+						value={myCalendarTitle}
+						onChange={onChangeMyCalendarTitle}
+						placeholder="캘린더 제목"
+						autoFocus={true}
+					/>
 				</MyCalendarAdderContent>
 				<MyCalendarAdderControlButtons>
 					<Button css={cancelButtonStyle} onClick={closeModal}>
 						취소
 					</Button>
-					<Button css={saveButtonStyle}>추가</Button>
+					<Button type="submit" css={saveButtonStyle}>
+						추가
+					</Button>
 				</MyCalendarAdderControlButtons>
 			</MyCalendarAdderForm>
 		</MyCalendarAdderContainer>

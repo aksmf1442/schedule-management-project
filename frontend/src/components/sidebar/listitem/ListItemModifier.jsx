@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { MdSettings, MdOutlineDelete } from 'react-icons/md';
 import styled, { css } from 'styled-components';
 import useToggle from '../../../hooks/useToggle';
@@ -33,8 +34,8 @@ const colorStyle = css`
 
 	&:hover {
 		filter: none;
+		border-radius: 100%;
 		transform: scale(1.2);
-		background: transparent;
 	}
 `;
 
@@ -73,6 +74,13 @@ function ListItemModifier({ modalPos, closeModal }) {
 	const { isOpen: isCalendarManageModalOpen, toggleClick: toggleCalendarManageModalOpen } =
 		useToggle();
 
+	const [currentColor, setCurrentColor] = useState('');
+
+	const colorButtonClick = color => {
+		setCurrentColor(color);
+		closeModal();
+	};
+
 	return (
 		<ModalPosContainer modalPos={modalPos}>
 			{canEditSubscription && (
@@ -89,7 +97,14 @@ function ListItemModifier({ modalPos, closeModal }) {
 			)}
 			<ColorsContainer>
 				{COLORS.map(color => {
-					return <Button key={color} css={colorStyle} color={color} />;
+					return (
+						<Button
+							key={color}
+							css={colorStyle}
+							color={color}
+							onClick={() => colorButtonClick(color)}
+						/>
+					);
 				})}
 			</ColorsContainer>
 			<ModalPortal isOpen={isCalendarManageModalOpen} closeModal={toggleCalendarManageModalOpen}>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 import { isSameMonth, isSameDay, getDay } from 'date-fns';
@@ -69,7 +69,11 @@ function CalendarCell({ day, currentDate, originDate, formattedDate, isSideBarOp
 				</CalendarCellContainer>
 			</Button>
 			<ModalPortal isOpen={isScheduleAdderModalOpen} closeModal={toggleScheduleAdderModalOpen}>
-				<ScheduleAdder isSideBarOpen={isSideBarOpen} day={getDay(day)} />
+				<ScheduleAdder
+					closeModal={toggleScheduleAdderModalOpen}
+					isSideBarOpen={isSideBarOpen}
+					day={day}
+				/>
 			</ModalPortal>
 		</>
 	);

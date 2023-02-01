@@ -11,7 +11,7 @@ const ButtonBox = styled.button`
 
 	&:hover {
 		border-radius: 10%;
-		background: ${({ theme }) => theme.colors.GRAY};
+		background: ${({ theme, color }) => (color ? color : theme.colors.GRAY)};
 	}
 	${({ css }) => css}
 `;

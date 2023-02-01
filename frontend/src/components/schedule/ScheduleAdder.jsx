@@ -1,6 +1,10 @@
+import { addDays } from 'date-fns';
+import format from 'date-fns/format';
 import React from 'react';
-import { useState } from 'react';
 import styled, { css } from 'styled-components';
+import useToggle from '../../hooks/useToggle';
+import useValidateSchedule from '../../hooks/useValidateSchedule';
+
 import Button from '../common/Button';
 
 const ScheduleAdderContainer = styled.div`
@@ -166,18 +170,70 @@ const FormControlButtons = styled.div`
 	width: 100%;
 `;
 
-function ScheduleAdder({ isSideBarOpen, day }) {
-	const [isAllDay, setAllDay] = useState(true);
+const TIMES = [
+	'00:00',
+	'01:00',
+	'02:00',
+	'03:00',
+	'04:00',
+	'05:00',
+	'06:00',
+	'07:00',
+	'08:00',
+	'09:00',
+	'10:00',
+	'11:00',
+	'12:00',
+	'13:00',
+	'14:00',
+	'15:00',
+	'16:00',
+	'17:00',
+	'18:00',
+	'19:00',
+	'20:00',
+	'21:00',
+	'22:00',
+	'23:00',
+];
 
-	const handleClickAllDayButton = () => {
-		setAllDay(prev => !prev);
+const MOCK_CALENDARS = ['내 캘린더', '캘린더 1', '캘린더 2'];
+
+const getFormatDate = date => {
+	return format(date, 'yyyy-MM-dd');
+};
+
+function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
+	const { isOpen: isAllDay, toggleClick: toggleAllDay } = useToggle(true);
+
+	const schedule = useValidateSchedule({
+		initialTitle: '',
+		initialStartDate: getFormatDate(day),
+		initialStartTime: '00:00',
+		initialEndDate: getFormatDate(day),
+		initialEndTime: '00:00',
+		initialCalendar: '내 캘린더',
+	});
+
+	const handleSubmitScheduleAdderForm = e => {
+		e.preventDefault();
+		closeModal();
+	};
+
+	const handleAllDayButton = () => {
+		toggleAllDay();
 	};
 
 	return (
-		<ScheduleAdderContainer isSideBarOpen={isSideBarOpen} day={day}>
-			<ScheduleAdderForm>
+		<ScheduleAdderContainer isSideBarOpen={isSideBarOpen}>
+			<ScheduleAdderForm onSubmit={handleSubmitScheduleAdderForm}>
 				<InputContainer>
-					<ScheduleInput placeholder="일정 제목 추가" autoFocus />
+					<ScheduleInput
+						placeholder="일정 제목 추가"
+						value={schedule.title.inputValue}
+						onChange={schedule.title.onChangeValue}
+						autoFocus
+					/>
 				</InputContainer>
 				<hr width="100%" />
 				<DateTimeContainer>
@@ -186,7 +242,7 @@ function ScheduleAdder({ isSideBarOpen, day }) {
 							type="checkbox"
 							id="allDay"
 							checked={isAllDay}
-							onClick={handleClickAllDayButton}
+							onClick={handleAllDayButton}
 							readOnly
 						/>
 						<label htmlFor="allDay" />
@@ -194,85 +250,56 @@ function ScheduleAdder({ isSideBarOpen, day }) {
 					</CheckBox>
 					<DateTime>
 						시작
-						<input type="date" value="2023-01-12"></input>
-						<select>
-							<option value="00">00:00</option>
-							<option value="01">01:00</option>
-							<option value="02">02:00</option>
-							<option value="03">03:00</option>
-							<option value="04">04:00</option>
-							<option value="05">05:00</option>
-							<option value="06">06:00</option>
-							<option value="07">07:00</option>
-							<option value="08">08:00</option>
-							<option value="09">09:00</option>
-							<option value="10">10:00</option>
-							<option value="11">11:00</option>
-							<option value="12">12:00</option>
-							<option value="13">13:00</option>
-							<option value="14">14:00</option>
-							<option value="15">15:00</option>
-							<option value="16">16:00</option>
-							<option value="17">17:00</option>
-							<option value="18">18:00</option>
-							<option value="19">19:00</option>
-							<option value="20">20:00</option>
-							<option value="21">21:00</option>
-							<option value="22">22:00</option>
-							<option value="23">23:00</option>
-						</select>
+						<input
+							type="date"
+							value={schedule.startDate.inputValue}
+							onChange={schedule.startDate.onChangeValue}
+						/>
+						{!isAllDay && (
+							<select
+								value={schedule.startTime.inputValue}
+								onChange={schedule.startTime.onChangeValue}
+							>
+								{TIMES.map(time => {
+									return <option value={time}>{time}</option>;
+								})}
+							</select>
+						)}
 					</DateTime>
 					<DateTime>
 						종료
-						<input type="date" value="2023-01-12"></input>
-						<select>
-							<option value="00">00:00</option>
-							<option value="01">01:00</option>
-							<option value="02">02:00</option>
-							<option value="03">03:00</option>
-							<option value="04">04:00</option>
-							<option value="05">05:00</option>
-							<option value="06">06:00</option>
-							<option value="07">07:00</option>
-							<option value="08">08:00</option>
-							<option value="09">09:00</option>
-							<option value="10">10:00</option>
-							<option value="11">11:00</option>
-							<option value="12">12:00</option>
-							<option value="13">13:00</option>
-							<option value="14">14:00</option>
-							<option value="15">15:00</option>
-							<option value="16">16:00</option>
-							<option value="17">17:00</option>
-							<option value="18">18:00</option>
-							<option value="19">19:00</option>
-							<option value="20">20:00</option>
-							<option value="21">21:00</option>
-							<option value="22">22:00</option>
-							<option value="23">23:00</option>
-						</select>
+						<input
+							type="date"
+							value={schedule.endDate.inputValue}
+							onChange={schedule.endDate.onChangeValue}
+						/>
+						{!isAllDay && (
+							<select value={schedule.endTime.inputValue} onChange={schedule.endTime.onChangeValue}>
+								{TIMES.map(time => {
+									return <option value={time}>{time}</option>;
+								})}
+							</select>
+						)}
 					</DateTime>
 				</DateTimeContainer>
 
 				<hr width="100%" />
 				<SelectBox>
 					캘린더 선택
-					<select>
-						<option key="내 캘린더" value="내 캘린더">
-							내 캘린더
-						</option>
-						<option key="캘린더 1" value="캘린더 1">
-							캘린더 1
-						</option>
-						<option key="캘린더 2" value="캘린더 2">
-							캘린더 2
-						</option>
+					<select value={schedule.calendar.inputValue} onChange={schedule.calendar.onChangeValue}>
+						{MOCK_CALENDARS.map(calendar => {
+							return <option value={calendar}>{calendar}</option>;
+						})}
 					</select>
 				</SelectBox>
 				<hr width="100%" />
 				<FormControlButtons>
-					<Button css={cancelButton}>취소</Button>
-					<Button css={saveButton}>저장</Button>
+					<Button css={cancelButton} onClick={closeModal}>
+						취소
+					</Button>
+					<Button type="submit" css={saveButton}>
+						저장
+					</Button>
 				</FormControlButtons>
 			</ScheduleAdderForm>
 		</ScheduleAdderContainer>
