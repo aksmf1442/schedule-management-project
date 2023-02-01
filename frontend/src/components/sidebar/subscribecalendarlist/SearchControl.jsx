@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { MdSearch } from 'react-icons/md';
 import styled, { css } from 'styled-components';
 import Button from '../../common/Button';
@@ -127,6 +128,14 @@ const subscribeButtonStyle = css`
 `;
 
 function SearchControl() {
+	const [calendarTitle, setCalendarTitle] = useState('');
+
+	const onChangeCalendarTitle = ({ target }) => {
+		if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
+			setCalendarTitle(target.value);
+		}
+	};
+
 	return (
 		<SearchControlContainer>
 			<SearchControlFormContainer>
@@ -134,7 +143,12 @@ function SearchControl() {
 					<Button type="submit" css={searchButtonStyle}>
 						<MdSearch size={24} />
 					</Button>
-					<SearchInput placeholder="캘린더명 검색" autoFocus={true} />
+					<SearchInput
+						value={calendarTitle}
+						onChange={onChangeCalendarTitle}
+						placeholder="캘린더명 검색"
+						autoFocus={true}
+					/>
 				</SearchForm>
 			</SearchControlFormContainer>
 			<>
