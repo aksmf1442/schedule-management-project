@@ -6,10 +6,8 @@ import useToggle from '../../hooks/useToggle';
 import Button from '../common/Button';
 
 const ProfileContainer = styled.div`
-	display: flex;
-	flex-direction: column;
+	${({ theme }) => theme.flex.column}
 	justify-content: space-around;
-	align-items: center;
 
 	gap: 5rem;
 	position: absolute;
@@ -33,10 +31,7 @@ const ImageContainer = styled.img`
 `;
 
 const ContentContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.column}
 
 	gap: 3rem;
 
@@ -46,10 +41,8 @@ const ContentContainer = styled.div`
 `;
 
 const NicknameEditterForm = styled.form`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-end;
-	align-items: center;
 
 	gap: 2rem;
 
@@ -119,10 +112,7 @@ const Nickname = styled.span`
 `;
 
 const NicknameEditButtonContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 
 	gap: 3rem;
 `;

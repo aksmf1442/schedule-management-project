@@ -4,10 +4,8 @@ import styled, { css } from 'styled-components';
 import Button from '../../common/Button';
 
 const CalendarManagerConatiner = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
-	align-items: center;
 
 	gap: 2rem;
 	position: relative;

@@ -22,9 +22,7 @@ const searchBoxButtonStyle = css`
 `;
 
 const InputContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	${({ theme }) => theme.flex.column}
 	align-items: flex-start;
 
 	position: relative;

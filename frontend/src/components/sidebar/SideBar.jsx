@@ -23,10 +23,8 @@ const SideBarContainer = styled.div`
 `;
 
 const sideListStyle = css`
-	display: flex;
-	flex-direction: column;
+	${({ theme }) => theme.flex.column}
 	justify-content: flex-start;
-	align-items: center;
 
 	width: 57rem;
 

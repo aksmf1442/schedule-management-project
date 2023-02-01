@@ -7,10 +7,8 @@ import ListItemModifier from './ListItemModifier';
 import useModalPosition from '../../../hooks/ useModalPosition';
 
 const ListContentContainer = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
-	align-items: center;
 
 	width: 100%;
 	height: 7rem;
@@ -25,10 +23,7 @@ const ListContentContainer = styled.div`
 `;
 
 const ListContentNameContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 
 	gap: 2rem;
 

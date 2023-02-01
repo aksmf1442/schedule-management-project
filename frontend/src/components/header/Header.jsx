@@ -12,10 +12,8 @@ import useToggle from '../../hooks/useToggle';
 import Profile from '../profile/Profile';
 
 const HeaderContainer = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
-	align-items: center;
 
 	position: fixed;
 	top: 0;
@@ -31,10 +29,7 @@ const HeaderContainer = styled.div`
 `;
 
 const ContentBox = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 `;
 
 const Content = styled.div`

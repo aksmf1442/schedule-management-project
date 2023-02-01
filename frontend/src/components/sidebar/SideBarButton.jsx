@@ -7,10 +7,7 @@ import sideBarState from '../../recoil/sideBarState';
 import { RiMenuFill, RiMenuFoldFill } from 'react-icons/ri';
 
 const SideBarButtonContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 
 	position: relative;
 

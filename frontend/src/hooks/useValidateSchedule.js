@@ -43,7 +43,6 @@ function useValidateSchedule({
 
 			endDate.setInputValue(nextDate);
 		}
-		console.log(getEndTime(startTime.inputValue));
 
 		endTime.setInputValue(getEndTime(startTime.inputValue));
 	}, [startDate, startTime]);

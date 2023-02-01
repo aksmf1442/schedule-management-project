@@ -8,12 +8,9 @@ import ModalPortal from '../../common/ModalPortal';
 import CalendarModifier from './CalendarModifier';
 
 const controlButtonStyle = css`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
+
 	gap: 1rem;
 
 	width: 100%;
@@ -40,9 +37,7 @@ const colorStyle = css`
 `;
 
 const ModalPosContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	${({ theme }) => theme.flex.column}
 	align-items: flex-start;
 
 	position: absolute;

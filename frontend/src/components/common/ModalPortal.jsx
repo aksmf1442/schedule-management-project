@@ -3,10 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 const ModalPortalContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 
 	position: fixed;
 	top: 0;

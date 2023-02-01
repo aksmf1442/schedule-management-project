@@ -5,10 +5,8 @@ import Button from '../../common/Button';
 import CalendarManager from './CalendarManager';
 
 const CalendarModifierContainer = styled.div`
-	display: flex;
-	flex-direction: column;
+	${({ theme }) => theme.flex.column}
 	justify-content: space-between;
-	align-items: center;
 
 	gap: 10rem;
 	overflow: overlay;
@@ -45,13 +43,10 @@ const SectionTitle = styled.h2`
 `;
 
 const SectionForm = styled.form`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-
+	${({ theme }) => theme.flex.row}
 	align-items: flex-start;
 	justify-content: space-between;
+
 	gap: 20rem;
 
 	width: 100%;

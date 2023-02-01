@@ -12,10 +12,8 @@ const SearchControlContainer = styled.div`
 `;
 
 const SearchControlFormContainer = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	align-items: flex-start;
-	justify-content: center;
 
 	width: 100%;
 
@@ -58,10 +56,8 @@ const SearchInput = styled.input`
 `;
 
 const TableHeader = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: space-around;
-	align-items: center;
 
 	width: 100%;
 	height: 12rem;
@@ -90,11 +86,7 @@ const TableItem = styled.span`
 `;
 
 const SearchResultContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-
+	${({ theme }) => theme.flex.row}
 	justify-content: space-around;
 	position: relative;
 

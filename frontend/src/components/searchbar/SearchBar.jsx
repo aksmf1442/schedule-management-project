@@ -23,10 +23,8 @@ const SearchBarContainer = styled.div`
 `;
 
 const searchListStyle = css`
-	display: flex;
-	flex-direction: column;
+	${({ theme }) => theme.flex.column}
 	justify-content: flex-start;
-	align-items: center;
 
 	width: 70rem;
 

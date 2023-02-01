@@ -1,4 +1,3 @@
-import { addDays } from 'date-fns';
 import format from 'date-fns/format';
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -21,10 +20,7 @@ const ScheduleAdderContainer = styled.div`
 `;
 
 const ScheduleAdderForm = styled.form`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.column}
 
 	gap: 4rem;
 
@@ -32,9 +28,7 @@ const ScheduleAdderForm = styled.form`
 `;
 
 const InputContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	${({ theme }) => theme.flex.column}
 	align-items: flex-start;
 
 	position: relative;
@@ -62,19 +56,16 @@ const ScheduleInput = styled.input`
 `;
 
 const DateTimeContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	${({ theme }) => theme.flex.column}
 	align-items: flex-start;
+
 	width: 100%;
 	gap: 4rem;
 `;
 
 const DateTime = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
-	align-items: center;
 
 	position: relative;
 	gap: 2.5rem;
@@ -83,10 +74,7 @@ const DateTime = styled.div`
 `;
 
 const CheckBox = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 
 	gap: 1rem;
 
@@ -130,10 +118,9 @@ const CheckBox = styled.div`
 `;
 
 const SelectBox = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
-	align-items: center;
+
 	gap: 2.5rem;
 
 	width: 100%;
@@ -161,10 +148,8 @@ const saveButton = css`
 `;
 
 const FormControlButtons = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-end;
-	align-items: center;
 
 	gap: 2rem;
 	width: 100%;

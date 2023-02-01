@@ -4,10 +4,8 @@ import styled, { css } from 'styled-components';
 import Button from '../../common/Button';
 
 const MyCalendarAdderContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.column}
+
 	width: 100rem;
 	height: 70rem;
 	padding: 12.5rem;
@@ -24,20 +22,15 @@ const MyCalendarAdderTitle = styled.h1`
 `;
 
 const MyCalendarAdderForm = styled.form`
-	display: flex;
-	flex-direction: column;
+	${({ theme }) => theme.flex.column}
 	justify-content: space-between;
-	align-items: center;
 
 	width: 100%;
 	height: 100%;
 `;
 
 const MyCalendarAdderContent = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.column}
 
 	width: 100%;
 	height: 100%;
@@ -79,10 +72,7 @@ const saveButtonStyle = css`
 `;
 
 const MyCalendarAdderControlButtons = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 
 	align-self: flex-end;
 	gap: 5rem;

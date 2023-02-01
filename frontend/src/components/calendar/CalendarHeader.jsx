@@ -6,10 +6,8 @@ import styled, { css } from 'styled-components';
 import Button from '../common/Button';
 
 const CalendarHeaderContainer = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
-	align-items: center;
 
 	width: 100%;
 	padding: 3rem 2rem;
@@ -20,10 +18,8 @@ const CalendarHeaderContainer = styled.div`
 `;
 
 const MonthPicker = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: space-around;
-	align-items: center;
 `;
 
 const headerMenuStyle = css`

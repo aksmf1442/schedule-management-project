@@ -9,10 +9,8 @@ const SearchContainer = styled.div`
 `;
 
 const SearchHeaderText = styled.span`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
-	align-items: center;
 
 	width: 100%;
 	height: 8rem;
@@ -25,10 +23,7 @@ const SearchHeaderText = styled.span`
 `;
 
 const SearchResults = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.column}
 
 	gap: 2rem;
 	overflow: hidden;
@@ -41,9 +36,7 @@ const SearchResults = styled.div`
 `;
 
 const SearchResultHeader = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
 
 	width: 100%;
@@ -65,9 +58,7 @@ const ColorBox = styled.div`
 `;
 
 const searchResultStyle = css`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
 
 	width: 100%;

@@ -13,19 +13,15 @@ const ListBox = styled.div`
 `;
 
 const ListHeader = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
-	align-items: center;
 
 	width: 100%;
 `;
 
 const ListHeaderText = styled.span`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
-	align-items: center;
 
 	width: 100%;
 	height: 8rem;
@@ -36,10 +32,7 @@ const ListHeaderText = styled.span`
 `;
 
 const ListContents = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.column}
 
 	gap: 2rem;
 	overflow: hidden;
