@@ -136,10 +136,14 @@ function SearchControl() {
 		}
 	};
 
+	const handleSubmitSearchForm = e => {
+		e.preventDefault();
+	};
+
 	return (
 		<SearchControlContainer>
 			<SearchControlFormContainer>
-				<SearchForm>
+				<SearchForm onSubmit={handleSubmitSearchForm}>
 					<Button type="submit" css={searchButtonStyle}>
 						<MdSearch size={24} />
 					</Button>
