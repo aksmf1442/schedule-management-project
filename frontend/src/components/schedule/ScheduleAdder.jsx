@@ -1,3 +1,4 @@
+import { addDays } from 'date-fns';
 import format from 'date-fns/format';
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -170,30 +171,30 @@ const FormControlButtons = styled.div`
 `;
 
 const TIMES = [
-	'00',
-	'01',
-	'02',
-	'03',
-	'04',
-	'05',
-	'06',
-	'07',
-	'08',
-	'09',
-	'10',
-	'11',
-	'12',
-	'13',
-	'14',
-	'15',
-	'16',
-	'17',
-	'18',
-	'19',
-	'20',
-	'21',
-	'22',
-	'23',
+	'00:00',
+	'01:00',
+	'02:00',
+	'03:00',
+	'04:00',
+	'05:00',
+	'06:00',
+	'07:00',
+	'08:00',
+	'09:00',
+	'10:00',
+	'11:00',
+	'12:00',
+	'13:00',
+	'14:00',
+	'15:00',
+	'16:00',
+	'17:00',
+	'18:00',
+	'19:00',
+	'20:00',
+	'21:00',
+	'22:00',
+	'23:00',
 ];
 
 const MOCK_CALENDARS = ['내 캘린더', '캘린더 1', '캘린더 2'];
@@ -208,9 +209,9 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 	const schedule = useValidateSchedule({
 		initialTitle: '',
 		initialStartDate: getFormatDate(day),
-		initialStartTime: '00',
+		initialStartTime: '00:00',
 		initialEndDate: getFormatDate(day),
-		initialEndTime: '00',
+		initialEndTime: '00:00',
 		initialCalendar: '내 캘린더',
 	});
 
@@ -260,7 +261,7 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 								onChange={schedule.startTime.onChangeValue}
 							>
 								{TIMES.map(time => {
-									return <option value={time}>{time}:00</option>;
+									return <option value={time}>{time}</option>;
 								})}
 							</select>
 						)}
@@ -275,7 +276,7 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 						{!isAllDay && (
 							<select value={schedule.endTime.inputValue} onChange={schedule.endTime.onChangeValue}>
 								{TIMES.map(time => {
-									return <option value={time}>{time}:00</option>;
+									return <option value={time}>{time}</option>;
 								})}
 							</select>
 						)}
