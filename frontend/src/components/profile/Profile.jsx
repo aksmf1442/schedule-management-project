@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { MdOutlineModeEdit, MdOutlineCheck } from 'react-icons/md';
 import styled, { css } from 'styled-components';
 import useToggle from '../../hooks/useToggle';
@@ -140,15 +141,27 @@ const logoutButtonStyle = css`
 `;
 
 function Profile() {
+	const [nickname, setNickname] = useState('');
 	const { isOpen: isEditingNickname, toggleClick: toggleIsEditingNickname } = useToggle();
+
+	const onChangeNickname = ({ target }) => {
+		if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
+			setNickname(target.value);
+		}
+	};
+
+	const handleSubmitProfileEditterForm = e => {
+		e.preventDefault();
+		toggleIsEditingNickname();
+	};
 
 	return (
 		<ProfileContainer>
 			<ImageContainer />
 			<ContentContainer>
 				{isEditingNickname ? (
-					<NicknameEditterForm>
-						<NicknameEditterInput autoFocus={true} />
+					<NicknameEditterForm onSubmit={handleSubmitProfileEditterForm}>
+						<NicknameEditterInput value={nickname} onChange={onChangeNickname} autoFocus={true} />
 						<Button type="submit" cssProp={nicknameEditterSaveButtonStyle}>
 							<MdOutlineCheck size={14} />
 							<NicknameEditterSaveButtonTitle>완료</NicknameEditterSaveButtonTitle>
@@ -156,7 +169,7 @@ function Profile() {
 					</NicknameEditterForm>
 				) : (
 					<NicknameEditButtonContainer>
-						<Nickname>하늘</Nickname>
+						<Nickname>{nickname}</Nickname>
 						<Button onClick={toggleIsEditingNickname}>
 							<MdOutlineModeEdit size={14} />
 						</Button>
