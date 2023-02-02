@@ -1,27 +1,15 @@
-import React, { useState } from 'react';
-import { addMonths, subMonths } from 'date-fns';
+import React from 'react';
 
 import CalendarHeader from './CalendarHeader';
 import CalendarDays from './CalendarDays';
 import CalendarCells from './CalendarCells';
+import useDate from '../../hooks/useDate';
 
 const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 function Calendar() {
-	const [currentDate, setCurrentDate] = useState(new Date());
-	const [originDate, setOriginDate] = useState(new Date());
-
-	const prevMonth = () => {
-		setCurrentDate(subMonths(currentDate, 1));
-	};
-
-	const resetDate = () => {
-		setCurrentDate(new Date());
-	};
-
-	const nextMonth = () => {
-		setCurrentDate(addMonths(currentDate, 1));
-	};
+	const { date: currentDate, prevMonth, resetDate, nextMonth } = useDate();
+	const { date: originDate } = useDate();
 
 	return (
 		<>

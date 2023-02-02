@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
 import styled, { css } from 'styled-components';
+import useInput from '../../../hooks/useInput';
 import Button from '../../common/Button';
 
 const Container = styled.div`
@@ -79,13 +79,7 @@ const saveButtonStyle = css`
 `;
 
 function MyCalendarAdder({ closeModal }) {
-	const [myCalendarTitle, setMyCalendarTitle] = useState('');
-
-	const onChangeMyCalendarTitle = ({ target }) => {
-		if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
-			setMyCalendarTitle(target.value);
-		}
-	};
+	const { inpuValue: myCalendar, onChangeValue: onChangeMyCalendar } = useInput();
 
 	const handleSubmitMyCalendarAdderForm = e => {
 		e.preventDefault();
@@ -98,8 +92,8 @@ function MyCalendarAdder({ closeModal }) {
 			<Form onSubmit={handleSubmitMyCalendarAdderForm}>
 				<Content>
 					<Input
-						value={myCalendarTitle}
-						onChange={onChangeMyCalendarTitle}
+						value={myCalendar}
+						onChange={onChangeMyCalendar}
 						placeholder="캘린더 제목"
 						autoFocus={true}
 					/>

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useControlledInput from './useControlledInput';
+import useInput from './useInput';
 import format from 'date-fns/format';
 import { addDays } from 'date-fns';
 
@@ -21,12 +21,12 @@ function useValidateSchedule({
 	initialEndTime,
 	initialCalendar,
 }) {
-	const title = useControlledInput(initialTitle);
-	const startDate = useControlledInput(initialStartDate);
-	const startTime = useControlledInput(initialStartTime);
-	const endDate = useControlledInput(initialEndDate);
-	const endTime = useControlledInput(initialEndTime);
-	const calendar = useControlledInput(initialCalendar);
+	const title = useInput(initialTitle);
+	const startDate = useInput(initialStartDate);
+	const startTime = useInput(initialStartTime);
+	const endDate = useInput(initialEndDate);
+	const endTime = useInput(initialEndTime);
+	const calendar = useInput(initialCalendar);
 
 	useEffect(() => {
 		if (startDate.inputValue + startTime.inputValue < endDate.inputValue + endTime.inputValue) {

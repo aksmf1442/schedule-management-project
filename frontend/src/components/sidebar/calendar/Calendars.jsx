@@ -4,7 +4,6 @@ import Button from '../../common/Button';
 import useToggle from '../../../hooks/useToggle';
 import ModalPortal from '../../common/ModalPortal';
 import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
-import MyCalendarAdder from './MyCalendarAdder';
 import ListContent from '../listcontent/ListContent';
 
 const Container = styled.div`

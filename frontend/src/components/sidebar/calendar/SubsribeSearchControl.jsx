@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
 import { MdSearch } from 'react-icons/md';
 import styled, { css } from 'styled-components';
+import useInput from '../../../hooks/useInput';
 import Button from '../../common/Button';
 
 const Container = styled.div`
@@ -120,13 +120,7 @@ const subscribeButtonStyle = css`
 `;
 
 function SubsribeSearchControl() {
-	const [calendarTitle, setCalendarTitle] = useState('');
-
-	const onChangeCalendarTitle = ({ target }) => {
-		if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
-			setCalendarTitle(target.value);
-		}
-	};
+	const { inputValue: calendarTitle, onChangeValue: onChangeCalendarTitle } = useInput();
 
 	const handleSubmitSearchForm = e => {
 		e.preventDefault();

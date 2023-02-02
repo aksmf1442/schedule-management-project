@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
 import { MdSettings, MdOutlineDelete } from 'react-icons/md';
 import styled, { css } from 'styled-components';
+import useColorInput from '../../../hooks/useColorInput';
 import useToggle from '../../../hooks/useToggle';
 import Button from '../../common/Button';
 import ModalPortal from '../../common/ModalPortal';
@@ -62,19 +62,13 @@ const Colors = styled.div`
 
 const COLORS = ['red', 'green', 'black', 'pink', 'blue', 'orange', 'gray'];
 
-function ListContentModifier({ modalPos, closeModal }) {
+function ListContentModifier({ modalPos }) {
 	const canEditSubscription = true;
 	const canDeleteSubscription = false;
 
+	const currentColor = useColorInput();
 	const { isOpen: isCalendarManageModalOpen, toggleClick: toggleCalendarManageModalOpen } =
 		useToggle();
-
-	const [currentColor, setCurrentColor] = useState('');
-
-	const colorButtonClick = color => {
-		setCurrentColor(color);
-		closeModal();
-	};
 
 	return (
 		<Container modalPos={modalPos}>
@@ -97,13 +91,13 @@ function ListContentModifier({ modalPos, closeModal }) {
 							key={color}
 							css={colorStyle}
 							color={color}
-							onClick={() => colorButtonClick(color)}
+							onClick={() => currentColor.handleButtonClick(color)}
 						/>
 					);
 				})}
 			</Colors>
 			<ModalPortal isOpen={isCalendarManageModalOpen} closeModal={toggleCalendarManageModalOpen}>
-				<CalendarModifier clasModal={toggleCalendarManageModalOpen} />
+				<CalendarModifier closeModal={toggleCalendarManageModalOpen} />
 			</ModalPortal>
 		</Container>
 	);

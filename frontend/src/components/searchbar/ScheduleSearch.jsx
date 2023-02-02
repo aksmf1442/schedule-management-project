@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
+import useInput from '../../hooks/useInput';
 import Button from '../common/Button';
 
 import SearchBox from './SearchBox';
@@ -71,19 +72,16 @@ const searchResultStyle = css`
 function ScheduleSearch({ css, children }) {
 	const listLength = 1;
 
-	const keywordRef = useRef(null);
-	const [keyword, setKeyword] = useState('');
+	const { inputValue: keyword, onChangeValue: onChangeKeyword } = useInput();
 
 	const handleSubmitSearch = e => {
 		e.preventDefault();
-
-		setKeyword(keywordRef.current.value);
 	};
 
 	return (
 		<Container css={css}>
 			<SearchHeader>{children}</SearchHeader>
-			<SearchBox onSubmit={handleSubmitSearch} kewordRef={keywordRef} />
+			<SearchBox onSubmit={handleSubmitSearch} onChangeKeyword={onChangeKeyword} />
 			<SearchResults listLength={listLength}>
 				<Button css={searchResultStyle}>
 					<SearchResultHeader>

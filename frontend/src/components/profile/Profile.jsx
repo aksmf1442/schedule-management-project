@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
 import { MdOutlineModeEdit, MdOutlineCheck } from 'react-icons/md';
 import styled, { css } from 'styled-components';
+import useInput from '../../hooks/useInput';
 import useToggle from '../../hooks/useToggle';
 import Button from '../common/Button';
 
@@ -114,14 +114,8 @@ const logoutButtonStyle = css`
 `;
 
 function Profile() {
-	const [nickname, setNickname] = useState('');
+	const { inputValue: nickname, onChangeValue: onChangeNickname } = useInput();
 	const { isOpen: isEditingNickname, toggleClick: toggleIsEditingNickname } = useToggle();
-
-	const onChangeNickname = ({ target }) => {
-		if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
-			setNickname(target.value);
-		}
-	};
 
 	const handleSubmitProfileEditterForm = e => {
 		e.preventDefault();

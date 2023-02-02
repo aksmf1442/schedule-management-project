@@ -62,7 +62,7 @@ function ListContent({ children }) {
 				closeModal={toggleModalOpen}
 				dimmerBackground={'transparent'}
 			>
-				<ListContentModifier closeModal={toggleModalOpen} modalPos={modalPos} />
+				<ListContentModifier modalPos={modalPos} />
 			</ModalPortal>
 		</Container>
 	);

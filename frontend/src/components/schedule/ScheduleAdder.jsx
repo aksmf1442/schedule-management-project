@@ -2,7 +2,7 @@ import format from 'date-fns/format';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import useToggle from '../../hooks/useToggle';
-import useValidateSchedule from '../../hooks/useValidateSchedule';
+import useSchedule from '../../hooks/useSchedule';
 
 import Button from '../common/Button';
 
@@ -191,7 +191,7 @@ const getFormatDate = date => {
 function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 	const { isOpen: isAllDay, toggleClick: toggleAllDay } = useToggle(true);
 
-	const schedule = useValidateSchedule({
+	const schedule = useSchedule({
 		initialTitle: '',
 		initialStartDate: getFormatDate(day),
 		initialStartTime: '00:00',

@@ -54,14 +54,14 @@ const Input = styled.input`
 	}
 `;
 
-function SearchBox({ kewordRef, onSubmit }) {
+function SearchBox({ onChangeKeyword, onSubmit }) {
 	return (
 		<Form onSubmit={onSubmit}>
 			<Button type="submit" css={searchBoxButtonStyle}>
 				<MdSearch size={17} />
 			</Button>
 			<InputBox>
-				<Input ref={kewordRef} />
+				<Input onChange={onChangeKeyword} />
 			</InputBox>
 		</Form>
 	);
