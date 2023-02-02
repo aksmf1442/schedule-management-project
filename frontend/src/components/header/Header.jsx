@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import SideBarButton from '../sidebar/SideBarButton';
 import { useSetRecoilState } from 'recoil';
 import sideBarState from '../../recoil/sideBarState';
 import searchBarState from '../../recoil/searchBarState';
 import Button from '../common/Button';
 
+import { RiMenuFill } from 'react-icons/ri';
 import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai';
 import ModalPortal from '../common/ModalPortal';
 import useToggle from '../../hooks/useToggle';
@@ -42,6 +42,19 @@ const ContentButtonText = styled.span`
 	font-weight: bold;
 `;
 
+const sideBarButtonStyle = css`
+	position: relative;
+
+	margin-left: 1.8rem;
+
+	top: 0.6rem;
+
+	background: transparent;
+
+	font-size: 7rem;
+	font-weight: bold;
+`;
+
 function Header() {
 	const navigate = useNavigate();
 	const setSideBarOpen = useSetRecoilState(sideBarState);
@@ -70,7 +83,9 @@ function Header() {
 			<Container>
 				<Contents>
 					<Content>
-						<SideBarButton handleSideBarOpen={handleSideBarOpen} />
+						<Button css={sideBarButtonStyle} onClick={handleSideBarOpen}>
+							<RiMenuFill size={24} />
+						</Button>
 					</Content>
 					<Content>
 						<Button onClick={handleClickHomeButton}>
