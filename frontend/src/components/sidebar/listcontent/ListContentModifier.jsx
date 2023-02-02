@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import useToggle from '../../../hooks/useToggle';
 import Button from '../../common/Button';
 import ModalPortal from '../../common/ModalPortal';
-import CalendarModifier from './CalendarModifier';
+import CalendarModifier from '../calendarmodifier/CalendarModifier';
 
 const Container = styled.div`
 	${({ theme }) => theme.flex.column}

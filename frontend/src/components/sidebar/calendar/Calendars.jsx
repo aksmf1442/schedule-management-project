@@ -47,30 +47,30 @@ const buttonStyle = css`
 	margin-left: 4rem;
 `;
 
-function MyCalendars({ css, children }) {
-	const { isOpen: isMyListOpen, toggleClick: toggleMyListOpen } = useToggle(true);
-	const { isOpen: isMyCalendarAdderOpen, toggleClick: toggleMyCalendarAdderOpen } = useToggle();
+function Calendars({ css, AdderModal, children }) {
+	const { isOpen: isListOpen, toggleClick: toggleListOpen } = useToggle(true);
+	const { isOpen: isCalendarAdderOpen, toggleClick: toggleCalendarAdderOpen } = useToggle();
 
 	return (
 		<Container css={css}>
 			<ContentsControl>
 				<ControlText>{children}</ControlText>
-				<Button onClick={toggleMyCalendarAdderOpen} css={buttonStyle}>
+				<Button onClick={toggleCalendarAdderOpen} css={buttonStyle}>
 					<AiOutlinePlus size={16} />
 				</Button>
-				<Button onClick={toggleMyListOpen} css={buttonStyle}>
-					{isMyListOpen ? <AiOutlineUp size={16} /> : <AiOutlineDown size={16} />}
+				<Button onClick={toggleListOpen} css={buttonStyle}>
+					{isListOpen ? <AiOutlineUp size={16} /> : <AiOutlineDown size={16} />}
 				</Button>
 			</ContentsControl>
-			<Contents isMyListOpen={isMyListOpen} listLength={2}>
-				<ListContent>내 캘린더1</ListContent>
-				<ListContent>내 캘린더2</ListContent>
+			<Contents isMyListOpen={isListOpen} listLength={2}>
+				<ListContent>캘린더1</ListContent>
+				<ListContent>캘린더2</ListContent>
 			</Contents>
-			<ModalPortal isOpen={isMyCalendarAdderOpen} closeModal={toggleMyCalendarAdderOpen}>
-				<MyCalendarAdder closeModal={toggleMyCalendarAdderOpen} />
+			<ModalPortal isOpen={isCalendarAdderOpen} closeModal={toggleCalendarAdderOpen}>
+				<AdderModal closeModal={toggleCalendarAdderOpen} />
 			</ModalPortal>
 		</Container>
 	);
 }
 
-export default MyCalendars;
+export default Calendars;

@@ -2,8 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import sideBarState from '../../recoil/sideBarState';
-import MyCalendars from './calendars/MyCalendars';
-import SubscribeCalendars from './subscribecalendars/SubscribeCalendars';
+
+import Calendars from './calendar/Calendars';
+import SubscribeCalendarAdder from './calendar/SubscribeCalendarAdder';
+import MyCalendarAdder from './calendar/MyCalendarAdder';
 
 const Container = styled.div`
 	overflow: hidden;
@@ -41,8 +43,12 @@ function SideBar() {
 
 	return (
 		<Container isSideBarOpen={isSideBarOpen}>
-			<MyCalendars css={listStyle}>내 캘린더</MyCalendars>
-			<SubscribeCalendars css={listStyle}>구독한 캘린더</SubscribeCalendars>
+			<Calendars css={listStyle} AdderModal={MyCalendarAdder}>
+				내 캘린더
+			</Calendars>
+			<Calendars css={listStyle} AdderModal={SubscribeCalendarAdder}>
+				구독한 캘린더
+			</Calendars>
 		</Container>
 	);
 }
