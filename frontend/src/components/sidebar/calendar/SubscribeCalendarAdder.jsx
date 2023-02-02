@@ -6,7 +6,7 @@ const SubscribeCalendarAdderContainer = styled.div`
 	${({ theme }) => theme.flex.column}
 	justify-content: space-between;
 
-	width: 50%;
+	width: 30%;
 	height: 95%;
 	padding: 12.5rem;
 	border-radius: 7px;

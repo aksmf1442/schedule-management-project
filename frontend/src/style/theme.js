@@ -25,12 +25,34 @@ const flex = {
 	`,
 };
 
+const buttons = {
+	cancle: css`
+		padding: 2rem 3rem;
+		box-sizing: border-box;
+		border-radius: 7px;
+		border: 1px solid ${({ theme }) => theme.colors.BLACK};
+
+		font-size: 1.5rem;
+		color: ${({ theme }) => theme.colors.BLACK};
+	`,
+	save: css`
+		padding: 2rem 3rem;
+		box-sizing: border-box;
+		border-radius: 7px;
+		border: 1px solid ${({ theme }) => theme.colors.BLUE};
+
+		font-size: 1.5rem;
+		color: ${({ theme }) => theme.colors.BLUE};
+	`,
+};
+
 const TRANSPARENT = 'transparent';
 
 const theme = {
 	colors,
 	flex,
 	TRANSPARENT,
+	buttons,
 };
 
 export default theme;

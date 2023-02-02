@@ -53,7 +53,7 @@ function Calendars({ css, AdderModal, children }) {
 	return (
 		<Container css={css}>
 			<ContentsControl>
-				<ControlText>{children}</ControlText>
+				<ControlText onClick={toggleListOpen}>{children}</ControlText>
 				<Button onClick={toggleCalendarAdderOpen} css={buttonStyle}>
 					<AiOutlinePlus size={16} />
 				</Button>

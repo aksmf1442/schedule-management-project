@@ -106,11 +106,7 @@ const Email = styled.span`
 `;
 
 const logoutButtonStyle = css`
-	padding: 2rem 3rem;
-	border: 1px solid ${({ theme }) => theme.colors.LIGHT_BLACK};
-	border-radius: 7px;
-
-	font-size: 3rem;
+	${({ theme }) => theme.buttons.cancle}
 `;
 
 function Profile() {

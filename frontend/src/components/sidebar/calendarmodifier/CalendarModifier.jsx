@@ -21,6 +21,8 @@ const Container = styled.div`
 
 const Header = styled.h1`
 	font-size: 6rem;
+
+	color: ${({ theme }) => theme.colors.GRAY};
 `;
 
 const closeButtonStyle = css`
@@ -39,7 +41,7 @@ const SectionTitle = styled.h2`
 	margin-bottom: 3rem;
 
 	font-size: 4rem;
-	font-weight: 700;
+	font-weight: 500;
 `;
 
 const SectionForm = styled.form`
@@ -47,27 +49,19 @@ const SectionForm = styled.form`
 	align-items: flex-start;
 	justify-content: space-between;
 
-	gap: 20rem;
-
 	width: 100%;
 `;
 
 const SectionRenameInputStyle = styled.input`
-	width: 40%%;
+	width: 80%;
 	height: 8rem;
 	font-size: 4rem;
 `;
 
 const sectionRenameButtonStyle = css`
 	height: 8rem;
-	padding: 2rem;
-	border-radius: 7px;
-	box-shadow: 0 2px 2px ${({ theme }) => theme.colors.GRAY};
 
-	background: ${({ theme }) => theme.colors.BLUE};
-
-	font-size: 3rem;
-	color: ${({ theme }) => theme.colors.WHITE};
+	${({ theme }) => theme.buttons.save};
 `;
 
 const Managers = styled.div`
@@ -83,11 +77,11 @@ const Managers = styled.div`
 	}
 `;
 
-function CalendarModifier() {
+function CalendarModifier({ closeModal }) {
 	return (
 		<Container>
 			<Header>캘린더 관리</Header>
-			<Button css={closeButtonStyle}>
+			<Button css={closeButtonStyle} onClick={closeModal}>
 				<MdClose />
 			</Button>
 			<Section>
@@ -99,14 +93,12 @@ function CalendarModifier() {
 					</Button>
 				</SectionForm>
 			</Section>
-
 			<Section>
 				<SectionTitle>편집자 목록</SectionTitle>
 				<Managers>
 					<CalendarManager user={'하늘'} />
 				</Managers>
 			</Section>
-
 			<Section>
 				<SectionTitle>구독자 목록</SectionTitle>
 				<Managers>

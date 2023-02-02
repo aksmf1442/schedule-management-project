@@ -19,6 +19,10 @@ const searchBoxButtonStyle = css`
 	transform: translateY(-50%);
 
 	width: 10rem;
+
+	&:hover {
+		background: ${({ theme }) => theme.TRANSPARENT};
+	}
 `;
 
 const InputBox = styled.div`

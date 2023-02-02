@@ -51,14 +51,7 @@ const Input = styled.input`
 `;
 
 const cancelButtonStyle = css`
-	padding: 2rem 3rem;
-	box-sizing: border-box;
-	border: 1px solid ${({ theme }) => theme.colors.BLACK};
-	border-radius: 7px;
-	box-shadow: 0 2px 2px ${({ theme }) => theme.colors.GRAY};
-
-	font-size: 1.5rem;
-	color: ${({ theme }) => theme.colors.BLACK};
+	${({ theme }) => theme.buttons.cancle}
 `;
 
 const ButtonsControl = styled.div`
@@ -69,13 +62,7 @@ const ButtonsControl = styled.div`
 `;
 
 const saveButtonStyle = css`
-	padding: 2rem 3rem;
-	box-sizing: border-box;
-	border-radius: 7px;
-	border: 1px solid ${({ theme }) => theme.colors.BLUE};
-
-	font-size: 1.5rem;
-	color: ${({ theme }) => theme.colors.BLUE};
+	${({ theme }) => theme.buttons.save}
 `;
 
 function MyCalendarAdder({ closeModal }) {

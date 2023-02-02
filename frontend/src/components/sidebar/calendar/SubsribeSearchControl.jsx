@@ -107,16 +107,10 @@ const SearchResult = styled.span`
 
 const subscribeButtonStyle = css`
 	width: 18rem;
-	height: 8rem;
-	border: 1px solid ${({ theme }) => theme.colors.BLUE};
-	border-radius: 7px;
-
-	background-color: ${({ theme }) => theme.colors.WHITE};
-
-	font-size: 3.5rem;
-	font-weight: 700;
-	line-height: 3.5rem;
 	color: ${({ theme }) => theme.colors.BLUE};
+	${({ theme }) => theme.buttons.save}
+	font-weight: 700;
+	font-size: 3rem;
 `;
 
 function SubsribeSearchControl() {

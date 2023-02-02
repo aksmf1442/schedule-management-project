@@ -16,7 +16,7 @@ const Container = styled.div`
 	padding: 5.5rem;
 	border-radius: 7px;
 
-	background: ${({ theme }) => theme.colors.GRAY};
+	background: ${({ theme }) => theme.colors.WHITE};
 	box-shadow: -2px 2px 17px 5px rgba(0, 0, 0, 0.25);
 `;
 
@@ -156,6 +156,13 @@ const saveButtonStyle = css`
 	color: ${({ theme }) => theme.colors.BLUE};
 `;
 
+const HR = styled.hr`
+	background-color: ${({ theme }) => theme.colors.GRAY};
+	width: 100%;
+	height: 1px;
+	border: 0;
+`;
+
 const MOCK_CALENDARS = ['내 캘린더', '캘린더 1', '캘린더 2'];
 
 function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
@@ -190,7 +197,7 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 						autoFocus
 					/>
 				</InputBox>
-				<hr width="100%" />
+				<HR />
 				<DateTimeBox>
 					<CheckBox>
 						<input
@@ -235,14 +242,17 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 						{!isAllDay && (
 							<select value={schedule.endTime.inputValue} onChange={schedule.endTime.onChangeValue}>
 								{TIMES.map(time => {
-									return <option value={time}>{time}</option>;
+									return (
+										<option key={time} value={time}>
+											{time}
+										</option>
+									);
 								})}
 							</select>
 						)}
 					</DateTime>
 				</DateTimeBox>
-
-				<hr width="100%" />
+				<HR />
 				<SelectBox>
 					캘린더 선택
 					<select value={schedule.calendar.inputValue} onChange={schedule.calendar.onChangeValue}>
@@ -255,7 +265,7 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 						})}
 					</select>
 				</SelectBox>
-				<hr width="100%" />
+				<HR />
 				<ButtonsControl>
 					<Button css={cancelButtonStyle} onClick={closeModal}>
 						취소
