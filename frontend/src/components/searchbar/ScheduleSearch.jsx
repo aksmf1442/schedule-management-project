@@ -4,11 +4,11 @@ import Button from '../common/Button';
 
 import SearchBox from './SearchBox';
 
-const SearchContainer = styled.div`
+const Container = styled.div`
 	${({ css }) => css}
 `;
 
-const SearchHeaderText = styled.span`
+const SearchHeader = styled.span`
 	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
 
@@ -68,7 +68,7 @@ const searchResultStyle = css`
 	color: ${({ theme }) => theme.colors.LIGHT_BLACK};
 `;
 
-function SearchList({ css, children }) {
+function ScheduleSearch({ css, children }) {
 	const listLength = 1;
 
 	const keywordRef = useRef(null);
@@ -81,8 +81,8 @@ function SearchList({ css, children }) {
 	};
 
 	return (
-		<SearchContainer css={css}>
-			<SearchHeaderText>{children}</SearchHeaderText>
+		<Container css={css}>
+			<SearchHeader>{children}</SearchHeader>
 			<SearchBox onSubmit={handleSubmitSearch} kewordRef={keywordRef} />
 			<SearchResults listLength={listLength}>
 				<Button css={searchResultStyle}>
@@ -93,8 +93,8 @@ function SearchList({ css, children }) {
 					<SearchResultDate>2023.01.23(월)</SearchResultDate>
 				</Button>
 			</SearchResults>
-		</SearchContainer>
+		</Container>
 	);
 }
 
-export default SearchList;
+export default ScheduleSearch;

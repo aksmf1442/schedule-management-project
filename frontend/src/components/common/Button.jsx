@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonBox = styled.button`
+const Container = styled.button`
 	background: ${({ color }) => (color ? color : 'transparent')};
 
 	font-family: inherit;
@@ -18,9 +18,9 @@ const ButtonBox = styled.button`
 
 function Button({ type, css, onClick, children, color, ...props }) {
 	return (
-		<ButtonBox {...props} type={type} css={css} color={color} onClick={onClick}>
+		<Container {...props} type={type} css={css} color={color} onClick={onClick}>
 			{children}
-		</ButtonBox>
+		</Container>
 	);
 }
 

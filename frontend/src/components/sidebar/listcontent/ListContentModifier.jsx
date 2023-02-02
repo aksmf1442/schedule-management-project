@@ -7,6 +7,20 @@ import Button from '../../common/Button';
 import ModalPortal from '../../common/ModalPortal';
 import CalendarModifier from './CalendarModifier';
 
+const Container = styled.div`
+	${({ theme }) => theme.flex.column}
+	align-items: flex-start;
+
+	position: absolute;
+	top: ${({ modalPos }) => (modalPos.top ? `${modalPos.top}px` : 'none')};
+	left: ${({ modalPos }) => (modalPos.left ? `${modalPos.left}px` : 'none')};
+
+	border: 1px solid ${({ theme }) => theme.colors.GRAY};
+	border-radius: 7px;
+
+	background: ${({ theme }) => theme.colors.WHITE};
+`;
+
 const controlButtonStyle = css`
 	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
@@ -36,21 +50,7 @@ const colorStyle = css`
 	}
 `;
 
-const ModalPosContainer = styled.div`
-	${({ theme }) => theme.flex.column}
-	align-items: flex-start;
-
-	position: absolute;
-	top: ${({ modalPos }) => (modalPos.top ? `${modalPos.top}px` : 'none')};
-	left: ${({ modalPos }) => (modalPos.left ? `${modalPos.left}px` : 'none')};
-
-	border: 1px solid ${({ theme }) => theme.colors.GRAY};
-	border-radius: 7px;
-
-	background: ${({ theme }) => theme.colors.WHITE};
-`;
-
-const ColorsContainer = styled.div`
+const Colors = styled.div`
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	place-items: center;
@@ -62,7 +62,7 @@ const ColorsContainer = styled.div`
 
 const COLORS = ['red', 'green', 'black', 'pink', 'blue', 'orange', 'gray'];
 
-function ListItemModifier({ modalPos, closeModal }) {
+function ListContentModifier({ modalPos, closeModal }) {
 	const canEditSubscription = true;
 	const canDeleteSubscription = false;
 
@@ -77,7 +77,7 @@ function ListItemModifier({ modalPos, closeModal }) {
 	};
 
 	return (
-		<ModalPosContainer modalPos={modalPos}>
+		<Container modalPos={modalPos}>
 			{canEditSubscription && (
 				<Button css={controlButtonStyle} onClick={toggleCalendarManageModalOpen}>
 					<MdSettings size={24} />
@@ -90,7 +90,7 @@ function ListItemModifier({ modalPos, closeModal }) {
 					구독 해제
 				</Button>
 			)}
-			<ColorsContainer>
+			<Colors>
 				{COLORS.map(color => {
 					return (
 						<Button
@@ -101,12 +101,12 @@ function ListItemModifier({ modalPos, closeModal }) {
 						/>
 					);
 				})}
-			</ColorsContainer>
+			</Colors>
 			<ModalPortal isOpen={isCalendarManageModalOpen} closeModal={toggleCalendarManageModalOpen}>
 				<CalendarModifier clasModal={toggleCalendarManageModalOpen} />
 			</ModalPortal>
-		</ModalPosContainer>
+		</Container>
 	);
 }
 
-export default ListItemModifier;
+export default ListContentModifier;

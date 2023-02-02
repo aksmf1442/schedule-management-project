@@ -11,7 +11,7 @@ import ModalPortal from '../common/ModalPortal';
 import useToggle from '../../hooks/useToggle';
 import Profile from '../profile/Profile';
 
-const HeaderContainer = styled.div`
+const Container = styled.div`
 	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
 
@@ -28,7 +28,7 @@ const HeaderContainer = styled.div`
 	box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
 `;
 
-const ContentBox = styled.div`
+const Contents = styled.div`
 	${({ theme }) => theme.flex.row}
 `;
 
@@ -36,7 +36,7 @@ const Content = styled.div`
 	margin-right: 3rem;
 `;
 
-const ContentText = styled.span`
+const ContentButtonText = styled.span`
 	color: ${({ theme }) => theme.colors.LIGHT_BLACK};
 	font-size: 5rem;
 	font-weight: bold;
@@ -57,40 +57,40 @@ function Header() {
 		setSearchBarOpen(prev => !prev);
 	};
 
-	const handleClickMainButton = () => {
+	const handleClickHomeButton = () => {
 		navigate('');
 	};
 
-	const handleClickProfileMenuButton = () => {
+	const handleClickProfileButton = () => {
 		toggleProfileModalOpen();
 	};
 
 	return (
 		<>
-			<HeaderContainer>
-				<ContentBox>
+			<Container>
+				<Contents>
 					<Content>
 						<SideBarButton handleSideBarOpen={handleSideBarOpen} />
 					</Content>
 					<Content>
-						<Button onClick={handleClickMainButton}>
-							<ContentText>일치</ContentText>
+						<Button onClick={handleClickHomeButton}>
+							<ContentButtonText>일치</ContentButtonText>
 						</Button>
 					</Content>
-				</ContentBox>
-				<ContentBox>
+				</Contents>
+				<Contents>
 					<Content>
 						<Button onClick={handleSearchBarOpen}>
 							<AiOutlineSearch size={24} />
 						</Button>
 					</Content>
 					<Content>
-						<Button onClick={handleClickProfileMenuButton}>
+						<Button onClick={handleClickProfileButton}>
 							<AiOutlineUser size={24} />
 						</Button>
 					</Content>
-				</ContentBox>
-			</HeaderContainer>
+				</Contents>
+			</Container>
 			<ModalPortal
 				isOpen={isProfileModalOpen}
 				closeModal={toggleProfileModalOpen}

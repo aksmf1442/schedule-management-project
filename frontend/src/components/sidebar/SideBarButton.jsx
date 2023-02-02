@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil';
 import sideBarState from '../../recoil/sideBarState';
 import { RiMenuFill, RiMenuFoldFill } from 'react-icons/ri';
 
-const SideBarButtonContainer = styled.div`
+const Container = styled.div`
 	${({ theme }) => theme.flex.row}
 
 	position: relative;
@@ -31,11 +31,11 @@ const SideBarButtonContainer = styled.div`
 function SideBarButton({ handleSideBarOpen }) {
 	const sideBarOpen = useRecoilValue(sideBarState);
 	return (
-		<SideBarButtonContainer>
+		<Container>
 			<Button onClick={handleSideBarOpen}>
 				{sideBarOpen ? <RiMenuFoldFill size={24} /> : <RiMenuFill size={24} />}
 			</Button>
-		</SideBarButtonContainer>
+		</Container>
 	);
 }
 

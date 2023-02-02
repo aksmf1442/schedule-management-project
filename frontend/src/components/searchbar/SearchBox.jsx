@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import Button from '../common/Button';
 import { MdSearch } from 'react-icons/md';
 
-const SearchBoxForm = styled.form`
+const Form = styled.form`
 	position: relative;
 
 	width: 100%;
@@ -21,7 +21,7 @@ const searchBoxButtonStyle = css`
 	width: 10rem;
 `;
 
-const InputContainer = styled.div`
+const InputBox = styled.div`
 	${({ theme }) => theme.flex.column}
 	align-items: flex-start;
 
@@ -56,14 +56,14 @@ const Input = styled.input`
 
 function SearchBox({ kewordRef, onSubmit }) {
 	return (
-		<SearchBoxForm onSubmit={onSubmit}>
+		<Form onSubmit={onSubmit}>
 			<Button type="submit" css={searchBoxButtonStyle}>
 				<MdSearch size={17} />
 			</Button>
-			<InputContainer>
+			<InputBox>
 				<Input ref={kewordRef} />
-			</InputContainer>
-		</SearchBoxForm>
+			</InputBox>
+		</Form>
 	);
 }
 

@@ -6,20 +6,20 @@ import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 import useToggle from '../../../hooks/useToggle';
 import ModalPortal from '../../common/ModalPortal';
 import SubscribeCalendarAdder from './SubscribeCalendarAdder';
-import ListItem from '../listitem/ListItem';
+import ListContent from '../listcontent/ListContent';
 
-const ListBox = styled.div`
+const Container = styled.div`
 	${({ css }) => css}
 `;
 
-const ListHeader = styled.div`
+const ContentsControl = styled.div`
 	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
 
 	width: 100%;
 `;
 
-const ListHeaderText = styled.span`
+const ControlText = styled.span`
 	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
 
@@ -31,7 +31,7 @@ const ListHeaderText = styled.span`
 	font-weight: bold;
 `;
 
-const ListContents = styled.div`
+const Contents = styled.div`
 	${({ theme }) => theme.flex.column}
 
 	gap: 2rem;
@@ -48,30 +48,30 @@ const listButtonStyle = css`
 	margin-left: 4rem;
 `;
 
-function SubscribeCalendarList({ css, children }) {
+function SubscribeCalendars({ css, children }) {
 	const { isOpen: isSubscriebeListOpen, toggleClick: toggleSubscriebeListOpen } = useToggle(true);
 	const { isOpen: isSubscriebeAdderOpen, toggleClick: toggleSubscriebeAdderOpen } = useToggle();
 
 	return (
-		<ListBox css={css}>
-			<ListHeader>
-				<ListHeaderText>{children}</ListHeaderText>
+		<Container css={css}>
+			<ContentsControl>
+				<ControlText>{children}</ControlText>
 				<Button onClick={toggleSubscriebeAdderOpen} css={listButtonStyle}>
 					<AiOutlinePlus size={16} />
 				</Button>
 				<Button onClick={toggleSubscriebeListOpen} css={listButtonStyle}>
 					{isSubscriebeListOpen ? <AiOutlineUp size={16} /> : <AiOutlineDown size={16} />}
 				</Button>
-			</ListHeader>
-			<ListContents isMyListOpen={isSubscriebeListOpen} listLength={2}>
-				<ListItem>구독한 캘린더1</ListItem>
-				<ListItem>구독한 캘린더2</ListItem>
-			</ListContents>
+			</ContentsControl>
+			<Contents isMyListOpen={isSubscriebeListOpen} listLength={2}>
+				<ListContent>구독한 캘린더1</ListContent>
+				<ListContent>구독한 캘린더2</ListContent>
+			</Contents>
 			<ModalPortal isOpen={isSubscriebeAdderOpen} closeModal={toggleSubscriebeAdderOpen}>
 				<SubscribeCalendarAdder claseModal={toggleSubscriebeAdderOpen} />
 			</ModalPortal>
-		</ListBox>
+		</Container>
 	);
 }
 
-export default SubscribeCalendarList;
+export default SubscribeCalendars;

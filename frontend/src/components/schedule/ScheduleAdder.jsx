@@ -6,7 +6,7 @@ import useValidateSchedule from '../../hooks/useValidateSchedule';
 
 import Button from '../common/Button';
 
-const ScheduleAdderContainer = styled.div`
+const Container = styled.div`
 	justify-content: space-around;
 	gap: 2rem;
 	position: fixed;
@@ -19,7 +19,7 @@ const ScheduleAdderContainer = styled.div`
 	box-shadow: -2px 2px 17px 5px rgba(0, 0, 0, 0.25);
 `;
 
-const ScheduleAdderForm = styled.form`
+const Form = styled.form`
 	${({ theme }) => theme.flex.column}
 
 	gap: 4rem;
@@ -27,7 +27,7 @@ const ScheduleAdderForm = styled.form`
 	height: 100%;
 `;
 
-const InputContainer = styled.div`
+const InputBox = styled.div`
 	${({ theme }) => theme.flex.column}
 	align-items: flex-start;
 
@@ -55,7 +55,7 @@ const ScheduleInput = styled.input`
 	}
 `;
 
-const DateTimeContainer = styled.div`
+const DateTimeBox = styled.div`
 	${({ theme }) => theme.flex.column}
 	align-items: flex-start;
 
@@ -126,7 +126,15 @@ const SelectBox = styled.div`
 	width: 100%;
 `;
 
-const cancelButton = css`
+const ButtonsControl = styled.div`
+	${({ theme }) => theme.flex.row}
+	justify-content: flex-end;
+
+	gap: 2rem;
+	width: 100%;
+`;
+
+const cancelButtonStyle = css`
 	padding: 2rem 3rem;
 	box-sizing: border-box;
 	border: 1px solid ${({ theme }) => theme.colors.BLACK};
@@ -137,7 +145,7 @@ const cancelButton = css`
 	color: ${({ theme }) => theme.colors.BLACK};
 `;
 
-const saveButton = css`
+const saveButtonStyle = css`
 	padding: 2rem 3rem;
 	box-sizing: border-box;
 	border-radius: 7px;
@@ -145,14 +153,6 @@ const saveButton = css`
 
 	font-size: 1.5rem;
 	color: ${({ theme }) => theme.colors.BLUE};
-`;
-
-const FormControlButtons = styled.div`
-	${({ theme }) => theme.flex.row}
-	justify-content: flex-end;
-
-	gap: 2rem;
-	width: 100%;
 `;
 
 const TIMES = [
@@ -210,18 +210,18 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 	};
 
 	return (
-		<ScheduleAdderContainer isSideBarOpen={isSideBarOpen}>
-			<ScheduleAdderForm onSubmit={handleSubmitScheduleAdderForm}>
-				<InputContainer>
+		<Container isSideBarOpen={isSideBarOpen}>
+			<Form onSubmit={handleSubmitScheduleAdderForm}>
+				<InputBox>
 					<ScheduleInput
 						placeholder="일정 제목 추가"
 						value={schedule.title.inputValue}
 						onChange={schedule.title.onChangeValue}
 						autoFocus
 					/>
-				</InputContainer>
+				</InputBox>
 				<hr width="100%" />
-				<DateTimeContainer>
+				<DateTimeBox>
 					<CheckBox>
 						<input
 							type="checkbox"
@@ -246,7 +246,11 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 								onChange={schedule.startTime.onChangeValue}
 							>
 								{TIMES.map(time => {
-									return <option value={time}>{time}</option>;
+									return (
+										<option key={time} value={time}>
+											{time}
+										</option>
+									);
 								})}
 							</select>
 						)}
@@ -266,28 +270,32 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 							</select>
 						)}
 					</DateTime>
-				</DateTimeContainer>
+				</DateTimeBox>
 
 				<hr width="100%" />
 				<SelectBox>
 					캘린더 선택
 					<select value={schedule.calendar.inputValue} onChange={schedule.calendar.onChangeValue}>
 						{MOCK_CALENDARS.map(calendar => {
-							return <option value={calendar}>{calendar}</option>;
+							return (
+								<option key={calendar} value={calendar}>
+									{calendar}
+								</option>
+							);
 						})}
 					</select>
 				</SelectBox>
 				<hr width="100%" />
-				<FormControlButtons>
-					<Button css={cancelButton} onClick={closeModal}>
+				<ButtonsControl>
+					<Button css={cancelButtonStyle} onClick={closeModal}>
 						취소
 					</Button>
-					<Button type="submit" css={saveButton}>
+					<Button type="submit" css={saveButtonStyle}>
 						저장
 					</Button>
-				</FormControlButtons>
-			</ScheduleAdderForm>
-		</ScheduleAdderContainer>
+				</ButtonsControl>
+			</Form>
+		</Container>
 	);
 }
 

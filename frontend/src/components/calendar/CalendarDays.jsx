@@ -1,33 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CalendarDaysContainer = styled.div`
+const Container = styled.div`
 	display: grid;
 	grid-template-columns: repeat(7, calc(100% / 7));
 
 	height: 7rem;
 `;
 
-const CalendarDay = styled.span`
+const Day = styled.span`
 	padding: 2rem;
 	border-top: 1px solid ${({ theme }) => theme.colors.GRAY};
 	border-right: 1px solid ${({ theme }) => theme.colors.GRAY};
-	border-left: ${({ day, DAYS, theme }) => day === DAYS[0] && `1px solid ${theme.colors.GRAY}`};
+	border-left: ${({ day, sunday, theme }) => day === sunday && `1px solid ${theme.colors.GRAY}`};
 
 	font-size: 3rem;
-	color: ${({ day, DAYS, theme }) => day === DAYS[0] && theme.colors.RED};
+	color: ${({ day, sunday, theme }) => day === sunday && theme.colors.RED};
 	text-align: right;
 `;
 
 function CalendarDays({ DAYS }) {
 	return (
-		<CalendarDaysContainer>
+		<Container>
 			{DAYS.map(day => (
-				<CalendarDay DAYS={DAYS} key={day} day={day}>
+				<Day key={day} day={day} sunday={DAYS[0]}>
 					{day}
-				</CalendarDay>
+				</Day>
 			))}
-		</CalendarDaysContainer>
+		</Container>
 	);
 }
 

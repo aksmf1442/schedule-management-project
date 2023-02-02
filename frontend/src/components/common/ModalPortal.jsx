@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 
 import styled from 'styled-components';
 
-const ModalPortalContainer = styled.div`
+const Container = styled.div`
 	${({ theme }) => theme.flex.row}
 
 	position: fixed;
@@ -37,13 +37,9 @@ function ModalPortal({ isOpen, closeModal, dimmerBackground, children }) {
 	};
 
 	const element = isOpen && (
-		<ModalPortalContainer
-			isOpen={isOpen}
-			onClick={handleClickDimmer}
-			dimmerBackground={dimmerBackground}
-		>
+		<Container isOpen={isOpen} onClick={handleClickDimmer} dimmerBackground={dimmerBackground}>
 			{children}
-		</ModalPortalContainer>
+		</Container>
 	);
 
 	return ReactDOM.createPortal(element, modalElement);

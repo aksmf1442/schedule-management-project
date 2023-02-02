@@ -9,7 +9,7 @@ import CalendarCell from './CalendarCell';
 import { useRecoilValue } from 'recoil';
 import sideBarState from '../../recoil/sideBarState';
 
-const CalendarCellsContainer = styled.div`
+const Container = styled.div`
 	display: grid;
 	grid-template-columns: repeat(7, calc(100% / 7));
 	grid-auto-rows: calc(calc(100vh - 42rem) / ${({ rowNum }) => rowNum});
@@ -46,7 +46,7 @@ function CalendarCells({ currentDate, originDate }) {
 		}
 	}
 
-	return <CalendarCellsContainer rowNum={rowLength}>{days}</CalendarCellsContainer>;
+	return <Container rowNum={rowLength}>{days}</Container>;
 }
 
 export default CalendarCells;

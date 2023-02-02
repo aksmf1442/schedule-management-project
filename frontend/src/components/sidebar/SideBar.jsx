@@ -2,10 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import sideBarState from '../../recoil/sideBarState';
-import MyCalendarList from './calendarlist/MyCalendarList';
-import SubscribeCalendarList from './subscribecalendarlist/SubscribeCalendarList';
+import MyCalendars from './calendars/MyCalendars';
+import SubscribeCalendars from './subscribecalendars/SubscribeCalendars';
 
-const SideBarContainer = styled.div`
+const Container = styled.div`
 	overflow: hidden;
 	position: fixed;
 	z-index: 10;
@@ -22,7 +22,7 @@ const SideBarContainer = styled.div`
 	}
 `;
 
-const sideListStyle = css`
+const listStyle = css`
 	${({ theme }) => theme.flex.column}
 	justify-content: flex-start;
 
@@ -40,10 +40,10 @@ function SideBar() {
 	const isSideBarOpen = useRecoilValue(sideBarState);
 
 	return (
-		<SideBarContainer isSideBarOpen={isSideBarOpen}>
-			<MyCalendarList css={sideListStyle}>내 캘린더</MyCalendarList>
-			<SubscribeCalendarList css={sideListStyle}>구독한 캘린더</SubscribeCalendarList>
-		</SideBarContainer>
+		<Container isSideBarOpen={isSideBarOpen}>
+			<MyCalendars css={listStyle}>내 캘린더</MyCalendars>
+			<SubscribeCalendars css={listStyle}>구독한 캘린더</SubscribeCalendars>
+		</Container>
 	);
 }
 

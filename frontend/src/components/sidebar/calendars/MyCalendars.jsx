@@ -5,20 +5,20 @@ import useToggle from '../../../hooks/useToggle';
 import ModalPortal from '../../common/ModalPortal';
 import { AiOutlinePlus, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 import MyCalendarAdder from './MyCalendarAdder';
-import ListItem from '../listitem/ListItem';
+import ListContent from '../listcontent/ListContent';
 
-const ListBox = styled.div`
+const Container = styled.div`
 	${({ css }) => css}
 `;
 
-const ListHeader = styled.div`
+const ContentsControl = styled.div`
 	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
 
 	width: 100%;
 `;
 
-const ListHeaderText = styled.span`
+const ControlText = styled.span`
 	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
 
@@ -30,7 +30,7 @@ const ListHeaderText = styled.span`
 	font-weight: bold;
 `;
 
-const ListContents = styled.div`
+const Contents = styled.div`
 	${({ theme }) => theme.flex.column}
 
 	gap: 2rem;
@@ -43,34 +43,34 @@ const ListContents = styled.div`
 	transition: height 0.2s ease-in-out;
 `;
 
-const listButtonStyle = css`
+const buttonStyle = css`
 	margin-left: 4rem;
 `;
 
-function MyCalendarList({ css, children }) {
+function MyCalendars({ css, children }) {
 	const { isOpen: isMyListOpen, toggleClick: toggleMyListOpen } = useToggle(true);
 	const { isOpen: isMyCalendarAdderOpen, toggleClick: toggleMyCalendarAdderOpen } = useToggle();
 
 	return (
-		<ListBox css={css}>
-			<ListHeader>
-				<ListHeaderText>{children}</ListHeaderText>
-				<Button onClick={toggleMyCalendarAdderOpen} css={listButtonStyle}>
+		<Container css={css}>
+			<ContentsControl>
+				<ControlText>{children}</ControlText>
+				<Button onClick={toggleMyCalendarAdderOpen} css={buttonStyle}>
 					<AiOutlinePlus size={16} />
 				</Button>
-				<Button onClick={toggleMyListOpen} css={listButtonStyle}>
+				<Button onClick={toggleMyListOpen} css={buttonStyle}>
 					{isMyListOpen ? <AiOutlineUp size={16} /> : <AiOutlineDown size={16} />}
 				</Button>
-			</ListHeader>
-			<ListContents isMyListOpen={isMyListOpen} listLength={2}>
-				<ListItem>내 캘린더1</ListItem>
-				<ListItem>내 캘린더2</ListItem>
-			</ListContents>
+			</ContentsControl>
+			<Contents isMyListOpen={isMyListOpen} listLength={2}>
+				<ListContent>내 캘린더1</ListContent>
+				<ListContent>내 캘린더2</ListContent>
+			</Contents>
 			<ModalPortal isOpen={isMyCalendarAdderOpen} closeModal={toggleMyCalendarAdderOpen}>
 				<MyCalendarAdder closeModal={toggleMyCalendarAdderOpen} />
 			</ModalPortal>
-		</ListBox>
+		</Container>
 	);
 }
 
-export default MyCalendarList;
+export default MyCalendars;

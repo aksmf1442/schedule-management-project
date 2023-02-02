@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Button from '../../common/Button';
 
-const MyCalendarAdderContainer = styled.div`
+const Container = styled.div`
 	${({ theme }) => theme.flex.column}
 
 	width: 100rem;
@@ -15,13 +15,13 @@ const MyCalendarAdderContainer = styled.div`
 	background: ${({ theme }) => theme.colors.WHITE};
 `;
 
-const MyCalendarAdderTitle = styled.h1`
+const Title = styled.h1`
 	font-size: 8rem;
 	font-weight: bold;
 	color: ${({ theme }) => theme.colors.GRAY};
 `;
 
-const MyCalendarAdderForm = styled.form`
+const Form = styled.form`
 	${({ theme }) => theme.flex.column}
 	justify-content: space-between;
 
@@ -29,14 +29,14 @@ const MyCalendarAdderForm = styled.form`
 	height: 100%;
 `;
 
-const MyCalendarAdderContent = styled.div`
+const Content = styled.div`
 	${({ theme }) => theme.flex.column}
 
 	width: 100%;
 	height: 100%;
 `;
 
-const MyCalendarAdderInput = styled.input`
+const Input = styled.input`
 	width: 100%;
 	background: inherit;
 	border: 0;
@@ -61,6 +61,13 @@ const cancelButtonStyle = css`
 	color: ${({ theme }) => theme.colors.BLACK};
 `;
 
+const ButtonsControl = styled.div`
+	${({ theme }) => theme.flex.row}
+
+	align-self: flex-end;
+	gap: 5rem;
+`;
+
 const saveButtonStyle = css`
 	padding: 2rem 3rem;
 	box-sizing: border-box;
@@ -69,13 +76,6 @@ const saveButtonStyle = css`
 
 	font-size: 1.5rem;
 	color: ${({ theme }) => theme.colors.BLUE};
-`;
-
-const MyCalendarAdderControlButtons = styled.div`
-	${({ theme }) => theme.flex.row}
-
-	align-self: flex-end;
-	gap: 5rem;
 `;
 
 function MyCalendarAdder({ closeModal }) {
@@ -93,27 +93,27 @@ function MyCalendarAdder({ closeModal }) {
 	};
 
 	return (
-		<MyCalendarAdderContainer>
-			<MyCalendarAdderTitle>캘린더 추가</MyCalendarAdderTitle>
-			<MyCalendarAdderForm onSubmit={handleSubmitMyCalendarAdderForm}>
-				<MyCalendarAdderContent>
-					<MyCalendarAdderInput
+		<Container>
+			<Title>캘린더 추가</Title>
+			<Form onSubmit={handleSubmitMyCalendarAdderForm}>
+				<Content>
+					<Input
 						value={myCalendarTitle}
 						onChange={onChangeMyCalendarTitle}
 						placeholder="캘린더 제목"
 						autoFocus={true}
 					/>
-				</MyCalendarAdderContent>
-				<MyCalendarAdderControlButtons>
+				</Content>
+				<ButtonsControl>
 					<Button css={cancelButtonStyle} onClick={closeModal}>
 						취소
 					</Button>
 					<Button type="submit" css={saveButtonStyle}>
 						추가
 					</Button>
-				</MyCalendarAdderControlButtons>
-			</MyCalendarAdderForm>
-		</MyCalendarAdderContainer>
+				</ButtonsControl>
+			</Form>
+		</Container>
 	);
 }
 

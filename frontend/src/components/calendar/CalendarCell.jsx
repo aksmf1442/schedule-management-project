@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 import { isSameMonth, isSameDay, getDay } from 'date-fns';
@@ -58,7 +58,7 @@ function CalendarCell({ day, currentDate, originDate, formattedDate, isSideBarOp
 	return (
 		<>
 			<Button onClick={handleClickScheduleAdderButton} aria-expanded={isScheduleAdderModalOpen}>
-				<CalendarCellContainer key={day} day={getDay(day)}>
+				<CalendarCellContainer day={getDay(day)}>
 					<CalendarCellText
 						isCurrentMonth={isSameMonth(day, currentDate)}
 						isToday={isSameDay(day, originDate)}
