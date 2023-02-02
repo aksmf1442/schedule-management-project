@@ -71,7 +71,6 @@ const searchResultStyle = css`
 
 function ScheduleSearch({ css, children }) {
 	const listLength = 1;
-
 	const { inputValue: keyword, onChangeValue: onChangeKeyword } = useInput();
 
 	const handleSubmitSearch = e => {
