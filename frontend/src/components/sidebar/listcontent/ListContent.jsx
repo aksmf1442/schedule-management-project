@@ -5,6 +5,7 @@ import Button from '../../common/Button';
 import ModalPortal from '../../common/ModalPortal';
 import ListContentModifier from './ListContentModifier';
 import useModalPosition from '../../../hooks/useModalPosition';
+import theme from '../../../style/theme';
 
 const Container = styled.div`
 	${({ theme }) => theme.flex.row}
@@ -60,7 +61,7 @@ function ListContent({ children }) {
 			<ModalPortal
 				isOpen={isModalOpen}
 				closeModal={toggleModalOpen}
-				dimmerBackground={'transparent'}
+				dimmerBackground={theme.TRANSPARENT}
 			>
 				<ListContentModifier modalPos={modalPos} />
 			</ModalPortal>

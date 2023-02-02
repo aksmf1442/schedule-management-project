@@ -25,9 +25,12 @@ const flex = {
 	`,
 };
 
+const TRANSPARENT = 'transparent';
+
 const theme = {
 	colors,
 	flex,
+	TRANSPARENT,
 };
 
 export default theme;

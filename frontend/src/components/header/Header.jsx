@@ -5,6 +5,7 @@ import sideBarState from '../../recoil/sideBarState';
 import searchBarState from '../../recoil/searchBarState';
 import Button from '../common/Button';
 
+import theme from '../../style/theme';
 import { RiMenuFill } from 'react-icons/ri';
 import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai';
 import ModalPortal from '../common/ModalPortal';
@@ -49,7 +50,7 @@ const sideBarButtonStyle = css`
 
 	top: 0.6rem;
 
-	background: transparent;
+	background: ${({ theme }) => theme.TRANSPARENT};
 
 	font-size: 7rem;
 	font-weight: bold;
@@ -109,7 +110,7 @@ function Header() {
 			<ModalPortal
 				isOpen={isProfileModalOpen}
 				closeModal={toggleProfileModalOpen}
-				dimmerBackground={'transparent'}
+				dimmerBackground={theme.TRANSPARENT}
 			>
 				<Profile />
 			</ModalPortal>

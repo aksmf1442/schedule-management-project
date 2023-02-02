@@ -1,6 +1,7 @@
 import React from 'react';
 import { MdSettings, MdOutlineDelete } from 'react-icons/md';
 import styled, { css } from 'styled-components';
+import { COLORS } from '../../../constants/color';
 import useColorInput from '../../../hooks/useColorInput';
 import useToggle from '../../../hooks/useToggle';
 import Button from '../../common/Button';
@@ -59,8 +60,6 @@ const Colors = styled.div`
 	width: 35rem;
 	padding: 2rem;
 `;
-
-const COLORS = ['red', 'green', 'black', 'pink', 'blue', 'orange', 'gray'];
 
 function ListContentModifier({ modalPos }) {
 	const canEditSubscription = true;

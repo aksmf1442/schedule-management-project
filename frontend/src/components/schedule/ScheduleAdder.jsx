@@ -1,10 +1,11 @@
-import format from 'date-fns/format';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import useToggle from '../../hooks/useToggle';
 import useSchedule from '../../hooks/useSchedule';
 
 import Button from '../common/Button';
+import { TIMES, INIT_TIME } from '../../constants/date';
+import { getFormatDate } from '../../util/date';
 
 const Container = styled.div`
 	justify-content: space-around;
@@ -155,38 +156,7 @@ const saveButtonStyle = css`
 	color: ${({ theme }) => theme.colors.BLUE};
 `;
 
-const TIMES = [
-	'00:00',
-	'01:00',
-	'02:00',
-	'03:00',
-	'04:00',
-	'05:00',
-	'06:00',
-	'07:00',
-	'08:00',
-	'09:00',
-	'10:00',
-	'11:00',
-	'12:00',
-	'13:00',
-	'14:00',
-	'15:00',
-	'16:00',
-	'17:00',
-	'18:00',
-	'19:00',
-	'20:00',
-	'21:00',
-	'22:00',
-	'23:00',
-];
-
 const MOCK_CALENDARS = ['내 캘린더', '캘린더 1', '캘린더 2'];
-
-const getFormatDate = date => {
-	return format(date, 'yyyy-MM-dd');
-};
 
 function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 	const { isOpen: isAllDay, toggleClick: toggleAllDay } = useToggle(true);
@@ -194,9 +164,9 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 	const schedule = useSchedule({
 		initialTitle: '',
 		initialStartDate: getFormatDate(day),
-		initialStartTime: '00:00',
+		initialStartTime: INIT_TIME,
 		initialEndDate: getFormatDate(day),
-		initialEndTime: '00:00',
+		initialEndTime: INIT_TIME,
 		initialCalendar: '내 캘린더',
 	});
 

@@ -18,15 +18,11 @@ const Container = styled.div`
 			? dimmerBackground
 			: isOpen
 			? `${theme.colors.BLACK}bb`
-			: 'transparent'};
+			: theme.TRANSPARENT};
 `;
 
 function ModalPortal({ isOpen, closeModal, dimmerBackground, children }) {
 	const modalElement = document.getElementById('modal');
-
-	if (!(modalElement instanceof HTMLElement)) {
-		return <></>;
-	}
 
 	const handleClickDimmer = e => {
 		if (e.target !== e.currentTarget) {

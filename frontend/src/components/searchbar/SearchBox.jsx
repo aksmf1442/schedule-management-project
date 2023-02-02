@@ -58,7 +58,7 @@ function SearchBox({ onChangeKeyword, onSubmit }) {
 	return (
 		<Form onSubmit={onSubmit}>
 			<Button type="submit" css={searchBoxButtonStyle}>
-				<MdSearch size={17} />
+				<MdSearch size={24} />
 			</Button>
 			<InputBox>
 				<Input onChange={onChangeKeyword} />
