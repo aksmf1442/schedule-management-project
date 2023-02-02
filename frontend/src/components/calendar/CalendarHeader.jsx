@@ -5,11 +5,9 @@ import { format } from 'date-fns';
 import styled, { css } from 'styled-components';
 import Button from '../common/Button';
 
-const CalendarHeaderContainer = styled.div`
-	display: flex;
-	flex-direction: row;
+const Container = styled.div`
+	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
-	align-items: center;
 
 	width: 100%;
 	padding: 3rem 2rem;
@@ -19,14 +17,12 @@ const CalendarHeaderContainer = styled.div`
 	color: ${({ theme }) => theme.colors.BLACK};
 `;
 
-const MonthPicker = styled.div`
-	display: flex;
-	flex-direction: row;
+const MonthContorl = styled.div`
+	${({ theme }) => theme.flex.row}
 	justify-content: space-around;
-	align-items: center;
 `;
 
-const headerMenuStyle = css`
+const controlButtonStyle = css`
 	position: relative;
 
 	width: 8rem;
@@ -64,23 +60,22 @@ const todayButtonStyle = css`
 
 function CalendarHeader({ currentDate, resetDate, prevMonth, nextMonth }) {
 	return (
-		<CalendarHeaderContainer>
+		<Container>
 			<span>
-				{format(currentDate, 'yyyy')}년
-				<span className="text month">{format(currentDate, 'M')}월</span>
+				{format(currentDate, 'yyyy')}년 {format(currentDate, 'M')}월
 			</span>
-			<MonthPicker>
-				<Button css={headerMenuStyle} onClick={prevMonth}>
+			<MonthContorl>
+				<Button css={controlButtonStyle} onClick={prevMonth}>
 					<IoIosArrowDropleft size={24} />
 				</Button>
 				<Button css={todayButtonStyle} onClick={resetDate}>
-					<span>오늘</span>
+					오늘
 				</Button>
-				<Button css={headerMenuStyle} onClick={nextMonth}>
+				<Button css={controlButtonStyle} onClick={nextMonth}>
 					<IoIosArrowDropright size={24} />
 				</Button>
-			</MonthPicker>
-		</CalendarHeaderContainer>
+			</MonthContorl>
+		</Container>
 	);
 }
 

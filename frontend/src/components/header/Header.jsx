@@ -1,21 +1,20 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import SideBarButton from '../sidebar/SideBarButton';
 import { useSetRecoilState } from 'recoil';
 import sideBarState from '../../recoil/sideBarState';
 import searchBarState from '../../recoil/searchBarState';
 import Button from '../common/Button';
 
+import theme from '../../style/theme';
+import { RiMenuFill } from 'react-icons/ri';
 import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai';
 import ModalPortal from '../common/ModalPortal';
 import useToggle from '../../hooks/useToggle';
 import Profile from '../profile/Profile';
 
-const HeaderContainer = styled.div`
-	display: flex;
-	flex-direction: row;
+const Container = styled.div`
+	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
-	align-items: center;
 
 	position: fixed;
 	top: 0;
@@ -30,20 +29,30 @@ const HeaderContainer = styled.div`
 	box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
 `;
 
-const ContentBox = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+const Contents = styled.div`
+	${({ theme }) => theme.flex.row}
 `;
 
 const Content = styled.div`
 	margin-right: 3rem;
 `;
 
-const ContentText = styled.span`
+const ContentButtonText = styled.span`
 	color: ${({ theme }) => theme.colors.LIGHT_BLACK};
 	font-size: 5rem;
+	font-weight: bold;
+`;
+
+const sideBarButtonStyle = css`
+	position: relative;
+
+	margin-left: 1.8rem;
+
+	top: 0.6rem;
+
+	background: ${({ theme }) => theme.TRANSPARENT};
+
+	font-size: 7rem;
 	font-weight: bold;
 `;
 
@@ -62,44 +71,46 @@ function Header() {
 		setSearchBarOpen(prev => !prev);
 	};
 
-	const handleClickMainButton = () => {
+	const handleClickHomeButton = () => {
 		navigate('');
 	};
 
-	const handleClickProfileMenuButton = () => {
+	const handleClickProfileButton = () => {
 		toggleProfileModalOpen();
 	};
 
 	return (
 		<>
-			<HeaderContainer>
-				<ContentBox>
+			<Container>
+				<Contents>
 					<Content>
-						<SideBarButton handleSideBarOpen={handleSideBarOpen} />
-					</Content>
-					<Content>
-						<Button onClick={handleClickMainButton}>
-							<ContentText>일치</ContentText>
+						<Button css={sideBarButtonStyle} onClick={handleSideBarOpen}>
+							<RiMenuFill size={24} />
 						</Button>
 					</Content>
-				</ContentBox>
-				<ContentBox>
+					<Content>
+						<Button onClick={handleClickHomeButton}>
+							<ContentButtonText>일치</ContentButtonText>
+						</Button>
+					</Content>
+				</Contents>
+				<Contents>
 					<Content>
 						<Button onClick={handleSearchBarOpen}>
 							<AiOutlineSearch size={24} />
 						</Button>
 					</Content>
 					<Content>
-						<Button onClick={handleClickProfileMenuButton}>
+						<Button onClick={handleClickProfileButton}>
 							<AiOutlineUser size={24} />
 						</Button>
 					</Content>
-				</ContentBox>
-			</HeaderContainer>
+				</Contents>
+			</Container>
 			<ModalPortal
 				isOpen={isProfileModalOpen}
 				closeModal={toggleProfileModalOpen}
-				dimmerBackground={'transparent'}
+				dimmerBackground={theme.TRANSPARENT}
 			>
 				<Profile />
 			</ModalPortal>

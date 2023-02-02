@@ -1,3 +1,5 @@
+import { css } from 'styled-components';
+
 const colors = {
 	GRAY: '#dee2e6',
 	RED: '#ff8787',
@@ -8,8 +10,27 @@ const colors = {
 	WHITE: 'white',
 };
 
+const flex = {
+	row: css`
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	`,
+	column: css`
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	`,
+};
+
+const TRANSPARENT = 'transparent';
+
 const theme = {
 	colors,
+	flex,
+	TRANSPARENT,
 };
 
 export default theme;

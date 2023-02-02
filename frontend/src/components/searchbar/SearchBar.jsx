@@ -2,9 +2,9 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import searchBarState from '../../recoil/searchBarState';
-import Search from './Search';
+import ScheduleSearch from './ScheduleSearch';
 
-const SearchBarContainer = styled.div`
+const Container = styled.div`
 	overflow: hidden;
 	position: fixed;
 	right: 0;
@@ -23,10 +23,8 @@ const SearchBarContainer = styled.div`
 `;
 
 const searchListStyle = css`
-	display: flex;
-	flex-direction: column;
+	${({ theme }) => theme.flex.column}
 	justify-content: flex-start;
-	align-items: center;
 
 	width: 70rem;
 
@@ -40,9 +38,9 @@ function SearchBar() {
 	const isSearchBarOpen = useRecoilValue(searchBarState);
 
 	return (
-		<SearchBarContainer isSearchBarOpen={isSearchBarOpen}>
-			<Search css={searchListStyle}>일정 검색</Search>
-		</SearchBarContainer>
+		<Container isSearchBarOpen={isSearchBarOpen}>
+			<ScheduleSearch css={searchListStyle}>일정 검색</ScheduleSearch>
+		</Container>
 	);
 }
 

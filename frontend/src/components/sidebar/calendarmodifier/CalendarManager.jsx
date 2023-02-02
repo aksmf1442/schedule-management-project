@@ -3,11 +3,9 @@ import { MdPersonOff } from 'react-icons/md';
 import styled, { css } from 'styled-components';
 import Button from '../../common/Button';
 
-const CalendarManagerConatiner = styled.div`
-	display: flex;
-	flex-direction: row;
+const Container = styled.div`
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
-	align-items: center;
 
 	gap: 2rem;
 	position: relative;
@@ -49,13 +47,13 @@ const managerButtonStyle = css`
 
 function CalendarManager({ user }) {
 	return (
-		<CalendarManagerConatiner>
+		<Container>
 			<Image />
 			<Name>{user}</Name>
 			<Button css={managerButtonStyle}>
 				<MdPersonOff />
 			</Button>
-		</CalendarManagerConatiner>
+		</Container>
 	);
 }
 

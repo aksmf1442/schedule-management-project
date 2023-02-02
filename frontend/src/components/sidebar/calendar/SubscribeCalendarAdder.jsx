@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchControl from './SearchControl';
+import SubsribeSearchControl from './SubsribeSearchControl';
 
 const SubscribeCalendarAdderContainer = styled.div`
-	display: flex;
-	flex-direction: column;
+	${({ theme }) => theme.flex.column}
 	justify-content: space-between;
-	align-items: center;
+
 	width: 50%;
 	height: 95%;
 	padding: 12.5rem;
@@ -26,7 +25,7 @@ function SubscribeCalendarAdder() {
 	return (
 		<SubscribeCalendarAdderContainer>
 			<SubscribeCalendarAdderTitle>캘린더 구독</SubscribeCalendarAdderTitle>
-			<SearchControl />
+			<SubsribeSearchControl />
 		</SubscribeCalendarAdderContainer>
 	);
 }

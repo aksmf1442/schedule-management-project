@@ -7,16 +7,14 @@ import CalendarPage from './pages/CalendarPage';
 
 function App() {
 	return (
-		<>
-			<BrowserRouter>
-				<Header />
-				<SideBar />
-				<SearchBar />
-				<Routes>
-					<Route path="" element={<CalendarPage />}></Route>
-				</Routes>
-			</BrowserRouter>
-		</>
+		<BrowserRouter>
+			<Header />
+			<SideBar />
+			<SearchBar />
+			<Routes>
+				<Route path="" element={<CalendarPage />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 

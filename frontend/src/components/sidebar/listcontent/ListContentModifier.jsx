@@ -1,19 +1,31 @@
 import React from 'react';
-import { useState } from 'react';
 import { MdSettings, MdOutlineDelete } from 'react-icons/md';
 import styled, { css } from 'styled-components';
+import { COLORS } from '../../../constants/color';
+import useColorInput from '../../../hooks/useColorInput';
 import useToggle from '../../../hooks/useToggle';
 import Button from '../../common/Button';
 import ModalPortal from '../../common/ModalPortal';
-import CalendarModifier from './CalendarModifier';
+import CalendarModifier from '../calendarmodifier/CalendarModifier';
+
+const Container = styled.div`
+	${({ theme }) => theme.flex.column}
+	align-items: flex-start;
+
+	position: absolute;
+	top: ${({ modalPos }) => (modalPos.top ? `${modalPos.top}px` : 'none')};
+	left: ${({ modalPos }) => (modalPos.left ? `${modalPos.left}px` : 'none')};
+
+	border: 1px solid ${({ theme }) => theme.colors.GRAY};
+	border-radius: 7px;
+
+	background: ${({ theme }) => theme.colors.WHITE};
+`;
 
 const controlButtonStyle = css`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
+
 	gap: 1rem;
 
 	width: 100%;
@@ -39,23 +51,7 @@ const colorStyle = css`
 	}
 `;
 
-const ModalPosContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-
-	position: absolute;
-	top: ${({ modalPos }) => (modalPos.top ? `${modalPos.top}px` : 'none')};
-	left: ${({ modalPos }) => (modalPos.left ? `${modalPos.left}px` : 'none')};
-
-	border: 1px solid ${({ theme }) => theme.colors.GRAY};
-	border-radius: 7px;
-
-	background: ${({ theme }) => theme.colors.WHITE};
-`;
-
-const ColorsContainer = styled.div`
+const Colors = styled.div`
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	place-items: center;
@@ -65,24 +61,16 @@ const ColorsContainer = styled.div`
 	padding: 2rem;
 `;
 
-const COLORS = ['red', 'green', 'black', 'pink', 'blue', 'orange', 'gray'];
-
-function ListItemModifier({ modalPos, closeModal }) {
+function ListContentModifier({ modalPos }) {
 	const canEditSubscription = true;
 	const canDeleteSubscription = false;
 
+	const currentColor = useColorInput();
 	const { isOpen: isCalendarManageModalOpen, toggleClick: toggleCalendarManageModalOpen } =
 		useToggle();
 
-	const [currentColor, setCurrentColor] = useState('');
-
-	const colorButtonClick = color => {
-		setCurrentColor(color);
-		closeModal();
-	};
-
 	return (
-		<ModalPosContainer modalPos={modalPos}>
+		<Container modalPos={modalPos}>
 			{canEditSubscription && (
 				<Button css={controlButtonStyle} onClick={toggleCalendarManageModalOpen}>
 					<MdSettings size={24} />
@@ -95,23 +83,23 @@ function ListItemModifier({ modalPos, closeModal }) {
 					구독 해제
 				</Button>
 			)}
-			<ColorsContainer>
+			<Colors>
 				{COLORS.map(color => {
 					return (
 						<Button
 							key={color}
 							css={colorStyle}
 							color={color}
-							onClick={() => colorButtonClick(color)}
+							onClick={() => currentColor.handleButtonClick(color)}
 						/>
 					);
 				})}
-			</ColorsContainer>
+			</Colors>
 			<ModalPortal isOpen={isCalendarManageModalOpen} closeModal={toggleCalendarManageModalOpen}>
-				<CalendarModifier clasModal={toggleCalendarManageModalOpen} />
+				<CalendarModifier closeModal={toggleCalendarManageModalOpen} />
 			</ModalPortal>
-		</ModalPosContainer>
+		</Container>
 	);
 }
 
-export default ListItemModifier;
+export default ListContentModifier;

@@ -1,13 +1,13 @@
-import { addDays } from 'date-fns';
-import format from 'date-fns/format';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import useToggle from '../../hooks/useToggle';
-import useValidateSchedule from '../../hooks/useValidateSchedule';
+import useSchedule from '../../hooks/useSchedule';
 
 import Button from '../common/Button';
+import { TIMES, INIT_TIME } from '../../constants/date';
+import { getFormatDate } from '../../util/date';
 
-const ScheduleAdderContainer = styled.div`
+const Container = styled.div`
 	justify-content: space-around;
 	gap: 2rem;
 	position: fixed;
@@ -20,21 +20,16 @@ const ScheduleAdderContainer = styled.div`
 	box-shadow: -2px 2px 17px 5px rgba(0, 0, 0, 0.25);
 `;
 
-const ScheduleAdderForm = styled.form`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+const Form = styled.form`
+	${({ theme }) => theme.flex.column}
 
 	gap: 4rem;
 
 	height: 100%;
 `;
 
-const InputContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+const InputBox = styled.div`
+	${({ theme }) => theme.flex.column}
 	align-items: flex-start;
 
 	position: relative;
@@ -61,20 +56,17 @@ const ScheduleInput = styled.input`
 	}
 `;
 
-const DateTimeContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+const DateTimeBox = styled.div`
+	${({ theme }) => theme.flex.column}
 	align-items: flex-start;
+
 	width: 100%;
 	gap: 4rem;
 `;
 
 const DateTime = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
-	align-items: center;
 
 	position: relative;
 	gap: 2.5rem;
@@ -83,10 +75,7 @@ const DateTime = styled.div`
 `;
 
 const CheckBox = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 
 	gap: 1rem;
 
@@ -130,16 +119,23 @@ const CheckBox = styled.div`
 `;
 
 const SelectBox = styled.div`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
-	align-items: center;
+
 	gap: 2.5rem;
 
 	width: 100%;
 `;
 
-const cancelButton = css`
+const ButtonsControl = styled.div`
+	${({ theme }) => theme.flex.row}
+	justify-content: flex-end;
+
+	gap: 2rem;
+	width: 100%;
+`;
+
+const cancelButtonStyle = css`
 	padding: 2rem 3rem;
 	box-sizing: border-box;
 	border: 1px solid ${({ theme }) => theme.colors.BLACK};
@@ -150,7 +146,7 @@ const cancelButton = css`
 	color: ${({ theme }) => theme.colors.BLACK};
 `;
 
-const saveButton = css`
+const saveButtonStyle = css`
 	padding: 2rem 3rem;
 	box-sizing: border-box;
 	border-radius: 7px;
@@ -160,58 +156,17 @@ const saveButton = css`
 	color: ${({ theme }) => theme.colors.BLUE};
 `;
 
-const FormControlButtons = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: center;
-
-	gap: 2rem;
-	width: 100%;
-`;
-
-const TIMES = [
-	'00:00',
-	'01:00',
-	'02:00',
-	'03:00',
-	'04:00',
-	'05:00',
-	'06:00',
-	'07:00',
-	'08:00',
-	'09:00',
-	'10:00',
-	'11:00',
-	'12:00',
-	'13:00',
-	'14:00',
-	'15:00',
-	'16:00',
-	'17:00',
-	'18:00',
-	'19:00',
-	'20:00',
-	'21:00',
-	'22:00',
-	'23:00',
-];
-
 const MOCK_CALENDARS = ['내 캘린더', '캘린더 1', '캘린더 2'];
-
-const getFormatDate = date => {
-	return format(date, 'yyyy-MM-dd');
-};
 
 function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 	const { isOpen: isAllDay, toggleClick: toggleAllDay } = useToggle(true);
 
-	const schedule = useValidateSchedule({
+	const schedule = useSchedule({
 		initialTitle: '',
 		initialStartDate: getFormatDate(day),
-		initialStartTime: '00:00',
+		initialStartTime: INIT_TIME,
 		initialEndDate: getFormatDate(day),
-		initialEndTime: '00:00',
+		initialEndTime: INIT_TIME,
 		initialCalendar: '내 캘린더',
 	});
 
@@ -225,18 +180,18 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 	};
 
 	return (
-		<ScheduleAdderContainer isSideBarOpen={isSideBarOpen}>
-			<ScheduleAdderForm onSubmit={handleSubmitScheduleAdderForm}>
-				<InputContainer>
+		<Container isSideBarOpen={isSideBarOpen}>
+			<Form onSubmit={handleSubmitScheduleAdderForm}>
+				<InputBox>
 					<ScheduleInput
 						placeholder="일정 제목 추가"
 						value={schedule.title.inputValue}
 						onChange={schedule.title.onChangeValue}
 						autoFocus
 					/>
-				</InputContainer>
+				</InputBox>
 				<hr width="100%" />
-				<DateTimeContainer>
+				<DateTimeBox>
 					<CheckBox>
 						<input
 							type="checkbox"
@@ -261,7 +216,11 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 								onChange={schedule.startTime.onChangeValue}
 							>
 								{TIMES.map(time => {
-									return <option value={time}>{time}</option>;
+									return (
+										<option key={time} value={time}>
+											{time}
+										</option>
+									);
 								})}
 							</select>
 						)}
@@ -281,28 +240,32 @@ function ScheduleAdder({ closeModal, isSideBarOpen, day }) {
 							</select>
 						)}
 					</DateTime>
-				</DateTimeContainer>
+				</DateTimeBox>
 
 				<hr width="100%" />
 				<SelectBox>
 					캘린더 선택
 					<select value={schedule.calendar.inputValue} onChange={schedule.calendar.onChangeValue}>
 						{MOCK_CALENDARS.map(calendar => {
-							return <option value={calendar}>{calendar}</option>;
+							return (
+								<option key={calendar} value={calendar}>
+									{calendar}
+								</option>
+							);
 						})}
 					</select>
 				</SelectBox>
 				<hr width="100%" />
-				<FormControlButtons>
-					<Button css={cancelButton} onClick={closeModal}>
+				<ButtonsControl>
+					<Button css={cancelButtonStyle} onClick={closeModal}>
 						취소
 					</Button>
-					<Button type="submit" css={saveButton}>
+					<Button type="submit" css={saveButtonStyle}>
 						저장
 					</Button>
-				</FormControlButtons>
-			</ScheduleAdderForm>
-		</ScheduleAdderContainer>
+				</ButtonsControl>
+			</Form>
+		</Container>
 	);
 }
 

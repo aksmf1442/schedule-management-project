@@ -4,11 +4,9 @@ import styled, { css } from 'styled-components';
 import Button from '../../common/Button';
 import CalendarManager from './CalendarManager';
 
-const CalendarModifierContainer = styled.div`
-	display: flex;
-	flex-direction: column;
+const Container = styled.div`
+	${({ theme }) => theme.flex.column}
 	justify-content: space-between;
-	align-items: center;
 
 	gap: 10rem;
 	overflow: overlay;
@@ -21,11 +19,11 @@ const CalendarModifierContainer = styled.div`
 	background: ${({ theme }) => theme.colors.WHITE};
 `;
 
-const CalendarModifierHeader = styled.h1`
+const Header = styled.h1`
 	font-size: 6rem;
 `;
 
-const closeModalButtonStyle = css`
+const closeButtonStyle = css`
 	position: absolute;
 	top: 6rem;
 	right: 6rem;
@@ -45,13 +43,10 @@ const SectionTitle = styled.h2`
 `;
 
 const SectionForm = styled.form`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-
+	${({ theme }) => theme.flex.row}
 	align-items: flex-start;
 	justify-content: space-between;
+
 	gap: 20rem;
 
 	width: 100%;
@@ -75,7 +70,7 @@ const sectionRenameButtonStyle = css`
 	color: ${({ theme }) => theme.colors.WHITE};
 `;
 
-const ManagerList = styled.div`
+const Managers = styled.div`
 	overflow: hidden;
 
 	width: 60rem;
@@ -90,9 +85,9 @@ const ManagerList = styled.div`
 
 function CalendarModifier() {
 	return (
-		<CalendarModifierContainer>
-			<CalendarModifierHeader>캘린더 관리</CalendarModifierHeader>
-			<Button css={closeModalButtonStyle}>
+		<Container>
+			<Header>캘린더 관리</Header>
+			<Button css={closeButtonStyle}>
 				<MdClose />
 			</Button>
 			<Section>
@@ -107,18 +102,18 @@ function CalendarModifier() {
 
 			<Section>
 				<SectionTitle>편집자 목록</SectionTitle>
-				<ManagerList>
+				<Managers>
 					<CalendarManager user={'하늘'} />
-				</ManagerList>
+				</Managers>
 			</Section>
 
 			<Section>
 				<SectionTitle>구독자 목록</SectionTitle>
-				<ManagerList>
+				<Managers>
 					<CalendarManager user={'하늘'} />
-				</ManagerList>
+				</Managers>
 			</Section>
-		</CalendarModifierContainer>
+		</Container>
 	);
 }
 

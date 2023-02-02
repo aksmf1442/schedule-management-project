@@ -1,21 +1,19 @@
 import React from 'react';
-import { useState } from 'react';
 import { MdSearch } from 'react-icons/md';
 import styled, { css } from 'styled-components';
+import useInput from '../../../hooks/useInput';
 import Button from '../../common/Button';
 
-const SearchControlContainer = styled.div`
+const Container = styled.div`
 	margin-top: 8rem;
 	align-self: center;
 
 	width: 85%;
 `;
 
-const SearchControlFormContainer = styled.div`
-	display: flex;
-	flex-direction: row;
+const SearchControl = styled.div`
+	${({ theme }) => theme.flex.row}
 	align-items: flex-start;
-	justify-content: center;
 
 	width: 100%;
 
@@ -57,11 +55,9 @@ const SearchInput = styled.input`
     box-shadow: 0 0 2px ${({ theme }) => theme.colors.BLUE};
 `;
 
-const TableHeader = styled.div`
-	display: flex;
-	flex-direction: row;
+const SearchResultHeader = styled.div`
+	${({ theme }) => theme.flex.row}
 	justify-content: space-around;
-	align-items: center;
 
 	width: 100%;
 	height: 12rem;
@@ -73,7 +69,12 @@ const TableHeader = styled.div`
 	font-weight: 700;
 `;
 
-const Table = styled.div`
+const SearchResultHeaderContent = styled.span`
+	flex: 1 1 0;
+	text-align: center;
+`;
+
+const SearchResults = styled.div`
 	overflow: hidden;
 
 	width: 100%;
@@ -84,17 +85,8 @@ const Table = styled.div`
 	}
 `;
 
-const TableItem = styled.span`
-	flex: 1 1 0;
-	text-align: center;
-`;
-
-const SearchResultContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-
+const SearchResultBox = styled.div`
+	${({ theme }) => theme.flex.row}
 	justify-content: space-around;
 	position: relative;
 
@@ -127,22 +119,16 @@ const subscribeButtonStyle = css`
 	color: ${({ theme }) => theme.colors.BLUE};
 `;
 
-function SearchControl() {
-	const [calendarTitle, setCalendarTitle] = useState('');
-
-	const onChangeCalendarTitle = ({ target }) => {
-		if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
-			setCalendarTitle(target.value);
-		}
-	};
+function SubsribeSearchControl() {
+	const { inputValue: calendarTitle, onChangeValue: onChangeCalendarTitle } = useInput();
 
 	const handleSubmitSearchForm = e => {
 		e.preventDefault();
 	};
 
 	return (
-		<SearchControlContainer>
-			<SearchControlFormContainer>
+		<Container>
+			<SearchControl>
 				<SearchForm onSubmit={handleSubmitSearchForm}>
 					<Button type="submit" css={searchButtonStyle}>
 						<MdSearch size={24} />
@@ -154,25 +140,25 @@ function SearchControl() {
 						autoFocus={true}
 					/>
 				</SearchForm>
-			</SearchControlFormContainer>
+			</SearchControl>
 			<>
-				<TableHeader>
-					<TableItem>캘린더</TableItem>
-					<TableItem>관리자</TableItem>
-					<TableItem />
-				</TableHeader>
-				<Table>
-					<SearchResultContainer>
+				<SearchResultHeader>
+					<SearchResultHeaderContent>캘린더</SearchResultHeaderContent>
+					<SearchResultHeaderContent>관리자</SearchResultHeaderContent>
+					<SearchResultHeaderContent />
+				</SearchResultHeader>
+				<SearchResults>
+					<SearchResultBox>
 						<SearchResult>캘린더 제목</SearchResult>
 						<SearchResult>닉네임</SearchResult>
 						<SearchResult>
 							<Button css={subscribeButtonStyle}>구독</Button>
 						</SearchResult>
-					</SearchResultContainer>
-				</Table>
+					</SearchResultBox>
+				</SearchResults>
 			</>
-		</SearchControlContainer>
+		</Container>
 	);
 }
 
-export default SearchControl;
+export default SubsribeSearchControl;

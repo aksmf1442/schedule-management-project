@@ -1,13 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
 import styled, { css } from 'styled-components';
+import useInput from '../../../hooks/useInput';
 import Button from '../../common/Button';
 
-const MyCalendarAdderContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+const Container = styled.div`
+	${({ theme }) => theme.flex.column}
+
 	width: 100rem;
 	height: 70rem;
 	padding: 12.5rem;
@@ -17,33 +15,28 @@ const MyCalendarAdderContainer = styled.div`
 	background: ${({ theme }) => theme.colors.WHITE};
 `;
 
-const MyCalendarAdderTitle = styled.h1`
+const Title = styled.h1`
 	font-size: 8rem;
 	font-weight: bold;
 	color: ${({ theme }) => theme.colors.GRAY};
 `;
 
-const MyCalendarAdderForm = styled.form`
-	display: flex;
-	flex-direction: column;
+const Form = styled.form`
+	${({ theme }) => theme.flex.column}
 	justify-content: space-between;
-	align-items: center;
 
 	width: 100%;
 	height: 100%;
 `;
 
-const MyCalendarAdderContent = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+const Content = styled.div`
+	${({ theme }) => theme.flex.column}
 
 	width: 100%;
 	height: 100%;
 `;
 
-const MyCalendarAdderInput = styled.input`
+const Input = styled.input`
 	width: 100%;
 	background: inherit;
 	border: 0;
@@ -68,6 +61,13 @@ const cancelButtonStyle = css`
 	color: ${({ theme }) => theme.colors.BLACK};
 `;
 
+const ButtonsControl = styled.div`
+	${({ theme }) => theme.flex.row}
+
+	align-self: flex-end;
+	gap: 5rem;
+`;
+
 const saveButtonStyle = css`
 	padding: 2rem 3rem;
 	box-sizing: border-box;
@@ -78,24 +78,8 @@ const saveButtonStyle = css`
 	color: ${({ theme }) => theme.colors.BLUE};
 `;
 
-const MyCalendarAdderControlButtons = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-
-	align-self: flex-end;
-	gap: 5rem;
-`;
-
 function MyCalendarAdder({ closeModal }) {
-	const [myCalendarTitle, setMyCalendarTitle] = useState('');
-
-	const onChangeMyCalendarTitle = ({ target }) => {
-		if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
-			setMyCalendarTitle(target.value);
-		}
-	};
+	const { inpuValue: myCalendar, onChangeValue: onChangeMyCalendar } = useInput();
 
 	const handleSubmitMyCalendarAdderForm = e => {
 		e.preventDefault();
@@ -103,27 +87,27 @@ function MyCalendarAdder({ closeModal }) {
 	};
 
 	return (
-		<MyCalendarAdderContainer>
-			<MyCalendarAdderTitle>캘린더 추가</MyCalendarAdderTitle>
-			<MyCalendarAdderForm onSubmit={handleSubmitMyCalendarAdderForm}>
-				<MyCalendarAdderContent>
-					<MyCalendarAdderInput
-						value={myCalendarTitle}
-						onChange={onChangeMyCalendarTitle}
+		<Container>
+			<Title>캘린더 추가</Title>
+			<Form onSubmit={handleSubmitMyCalendarAdderForm}>
+				<Content>
+					<Input
+						value={myCalendar}
+						onChange={onChangeMyCalendar}
 						placeholder="캘린더 제목"
 						autoFocus={true}
 					/>
-				</MyCalendarAdderContent>
-				<MyCalendarAdderControlButtons>
+				</Content>
+				<ButtonsControl>
 					<Button css={cancelButtonStyle} onClick={closeModal}>
 						취소
 					</Button>
 					<Button type="submit" css={saveButtonStyle}>
 						추가
 					</Button>
-				</MyCalendarAdderControlButtons>
-			</MyCalendarAdderForm>
-		</MyCalendarAdderContainer>
+				</ButtonsControl>
+			</Form>
+		</Container>
 	);
 }
 

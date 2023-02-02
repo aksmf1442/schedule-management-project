@@ -1,15 +1,13 @@
 import React from 'react';
-import { useState } from 'react';
 import { MdOutlineModeEdit, MdOutlineCheck } from 'react-icons/md';
 import styled, { css } from 'styled-components';
+import useInput from '../../hooks/useInput';
 import useToggle from '../../hooks/useToggle';
 import Button from '../common/Button';
 
-const ProfileContainer = styled.div`
-	display: flex;
-	flex-direction: column;
+const Container = styled.div`
+	${({ theme }) => theme.flex.column}
 	justify-content: space-around;
-	align-items: center;
 
 	gap: 5rem;
 	position: absolute;
@@ -26,17 +24,14 @@ const ProfileContainer = styled.div`
 	font-size: 4rem;
 `;
 
-const ImageContainer = styled.img`
+const Image = styled.img`
 	width: 35rem;
 	height: 35rem;
 	border-radius: 50%;
 `;
 
-const ContentContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+const Content = styled.div`
+	${({ theme }) => theme.flex.column}
 
 	gap: 3rem;
 
@@ -46,10 +41,8 @@ const ContentContainer = styled.div`
 `;
 
 const NicknameEditterForm = styled.form`
-	display: flex;
-	flex-direction: row;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-end;
-	align-items: center;
 
 	gap: 2rem;
 
@@ -95,39 +88,19 @@ const nicknameEditterSaveButtonStyle = css`
 	}
 `;
 
-const NicknameEditterSaveButtonTitle = styled.span`
-	visibility: hidden;
-	position: absolute;
-	top: 120%;
-	left: 50%;
-	transform: translateX(-50%);
-
-	padding: 2rem 3rem;
-
-	background: ${({ theme }) => theme.colors.GRAY}ee;
-
-	font-size: 3rem;
-	font-weight: normal;
-	color: ${({ theme }) => theme.colors.WHITE};
-	white-space: nowrap;
-`;
-
 const Nickname = styled.span`
 	margin-left: 7rem;
 
 	font-size: 3.5rem;
 `;
 
-const NicknameEditButtonContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+const NicknameEditButtonBox = styled.div`
+	${({ theme }) => theme.flex.row}
 
 	gap: 3rem;
 `;
 
-const EmailText = styled.span`
+const Email = styled.span`
 	font-size: 3rem;
 	color: ${({ theme }) => theme.colors.LIGHT_BLACK};
 `;
@@ -141,14 +114,8 @@ const logoutButtonStyle = css`
 `;
 
 function Profile() {
-	const [nickname, setNickname] = useState('');
+	const { inputValue: nickname, onChangeValue: onChangeNickname } = useInput();
 	const { isOpen: isEditingNickname, toggleClick: toggleIsEditingNickname } = useToggle();
-
-	const onChangeNickname = ({ target }) => {
-		if (target instanceof HTMLInputElement || target instanceof HTMLSelectElement) {
-			setNickname(target.value);
-		}
-	};
 
 	const handleSubmitProfileEditterForm = e => {
 		e.preventDefault();
@@ -156,29 +123,28 @@ function Profile() {
 	};
 
 	return (
-		<ProfileContainer>
-			<ImageContainer />
-			<ContentContainer>
+		<Container>
+			<Image />
+			<Content>
 				{isEditingNickname ? (
 					<NicknameEditterForm onSubmit={handleSubmitProfileEditterForm}>
 						<NicknameEditterInput value={nickname} onChange={onChangeNickname} autoFocus={true} />
-						<Button type="submit" cssProp={nicknameEditterSaveButtonStyle}>
+						<Button type="submit" css={nicknameEditterSaveButtonStyle}>
 							<MdOutlineCheck size={14} />
-							<NicknameEditterSaveButtonTitle>완료</NicknameEditterSaveButtonTitle>
 						</Button>
 					</NicknameEditterForm>
 				) : (
-					<NicknameEditButtonContainer>
+					<NicknameEditButtonBox>
 						<Nickname>{nickname}</Nickname>
 						<Button onClick={toggleIsEditingNickname}>
 							<MdOutlineModeEdit size={14} />
 						</Button>
-					</NicknameEditButtonContainer>
+					</NicknameEditButtonBox>
 				)}
-				<EmailText>aksmf1442@gmail.com</EmailText>
-			</ContentContainer>
+				<Email>aksmf1442@gmail.com</Email>
+			</Content>
 			<Button css={logoutButtonStyle}>로그아웃</Button>
-		</ProfileContainer>
+		</Container>
 	);
 }
 

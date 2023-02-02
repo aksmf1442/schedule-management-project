@@ -1,18 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
+import useInput from '../../hooks/useInput';
 import Button from '../common/Button';
 
 import SearchBox from './SearchBox';
 
-const SearchContainer = styled.div`
+const Container = styled.div`
 	${({ css }) => css}
 `;
 
-const SearchHeaderText = styled.span`
-	display: flex;
-	flex-direction: row;
+const SearchHeader = styled.span`
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
-	align-items: center;
 
 	width: 100%;
 	height: 8rem;
@@ -25,10 +24,7 @@ const SearchHeaderText = styled.span`
 `;
 
 const SearchResults = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	${({ theme }) => theme.flex.column}
 
 	gap: 2rem;
 	overflow: hidden;
@@ -41,9 +37,7 @@ const SearchResults = styled.div`
 `;
 
 const SearchResultHeader = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 	justify-content: flex-start;
 
 	width: 100%;
@@ -65,9 +59,7 @@ const ColorBox = styled.div`
 `;
 
 const searchResultStyle = css`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+	${({ theme }) => theme.flex.row}
 	justify-content: space-between;
 
 	width: 100%;
@@ -77,22 +69,19 @@ const searchResultStyle = css`
 	color: ${({ theme }) => theme.colors.LIGHT_BLACK};
 `;
 
-function SearchList({ css, children }) {
+function ScheduleSearch({ css, children }) {
 	const listLength = 1;
 
-	const keywordRef = useRef(null);
-	const [keyword, setKeyword] = useState('');
+	const { inputValue: keyword, onChangeValue: onChangeKeyword } = useInput();
 
 	const handleSubmitSearch = e => {
 		e.preventDefault();
-
-		setKeyword(keywordRef.current.value);
 	};
 
 	return (
-		<SearchContainer css={css}>
-			<SearchHeaderText>{children}</SearchHeaderText>
-			<SearchBox onSubmit={handleSubmitSearch} kewordRef={keywordRef} />
+		<Container css={css}>
+			<SearchHeader>{children}</SearchHeader>
+			<SearchBox onSubmit={handleSubmitSearch} onChangeKeyword={onChangeKeyword} />
 			<SearchResults listLength={listLength}>
 				<Button css={searchResultStyle}>
 					<SearchResultHeader>
@@ -102,8 +91,8 @@ function SearchList({ css, children }) {
 					<SearchResultDate>2023.01.23(월)</SearchResultDate>
 				</Button>
 			</SearchResults>
-		</SearchContainer>
+		</Container>
 	);
 }
 
-export default SearchList;
+export default ScheduleSearch;

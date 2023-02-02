@@ -2,10 +2,12 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import sideBarState from '../../recoil/sideBarState';
-import MyCalendarList from './calendarlist/MyCalendarList';
-import SubscribeCalendarList from './subscribecalendarlist/SubscribeCalendarList';
 
-const SideBarContainer = styled.div`
+import Calendars from './calendar/Calendars';
+import SubscribeCalendarAdder from './calendar/SubscribeCalendarAdder';
+import MyCalendarAdder from './calendar/MyCalendarAdder';
+
+const Container = styled.div`
 	overflow: hidden;
 	position: fixed;
 	z-index: 10;
@@ -22,11 +24,9 @@ const SideBarContainer = styled.div`
 	}
 `;
 
-const sideListStyle = css`
-	display: flex;
-	flex-direction: column;
+const listStyle = css`
+	${({ theme }) => theme.flex.column}
 	justify-content: flex-start;
-	align-items: center;
 
 	width: 57rem;
 
@@ -42,10 +42,14 @@ function SideBar() {
 	const isSideBarOpen = useRecoilValue(sideBarState);
 
 	return (
-		<SideBarContainer isSideBarOpen={isSideBarOpen}>
-			<MyCalendarList css={sideListStyle}>내 캘린더</MyCalendarList>
-			<SubscribeCalendarList css={sideListStyle}>구독한 캘린더</SubscribeCalendarList>
-		</SideBarContainer>
+		<Container isSideBarOpen={isSideBarOpen}>
+			<Calendars css={listStyle} AdderModal={MyCalendarAdder}>
+				내 캘린더
+			</Calendars>
+			<Calendars css={listStyle} AdderModal={SubscribeCalendarAdder}>
+				구독한 캘린더
+			</Calendars>
+		</Container>
 	);
 }
 

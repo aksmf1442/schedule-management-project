@@ -5,7 +5,7 @@ import sideBarState from '../recoil/sideBarState';
 import { useRecoilValue } from 'recoil';
 import searchBarState from '../recoil/searchBarState';
 
-const CalendarPageContainer = styled.div`
+const Container = styled.div`
 	overflow-y: auto;
 	position: relative;
 
@@ -25,9 +25,9 @@ function CalendarPage() {
 	const isSearchBarOpen = useRecoilValue(searchBarState);
 
 	return (
-		<CalendarPageContainer isSideBarOpen={isSideBarOpen} isSearchBarOpen={isSearchBarOpen}>
+		<Container isSideBarOpen={isSideBarOpen} isSearchBarOpen={isSearchBarOpen}>
 			<Calendar />
-		</CalendarPageContainer>
+		</Container>
 	);
 }
 
