@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Button from '../components/common/Button';
 
 import { FcGoogle } from 'react-icons/fc';
+import { GOOGLE_LOGIN_URI } from '../constants/login';
 
 const Container = styled.div`
 	${({ theme }) => theme.flex.row}
@@ -37,14 +38,15 @@ const loginIconStyle = css`
 const LoginText = styled.p`
 	width: 100%;
 `;
-
 function LoginPage() {
 	return (
 		<Container>
-			<Button css={loginButtonStyle}>
-				<FcGoogle css={loginIconStyle} />
-				<LoginText>Google 로그인</LoginText>
-			</Button>
+			<a href={GOOGLE_LOGIN_URI}>
+				<Button css={loginButtonStyle}>
+					<FcGoogle css={loginIconStyle} />
+					<LoginText>Google 로그인</LoginText>
+				</Button>
+			</a>
 		</Container>
 	);
 }

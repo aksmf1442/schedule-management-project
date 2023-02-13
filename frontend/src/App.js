@@ -5,6 +5,7 @@ import Header from './components/header/Header';
 import SearchBar from './components/searchbar/SearchBar';
 import SideBar from './components/sidebar/SideBar';
 import CalendarPage from './pages/CalendarPage';
+import GoogleCallbackPage from './pages/GoogleCallbackPage';
 import LoginPage from './pages/LoginPage';
 import userState from './recoil/userState';
 
@@ -17,7 +18,8 @@ function App() {
 			<SideBar />
 			<SearchBar />
 			<Routes>
-				<Route path="" element={accessToken ? <CalendarPage /> : <LoginPage />} />
+				<Route path="/" element={accessToken ? <CalendarPage /> : <LoginPage />} />
+				<Route path="/google/callback" element={<GoogleCallbackPage />} />
 			</Routes>
 		</BrowserRouter>
 	);

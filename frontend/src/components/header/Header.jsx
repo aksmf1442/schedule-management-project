@@ -75,7 +75,7 @@ function Header() {
 	};
 
 	const handleClickHomeButton = () => {
-		navigate('');
+		navigate('/');
 	};
 
 	const handleClickProfileButton = () => {
