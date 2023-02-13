@@ -107,6 +107,7 @@ const SearchResult = styled.span`
 
 const subscribeButtonStyle = css`
 	width: 18rem;
+
 	color: ${({ theme }) => theme.colors.BLUE};
 	${({ theme }) => theme.buttons.save}
 	font-weight: 700;
