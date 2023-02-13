@@ -4,6 +4,7 @@ import Calendar from '../components/calendar/Calendar';
 import sideBarState from '../recoil/sideBarState';
 import { useRecoilValue } from 'recoil';
 import searchBarState from '../recoil/searchBarState';
+import userState from '../recoil/userState';
 
 const Container = styled.div`
 	overflow-y: auto;
@@ -21,12 +22,13 @@ const Container = styled.div`
 `;
 
 function CalendarPage() {
+	const accessToken = useRecoilValue(userState);
 	const isSideBarOpen = useRecoilValue(sideBarState);
 	const isSearchBarOpen = useRecoilValue(searchBarState);
 
 	return (
-		<Container isSideBarOpen={isSideBarOpen} isSearchBarOpen={isSearchBarOpen}>
-			<Calendar />
+		<Container isSideBarOpen={accessToken && isSideBarOpen} isSearchBarOpen={isSearchBarOpen}>
+			{accessToken && <Calendar />}
 		</Container>
 	);
 }

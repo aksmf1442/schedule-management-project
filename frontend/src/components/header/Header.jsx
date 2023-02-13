@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import sideBarState from '../../recoil/sideBarState';
 import searchBarState from '../../recoil/searchBarState';
 import Button from '../common/Button';
@@ -11,6 +11,7 @@ import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai';
 import ModalPortal from '../common/ModalPortal';
 import useToggle from '../../hooks/useToggle';
 import Profile from '../profile/Profile';
+import userState from '../../recoil/userState';
 
 const Container = styled.div`
 	${({ theme }) => theme.flex.row}
@@ -57,6 +58,8 @@ const sideBarButtonStyle = css`
 `;
 
 function Header() {
+	const accessToken = useRecoilValue(userState);
+
 	const navigate = useNavigate();
 	const setSideBarOpen = useSetRecoilState(sideBarState);
 	const setSearchBarOpen = useSetRecoilState(searchBarState);
@@ -72,7 +75,7 @@ function Header() {
 	};
 
 	const handleClickHomeButton = () => {
-		navigate('');
+		navigate('/');
 	};
 
 	const handleClickProfileButton = () => {
@@ -83,29 +86,33 @@ function Header() {
 		<>
 			<Container>
 				<Contents>
-					<Content>
-						<Button css={sideBarButtonStyle} onClick={handleSideBarOpen}>
-							<RiMenuFill size={24} />
-						</Button>
-					</Content>
+					{accessToken && (
+						<Content>
+							<Button css={sideBarButtonStyle} onClick={handleSideBarOpen}>
+								<RiMenuFill size={24} />
+							</Button>
+						</Content>
+					)}
 					<Content>
 						<Button onClick={handleClickHomeButton}>
 							<ContentButtonText>일치</ContentButtonText>
 						</Button>
 					</Content>
 				</Contents>
-				<Contents>
-					<Content>
-						<Button onClick={handleSearchBarOpen}>
-							<AiOutlineSearch size={24} />
-						</Button>
-					</Content>
-					<Content>
-						<Button onClick={handleClickProfileButton}>
-							<AiOutlineUser size={24} />
-						</Button>
-					</Content>
-				</Contents>
+				{accessToken && (
+					<Contents>
+						<Content>
+							<Button onClick={handleSearchBarOpen}>
+								<AiOutlineSearch size={24} />
+							</Button>
+						</Content>
+						<Content>
+							<Button onClick={handleClickProfileButton}>
+								<AiOutlineUser size={24} />
+							</Button>
+						</Content>
+					</Contents>
+				)}
 			</Container>
 			<ModalPortal
 				isOpen={isProfileModalOpen}

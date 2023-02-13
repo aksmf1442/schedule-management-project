@@ -6,6 +6,7 @@ import sideBarState from '../../recoil/sideBarState';
 import Calendars from './calendar/Calendars';
 import SubscribeCalendarAdder from './calendar/SubscribeCalendarAdder';
 import MyCalendarAdder from './calendar/MyCalendarAdder';
+import userState from '../../recoil/userState';
 
 const Container = styled.div`
 	overflow: hidden;
@@ -39,10 +40,11 @@ const listStyle = css`
 `;
 
 function SideBar() {
+	const accessToken = useRecoilValue(userState);
 	const isSideBarOpen = useRecoilValue(sideBarState);
 
 	return (
-		<Container isSideBarOpen={isSideBarOpen}>
+		<Container isSideBarOpen={accessToken && isSideBarOpen}>
 			<Calendars css={listStyle} AdderModal={MyCalendarAdder}>
 				내 캘린더
 			</Calendars>
