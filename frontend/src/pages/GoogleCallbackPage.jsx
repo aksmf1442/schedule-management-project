@@ -11,6 +11,8 @@ function GoogleCallbackPage() {
 	const { search } = useLocation();
 	const code = new URLSearchParams(search).get('code');
 
+	console.log(code);
+
 	useEffect(() => {
 		const accessToken = 'token';
 		window.localStorage.setItem(TOKEN.ACCESS_TOKEN, accessToken);
