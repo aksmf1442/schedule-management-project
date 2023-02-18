@@ -1,10 +1,10 @@
 package com.illch.auth.application;
 
 import com.illch.auth.dto.LoginRequest;
-import com.illch.infrasturcture.auth.AccessTokenResponse;
-import com.illch.infrasturcture.auth.GoogleOauthManager;
-import com.illch.infrasturcture.auth.JwtTokenProvider;
-import com.illch.infrasturcture.auth.RefreshTokenResponse;
+import com.illch.auth.infrastructure.dto.AccessTokenResponse;
+import com.illch.auth.infrastructure.GoogleOauthManager;
+import com.illch.auth.infrastructure.JwtTokenProvider;
+import com.illch.auth.infrastructure.dto.RefreshTokenResponse;
 import com.illch.member.domain.Member;
 import com.illch.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

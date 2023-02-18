@@ -2,9 +2,9 @@ package com.illch.auth.presentation;
 
 import com.illch.auth.application.AuthService;
 import com.illch.auth.dto.LoginRequest;
-import com.illch.infrasturcture.auth.AccessTokenResponse;
-import com.illch.infrasturcture.auth.JwtRefreshToken;
-import com.illch.infrasturcture.auth.RefreshTokenResponse;
+import com.illch.auth.infrastructure.dto.AccessTokenResponse;
+import com.illch.auth.infrastructure.JwtRefreshToken;
+import com.illch.auth.infrastructure.dto.RefreshTokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;

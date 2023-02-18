@@ -1,4 +1,4 @@
-package com.illch.infrasturcture.auth;
+package com.illch.auth.infrastructure;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

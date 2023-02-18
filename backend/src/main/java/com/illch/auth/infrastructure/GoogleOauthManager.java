@@ -1,5 +1,7 @@
-package com.illch.infrasturcture.auth;
+package com.illch.auth.infrastructure;
 
+import com.illch.auth.infrastructure.dto.OauthTokenRequest;
+import com.illch.auth.infrastructure.dto.OauthTokenResponse;
 import com.illch.member.domain.Member;
 import com.illch.member.dto.MemberResponse;
 import net.minidev.json.JSONObject;

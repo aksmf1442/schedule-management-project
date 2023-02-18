@@ -1,4 +1,4 @@
-package com.illch.infrasturcture.auth;
+package com.illch.auth.infrastructure;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
