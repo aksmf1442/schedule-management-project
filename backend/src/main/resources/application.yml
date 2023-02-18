@@ -31,3 +31,6 @@ jwt:
   access-token:
     secret-key: haneulkey1alkjsdljahsdfjhjkqbnmcxbvjkaghjkwermbsdjkfb
     validTime: 3600
+  refresh-token:
+    secret-key: haneulkey1alkjsdljahsdfjhjkqbnmkey1alkjsdljahsdfjhjkq
+    validTime: 360000
