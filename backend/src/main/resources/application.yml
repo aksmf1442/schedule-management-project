@@ -17,3 +17,20 @@ spring:
     password:
     url: jdbc:h2:mem://localhost/~/testdb;MODE=MYSQL
 
+google:
+  client:
+    id: 454060363314-9b90no7jmthjkc8dajg8gcoigeho8g4p.apps.googleusercontent.com
+    secret: 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
+    redirect-uri: http://localhost:3000/google/callback
+    grant-type: authorization_code
+  url:
+    access-token: https://oauth2.googleapis.com/token
+    profile: https://openidconnect.googleapis.com/v1/userinfo
+
+jwt:
+  access-token:
+    secret-key: haneulkey1alkjsdljahsdfjhjkqbnmcxbvjkaghjkwermbsdjkfb
+    validTime: 3600
+  refresh-token:
+    secret-key: haneulkey1alkjsdljahsdfjhjkqbnmkey1alkjsdljahsdfjhjkq
+    validTime: 360000
