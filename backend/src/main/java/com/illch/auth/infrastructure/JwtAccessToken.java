@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Getter
-public class JwtAccessToken {
+public class JwtAccessToken extends JwtToken{
 
     @Value("${jwt.access-token.secret-key}")
     private String secretKey;

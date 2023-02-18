@@ -15,17 +15,15 @@ public class JwtTokenProvider {
 
     private final JwtAccessToken jwtAccessToken;
 
-    private final JwtRefreshToken jwtRefreshToken;
-
-    public String createAccessToken(Long id) {
+    public String createToken(Long id, JwtToken jwtToken) {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime expireTime = now.plusSeconds(jwtAccessToken.getValidTime());
+        LocalDateTime expireTime = now.plusSeconds(jwtToken.getValidTime());
 
         return Jwts.builder()
                 .claim("id", id)
                 .setIssuedAt(Timestamp.valueOf(now))
                 .setExpiration(Timestamp.valueOf(expireTime))
-                .signWith(SignatureAlgorithm.HS256, jwtAccessToken.getSecretKey())
+                .signWith(SignatureAlgorithm.HS256, jwtToken.getSecretKey())
                 .compact();
     }
 
@@ -37,23 +35,4 @@ public class JwtTokenProvider {
         return claims.get("id", Long.class);
     }
 
-    public Long extractMemberIdByRefreshToken(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(jwtRefreshToken.getSecretKey())
-                .parseClaimsJws(token)
-                .getBody();
-        return claims.get("id", Long.class);
-    }
-
-    public String createRefreshToken(Long id) {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime expireTime = now.plusSeconds(jwtRefreshToken.getValidTime());
-
-        return Jwts.builder()
-                .claim("id", id)
-                .setIssuedAt(Timestamp.valueOf(now))
-                .setExpiration(Timestamp.valueOf(expireTime))
-                .signWith(SignatureAlgorithm.HS256, jwtRefreshToken.getSecretKey())
-                .compact();
-    }
 }

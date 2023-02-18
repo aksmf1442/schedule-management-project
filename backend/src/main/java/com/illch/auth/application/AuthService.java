@@ -1,6 +1,8 @@
 package com.illch.auth.application;
 
 import com.illch.auth.dto.LoginRequest;
+import com.illch.auth.infrastructure.JwtAccessToken;
+import com.illch.auth.infrastructure.JwtRefreshToken;
 import com.illch.auth.infrastructure.dto.AccessTokenResponse;
 import com.illch.auth.infrastructure.GoogleOauthManager;
 import com.illch.auth.infrastructure.JwtTokenProvider;
@@ -21,21 +23,23 @@ public class AuthService {
     private final MemberRepository memberRepository;
     private final GoogleOauthManager googleOauthManager;
     private final JwtTokenProvider jwtTokenProvider;
+    private final JwtAccessToken jwtAccessToken;
+    private final JwtRefreshToken jwtRefreshToken;
 
     public AccessTokenResponse createAccessToken(LoginRequest loginRequest) {
         Member oauthMember = googleOauthManager.findMemberByOauthCode(loginRequest.getCode());
         Optional<Member> findMember = memberRepository.findBySocialId(oauthMember.getSocialId());
 
         if (findMember.isPresent()) {
-            return AccessTokenResponse.of(jwtTokenProvider.createAccessToken(findMember.get().getId()));
+            return AccessTokenResponse.of(jwtTokenProvider.createToken(findMember.get().getId(), jwtAccessToken));
         }
 
         Member savedMember = memberRepository.save(oauthMember);
-        return AccessTokenResponse.of(jwtTokenProvider.createAccessToken(savedMember.getId()));
+        return AccessTokenResponse.of(jwtTokenProvider.createToken(savedMember.getId(), jwtAccessToken));
     }
 
     public RefreshTokenResponse createRefreshToken(Long memberId) {
-        return RefreshTokenResponse.of(jwtTokenProvider.createRefreshToken(memberId));
+        return RefreshTokenResponse.of(jwtTokenProvider.createToken(memberId, jwtRefreshToken));
     }
 
     public Long extractMemberIdByAccessToken(String token) {
