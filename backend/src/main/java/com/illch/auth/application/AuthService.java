@@ -7,6 +7,7 @@ import com.illch.auth.infrastructure.dto.AccessTokenResponse;
 import com.illch.auth.infrastructure.GoogleOauthManager;
 import com.illch.auth.infrastructure.JwtTokenProvider;
 import com.illch.auth.infrastructure.dto.RefreshTokenResponse;
+import com.illch.global.config.auth.AppMember;
 import com.illch.member.domain.Member;
 import com.illch.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,10 @@ public class AuthService {
 
     public Long extractMemberIdByAccessToken(String token) {
         return jwtTokenProvider.extractMemberIdByAccessToken(token);
+    }
+
+    public AppMember createLoginMember(Long id) {
+        return AppMember.of(id);
     }
 
 }
