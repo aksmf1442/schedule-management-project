@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -34,5 +35,23 @@ public class JwtTokenProvider {
                 .getBody();
         return claims.get("id", Long.class);
     }
+
+    public void validateToken(String token, JwtToken jwtToken) {
+        try {
+            validateNullToken(token, jwtToken);
+            Jwts.parser()
+                    .setSigningKey(jwtToken.getSecretKey())
+                    .parseClaimsJws(token);
+        } catch (RuntimeException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    private void validateNullToken(String token, JwtToken jwtToken) {
+        if (Objects.isNull(token)) {
+            throw new RuntimeException();
+        }
+    }
+
 
 }
