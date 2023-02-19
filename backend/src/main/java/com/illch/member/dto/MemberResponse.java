@@ -4,9 +4,11 @@ import com.illch.member.domain.Member;
 import com.illch.member.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 
 @AllArgsConstructor
 @Builder
+@Getter
 public class MemberResponse {
 
     private String socialId;
@@ -21,6 +23,14 @@ public class MemberResponse {
                 .socialId(socialId)
                 .nickname(nickname)
                 .thumbnailURL(thumbnailURL)
+                .build();
+    }
+
+    public static MemberResponse of(Member member) {
+        return MemberResponse.builder()
+                .socialId(member.getSocialId())
+                .nickname(member.getNickname())
+                .thumbnailURL(member.getThumbnailURL())
                 .build();
     }
 

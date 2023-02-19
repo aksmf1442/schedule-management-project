@@ -38,7 +38,7 @@ public class JwtTokenProvider {
 
     public void validateToken(String token, JwtToken jwtToken) {
         try {
-            validateNullToken(token, jwtToken);
+            validateNullToken(token);
             Jwts.parser()
                     .setSigningKey(jwtToken.getSecretKey())
                     .parseClaimsJws(token);
@@ -47,7 +47,7 @@ public class JwtTokenProvider {
         }
     }
 
-    private void validateNullToken(String token, JwtToken jwtToken) {
+    private void validateNullToken(String token) {
         if (Objects.isNull(token)) {
             throw new RuntimeException();
         }
