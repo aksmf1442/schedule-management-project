@@ -41,4 +41,7 @@ public class Member extends BaseEntity {
         this.thumbnailURL = thumbnailURL;
     }
 
+    public void update(String nickname) {
+        this.nickname = nickname;
+    }
 }
