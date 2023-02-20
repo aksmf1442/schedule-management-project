@@ -3,7 +3,7 @@ package com.illch.auth.infrastructure;
 import com.illch.auth.infrastructure.dto.OauthTokenRequest;
 import com.illch.auth.infrastructure.dto.OauthTokenResponse;
 import com.illch.member.domain.Member;
-import com.illch.member.dto.MemberResponse;
+import com.illch.auth.dto.OauthMemberResponse;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -60,7 +60,7 @@ public class GoogleOauthManager {
                 });
 
         JSONObject jsonObject = jsonObjectMono.block();
-        MemberResponse memberResponse = extractMemberByJson(
+        OauthMemberResponse memberResponse = extractMemberByJson(
                 jsonObject);
         return memberResponse.toMember();
     }
@@ -99,10 +99,10 @@ public class GoogleOauthManager {
                 .build();
     }
 
-    protected MemberResponse extractMemberByJson(JSONObject jsonObject) {
+    protected OauthMemberResponse extractMemberByJson(JSONObject jsonObject) {
         String socialId = jsonObject.get(JSON_PROPERTY_ID).toString();
         String nickname = jsonObject.get(JSON_PROPERTY_NAME).toString();
         String thumbnailURL = jsonObject.get(JSON_PROPERTY_PICTURE).toString();
-        return MemberResponse.of(socialId, nickname, thumbnailURL);
+        return OauthMemberResponse.of(socialId, nickname, thumbnailURL);
     }
 }

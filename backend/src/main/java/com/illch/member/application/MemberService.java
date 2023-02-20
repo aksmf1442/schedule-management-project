@@ -2,6 +2,7 @@ package com.illch.member.application;
 
 import com.illch.global.config.auth.AppMember;
 import com.illch.member.domain.Member;
+import com.illch.auth.dto.OauthMemberResponse;
 import com.illch.member.dto.MemberResponse;
 import com.illch.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
