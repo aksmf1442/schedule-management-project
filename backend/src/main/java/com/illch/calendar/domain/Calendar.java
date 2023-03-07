@@ -33,4 +33,8 @@ public class Calendar extends BaseEntity {
         this.member = member;
         this.deleted = deleted;
     }
+
+    public void updateCalendarTitle(String title) {
+        this.title = title;
+    }
 }
