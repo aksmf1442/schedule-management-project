@@ -1,5 +1,6 @@
 package com.illch.global.config.auth;
 
+import com.illch.member.domain.Member;
 import com.illch.member.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,4 +20,9 @@ public class AppMember {
             .build();
     }
 
+    public void checkSameMember(Member member) {
+        if (!member.checkSameUser(this.getId())) {
+            throw new RuntimeException();
+        }
+    }
 }

@@ -44,4 +44,8 @@ public class Member extends BaseEntity {
     public void update(String nickname) {
         this.nickname = nickname;
     }
+
+    public boolean checkSameUser(Long id) {
+        return this.getId() == id;
+    }
 }
