@@ -2,6 +2,7 @@ package com.illch.calendar.presentation;
 
 import com.illch.calendar.application.CalendarService;
 import com.illch.calendar.dto.CalendarRequest;
+import com.illch.calendar.dto.UpdateCalendarOpenedRequest;
 import com.illch.calendar.dto.UpdateCalendarTitleRequest;
 import com.illch.global.config.auth.AppMember;
 import com.illch.global.config.auth.LoginMember;
@@ -26,6 +27,13 @@ public class CalendarController {
     public ResponseEntity<Void> updateCalendarTitle(@PathVariable Long id, @RequestBody UpdateCalendarTitleRequest updateCalendarTitleRequest,
                                                     @LoginMember AppMember appMember) {
         calendarService.updateCalendarTitle(id, updateCalendarTitleRequest, appMember);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/opened")
+    public ResponseEntity<Void> updateCalendarOpened(@PathVariable Long id, @RequestBody UpdateCalendarOpenedRequest updateCalendarOpenedRequest,
+                                                     @LoginMember AppMember appMember) {
+        calendarService.updateCalendarOpened(id, updateCalendarOpenedRequest, appMember);
         return ResponseEntity.noContent().build();
     }
 }

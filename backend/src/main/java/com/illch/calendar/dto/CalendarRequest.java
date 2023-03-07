@@ -19,12 +19,12 @@ public class CalendarRequest {
     @Length(min = 1, max = 10)
     private String title;
 
-    private String password;
+    private boolean opened;
 
     public Calendar toCalendar(Member member) {
         return Calendar.builder()
                 .title(title)
-                .password(password)
+                .opened(opened)
                 .deleted(false)
                 .member(member)
                 .build();

@@ -2,6 +2,7 @@ package com.illch.calendar.application;
 
 import com.illch.calendar.domain.Calendar;
 import com.illch.calendar.dto.CalendarRequest;
+import com.illch.calendar.dto.UpdateCalendarOpenedRequest;
 import com.illch.calendar.dto.UpdateCalendarTitleRequest;
 import com.illch.calendar.repository.CalendarRepository;
 import com.illch.global.config.auth.AppMember;
@@ -29,5 +30,11 @@ public class CalendarService {
         Calendar calendar = calendarRepository.findById(id).orElseThrow(RuntimeException::new);
         appMember.checkSameMember(calendar.getMember());
         calendar.updateCalendarTitle(updateCalendarTitleRequest.getTitle());
+    }
+
+    public void updateCalendarOpened(Long id, UpdateCalendarOpenedRequest updateCalendarOpenedRequest, AppMember appMember) {
+        Calendar calendar = calendarRepository.findById(id).orElseThrow(RuntimeException::new);
+        appMember.checkSameMember(calendar.getMember());
+        calendar.updateCalendarOpened(updateCalendarOpenedRequest.isOpened());
     }
 }
