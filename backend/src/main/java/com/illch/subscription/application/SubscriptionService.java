@@ -2,6 +2,7 @@ package com.illch.subscription.application;
 
 import com.illch.calendar.domain.Calendar;
 import com.illch.calendar.repository.CalendarRepository;
+import com.illch.global.config.auth.AppMember;
 import com.illch.member.domain.Member;
 import com.illch.member.repository.MemberRepository;
 import com.illch.subscription.domain.Subscription;
@@ -28,5 +29,11 @@ public class SubscriptionService {
         Calendar calendar = calendarRepository.findById(subscriptionRequest.getCalendarId()).orElseThrow(RuntimeException::new);
         Subscription subscription = subscriptionRepository.save(subscriptionRequest.toSubscription(member, calendar));
         return SubscriptionResponse.of(subscription);
+    }
+
+    public void deleteSubscription(Long id, AppMember appMember) {
+        Subscription subscription = subscriptionRepository.findById(id).orElseThrow(RuntimeException::new);
+        appMember.checkSameMember(subscription.getMember());
+        subscriptionRepository.deleteById(id);
     }
 }

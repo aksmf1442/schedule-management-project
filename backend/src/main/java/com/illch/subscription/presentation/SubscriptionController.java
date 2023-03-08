@@ -8,10 +8,7 @@ import com.illch.subscription.dto.SubscriptionRequest;
 import com.illch.subscription.dto.SubscriptionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,5 +21,11 @@ public class SubscriptionController {
     public ResponseEntity<SubscriptionResponse> createSubscription(@RequestBody SubscriptionRequest subscriptionRequest, @LoginMember AppMember appMember) {
         SubscriptionResponse subscriptionResponse = subscriptionService.createSubscription(subscriptionRequest, appMember.getId());
         return ResponseEntity.ok(subscriptionResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSubscription(@PathVariable Long id, @LoginMember AppMember appMember) {
+        subscriptionService.deleteSubscription(id, appMember);
+        return ResponseEntity.noContent().build();
     }
 }
