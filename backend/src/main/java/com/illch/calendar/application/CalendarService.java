@@ -30,8 +30,9 @@ public class CalendarService {
 
     public void createCalendar(CalendarRequest calendarRequest, Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
-        Calendar calendar = calendarRequest.toCalendar(member);
-        calendarRepository.save(calendar);
+        Calendar calendar = calendarRepository.save(calendarRequest.toCalendar(member));
+        Subscription subscription = calendarRequest.toSubscription(member, calendar);
+        subscriptionRepository.save(subscription);
     }
 
     public void updateCalendarTitle(Long id, UpdateCalendarTitleRequest updateCalendarTitleRequest, AppMember appMember) {
