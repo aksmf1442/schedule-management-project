@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-import reactor.util.annotation.Nullable;
 
 import javax.validation.constraints.NotNull;
 

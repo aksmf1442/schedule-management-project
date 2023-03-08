@@ -12,4 +12,6 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
     Optional<List<Subscription>> findAllByMember(Member member);
 
     Optional<List<Subscription>> findAllByCalendar(Calendar calendar);
+
+    Optional<Subscription> findByMemberAndCalendar(Member member, Calendar calendar);
 }

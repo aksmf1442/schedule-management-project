@@ -1,7 +1,10 @@
 package com.illch.calendar.presentation;
 
 import com.illch.calendar.application.CalendarService;
-import com.illch.calendar.dto.*;
+import com.illch.calendar.dto.CalendarRequest;
+import com.illch.calendar.dto.SubscribersResponse;
+import com.illch.calendar.dto.UpdateCalendarOpenedRequest;
+import com.illch.calendar.dto.UpdateCalendarTitleRequest;
 import com.illch.global.config.auth.AppMember;
 import com.illch.global.config.auth.LoginMember;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +26,8 @@ public class CalendarController {
 
     @GetMapping("/{id}/subscribers")
     public ResponseEntity<SubscribersResponse> findSubscribers(@PathVariable Long id, @LoginMember AppMember appMember) {
-         SubscribersResponse subscribersResponse =  calendarService.findSubscribers(id, appMember);
-         return ResponseEntity.ok(subscribersResponse);
+        SubscribersResponse subscribersResponse = calendarService.findSubscribers(id, appMember);
+        return ResponseEntity.ok(subscribersResponse);
     }
 
     @PatchMapping("/{id}/title")

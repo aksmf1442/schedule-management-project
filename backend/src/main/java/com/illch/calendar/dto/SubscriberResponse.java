@@ -1,6 +1,5 @@
 package com.illch.calendar.dto;
 
-import com.illch.member.domain.Member;
 import com.illch.member.dto.MemberResponse;
 import com.illch.subscription.domain.Subscription;
 import lombok.AllArgsConstructor;

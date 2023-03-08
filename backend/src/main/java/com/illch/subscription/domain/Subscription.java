@@ -39,4 +39,5 @@ public class Subscription extends BaseEntity {
         this.member = member;
         this.calendar = calendar;
     }
+
 }

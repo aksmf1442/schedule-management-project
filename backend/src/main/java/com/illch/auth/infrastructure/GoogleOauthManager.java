@@ -1,9 +1,9 @@
 package com.illch.auth.infrastructure;
 
+import com.illch.auth.dto.OauthMemberResponse;
 import com.illch.auth.infrastructure.dto.OauthTokenRequest;
 import com.illch.auth.infrastructure.dto.OauthTokenResponse;
 import com.illch.member.domain.Member;
-import com.illch.auth.dto.OauthMemberResponse;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
