@@ -1,6 +1,5 @@
 package com.illch.subscription.presentation;
 
-import com.illch.calendar.dto.CalendarRequest;
 import com.illch.global.config.auth.AppMember;
 import com.illch.global.config.auth.LoginMember;
 import com.illch.subscription.application.SubscriptionService;

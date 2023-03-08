@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class SubscriptionResponses {
 
-    private List<SubscriptionResponse> subscriptionResponses;
+    private List<SubscriptionResponse> subscriptionsResponse;
 
 
     public static SubscriptionResponses of(List<Subscription> subscriptions) {
         return SubscriptionResponses.builder()
-                .subscriptionResponses(subscriptions.stream()
+                .subscriptionsResponse(subscriptions.stream()
                         .map(SubscriptionResponse::of)
                         .collect(Collectors.toList()))
                 .build();
