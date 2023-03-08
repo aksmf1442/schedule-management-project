@@ -6,6 +6,7 @@ import com.illch.global.config.auth.LoginMember;
 import com.illch.subscription.application.SubscriptionService;
 import com.illch.subscription.dto.SubscriptionRequest;
 import com.illch.subscription.dto.SubscriptionResponse;
+import com.illch.subscription.dto.SubscriptionResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class SubscriptionController {
 
     private final SubscriptionService subscriptionService;
+
+    @GetMapping("")
+    public ResponseEntity<SubscriptionResponses> findSubscriptions(@LoginMember AppMember appMember) {
+        SubscriptionResponses subscriptionResponses = subscriptionService.findSubscriptions(appMember.getId());
+        return ResponseEntity.ok(subscriptionResponses);
+    }
 
     @PostMapping("")
     public ResponseEntity<SubscriptionResponse> createSubscription(@RequestBody SubscriptionRequest subscriptionRequest, @LoginMember AppMember appMember) {

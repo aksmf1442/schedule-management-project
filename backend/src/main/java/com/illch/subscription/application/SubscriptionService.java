@@ -8,10 +8,13 @@ import com.illch.member.repository.MemberRepository;
 import com.illch.subscription.domain.Subscription;
 import com.illch.subscription.dto.SubscriptionRequest;
 import com.illch.subscription.dto.SubscriptionResponse;
+import com.illch.subscription.dto.SubscriptionResponses;
 import com.illch.subscription.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Transactional
 @RequiredArgsConstructor
@@ -35,5 +38,11 @@ public class SubscriptionService {
         Subscription subscription = subscriptionRepository.findById(id).orElseThrow(RuntimeException::new);
         appMember.checkSameMember(subscription.getMember());
         subscriptionRepository.deleteById(id);
+    }
+
+    public SubscriptionResponses findSubscriptions(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
+        List<Subscription> subscriptions = subscriptionRepository.findAllByMember(member).orElseThrow(RuntimeException::new);
+        return SubscriptionResponses.of(subscriptions);
     }
 }
