@@ -2,7 +2,6 @@ package com.illch.schedule.presentation;
 
 import com.illch.global.config.auth.AppMember;
 import com.illch.global.config.auth.LoginMember;
-import com.illch.member.dto.MemberResponse;
 import com.illch.schedule.application.ScheduleService;
 import com.illch.schedule.dto.ScheduleRequest;
 import com.illch.schedule.dto.ScheduleResponse;
@@ -34,4 +33,5 @@ public class ScheduleController {
         scheduleService.deleteSchedule(id, appMember.getId());
         return ResponseEntity.noContent().build();
     }
+
 }
