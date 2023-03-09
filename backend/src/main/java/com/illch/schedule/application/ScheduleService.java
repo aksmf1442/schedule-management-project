@@ -30,9 +30,8 @@ public class ScheduleService {
     public ScheduleResponse createSchedule(Long calendarId, ScheduleRequest scheduleRequest, Long memberId) {
         Calendar calendar = calendarRepository.findById(calendarId).orElseThrow(RuntimeException::new);
         Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
-        Subscription subscription = subscriptionRepository.findByMemberAndCalendar(member, calendar).orElseThrow(RuntimeException::new);
 
-        subscription.getRole().validateEditingPermission();
+        validatePermission(member, calendar);
 
         Schedule schedule = scheduleRepository.save(scheduleRequest.toSchedule(calendar));
         return ScheduleResponse.of(schedule);
@@ -42,11 +41,25 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(id).orElseThrow(RuntimeException::new);
         Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
         Calendar calendar = schedule.getCalendar();
-        Subscription subscription = subscriptionRepository.findByMemberAndCalendar(member, calendar).orElseThrow(RuntimeException::new);
 
-        subscription.getRole().validateEditingPermission();
+        validatePermission(member, calendar);
 
         schedule.update(scheduleRequest);
         return ScheduleResponse.of(schedule);
+    }
+
+    public void deleteSchedule(Long id, Long memberId) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(RuntimeException::new);
+        Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
+        Calendar calendar = schedule.getCalendar();
+
+        validatePermission(member, calendar);
+
+        scheduleRepository.delete(schedule);
+    }
+
+    private void validatePermission(Member member, Calendar calendar) {
+        Subscription subscription = subscriptionRepository.findByMemberAndCalendar(member, calendar).orElseThrow(RuntimeException::new);
+        subscription.getRole().validateEditingPermission();
     }
 }

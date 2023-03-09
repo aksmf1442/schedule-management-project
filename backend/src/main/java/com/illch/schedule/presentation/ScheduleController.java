@@ -28,4 +28,10 @@ public class ScheduleController {
         ScheduleResponse scheduleResponse = scheduleService.updateSchedule(id, scheduleRequest, appMember.getId());
         return ResponseEntity.ok(scheduleResponse);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSchedule(@PathVariable Long id, @LoginMember AppMember appMember) {
+        scheduleService.deleteSchedule(id, appMember.getId());
+        return ResponseEntity.noContent().build();
+    }
 }
