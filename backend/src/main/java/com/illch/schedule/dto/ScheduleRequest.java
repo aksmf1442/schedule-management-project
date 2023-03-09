@@ -27,13 +27,12 @@ public class ScheduleRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime endDateTime;
 
-    public Schedule toSchedule(Calendar calendar, Member member) {
+    public Schedule toSchedule(Calendar calendar) {
         return Schedule.builder()
                 .title(title)
                 .startDateTime(startDateTime)
                 .endDateTime(endDateTime)
                 .calendar(calendar)
-                .member(member)
                 .build();
     }
 }

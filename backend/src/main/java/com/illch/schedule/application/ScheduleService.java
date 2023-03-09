@@ -34,7 +34,19 @@ public class ScheduleService {
 
         subscription.getRole().validateEditingPermission();
 
-        Schedule schedule = scheduleRepository.save(scheduleRequest.toSchedule(calendar, member));
+        Schedule schedule = scheduleRepository.save(scheduleRequest.toSchedule(calendar));
+        return ScheduleResponse.of(schedule);
+    }
+
+    public ScheduleResponse updateSchedule(Long id, ScheduleRequest scheduleRequest, Long memberId) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(RuntimeException::new);
+        Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
+        Calendar calendar = schedule.getCalendar();
+        Subscription subscription = subscriptionRepository.findByMemberAndCalendar(member, calendar).orElseThrow(RuntimeException::new);
+
+        subscription.getRole().validateEditingPermission();
+
+        schedule.update(scheduleRequest);
         return ScheduleResponse.of(schedule);
     }
 }

@@ -2,7 +2,7 @@ package com.illch.schedule.domain;
 
 import com.illch.BaseEntity;
 import com.illch.calendar.domain.Calendar;
-import com.illch.member.domain.Member;
+import com.illch.schedule.dto.ScheduleRequest;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,16 +28,17 @@ public class Schedule extends BaseEntity {
     @JoinColumn(name = "calendar_id", nullable = false)
     private Calendar calendar;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
-
     @Builder
-    public Schedule(String title, LocalDateTime startDateTime, LocalDateTime endDateTime, Calendar calendar, Member member) {
+    public Schedule(String title, LocalDateTime startDateTime, LocalDateTime endDateTime, Calendar calendar) {
         this.title = title;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.calendar = calendar;
-        this.member = member;
+    }
+
+    public void update(ScheduleRequest scheduleRequest) {
+        this.title = scheduleRequest.getTitle();
+        this.startDateTime = scheduleRequest.getStartDateTime();
+        this.endDateTime = scheduleRequest.getEndDateTime();
     }
 }

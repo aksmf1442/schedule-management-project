@@ -22,4 +22,10 @@ public class ScheduleController {
         ScheduleResponse scheduleResponse = scheduleService.createSchedule(calendarId, scheduleRequest, appMember.getId());
         return ResponseEntity.ok(scheduleResponse);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ScheduleResponse> updateSchedule(@PathVariable Long id, @RequestBody ScheduleRequest scheduleRequest, @LoginMember AppMember appMember) {
+        ScheduleResponse scheduleResponse = scheduleService.updateSchedule(id, scheduleRequest, appMember.getId());
+        return ResponseEntity.ok(scheduleResponse);
+    }
 }
