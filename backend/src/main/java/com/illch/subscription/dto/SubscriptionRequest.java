@@ -2,6 +2,7 @@ package com.illch.subscription.dto;
 
 import com.illch.calendar.domain.Calendar;
 import com.illch.member.domain.Member;
+import com.illch.subscription.domain.Color;
 import com.illch.subscription.domain.Subscription;
 import com.illch.subscription.domain.SubscriptionRole;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ public class SubscriptionRequest {
 
     public Subscription toSubscription(Member member, Calendar calendar) {
         return Subscription.builder()
-                .color(color)
+                .color(Color.valueOf(color))
                 .role(SubscriptionRole.COMMON)
                 .checked(true)
                 .member(member)

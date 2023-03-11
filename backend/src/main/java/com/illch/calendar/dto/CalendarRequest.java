@@ -2,6 +2,7 @@ package com.illch.calendar.dto;
 
 import com.illch.calendar.domain.Calendar;
 import com.illch.member.domain.Member;
+import com.illch.subscription.domain.Color;
 import com.illch.subscription.domain.Subscription;
 import com.illch.subscription.domain.SubscriptionRole;
 import lombok.AllArgsConstructor;
@@ -33,8 +34,7 @@ public class CalendarRequest {
 
     public Subscription toSubscription(Member member, Calendar calendar) {
         return Subscription.builder()
-                // todo: Color enum 생성해서 랜덤 컬러로 들어갈 수 있게 변경
-                .color("red")
+                .color(Color.pickRandomColor())
                 .role(SubscriptionRole.ADMIN)
                 .checked(true)
                 .member(member)
