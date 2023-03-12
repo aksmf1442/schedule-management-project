@@ -15,9 +15,9 @@ public class AppMember {
 
     public static AppMember of(Long id) {
         return AppMember.builder()
-            .id(id)
-            .role(Role.MEMBER)
-            .build();
+                .id(id)
+                .role(Role.MEMBER)
+                .build();
     }
 
     public void checkSameMember(Member member) {

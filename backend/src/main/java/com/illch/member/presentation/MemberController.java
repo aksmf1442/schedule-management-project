@@ -1,13 +1,11 @@
 package com.illch.member.presentation;
 
-import com.illch.auth.dto.OauthMemberResponse;
 import com.illch.global.config.auth.AppMember;
 import com.illch.global.config.auth.LoginMember;
 import com.illch.member.application.MemberService;
 import com.illch.member.dto.MemberResponse;
 import com.illch.member.dto.UpdateMyNicknameRequest;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

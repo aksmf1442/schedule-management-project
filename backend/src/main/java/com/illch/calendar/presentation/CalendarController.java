@@ -1,9 +1,13 @@
 package com.illch.calendar.presentation;
 
 import com.illch.calendar.application.CalendarService;
-import com.illch.calendar.dto.*;
+import com.illch.calendar.dto.CalendarRequest;
+import com.illch.calendar.dto.SubscribersResponse;
+import com.illch.calendar.dto.UpdateCalendarOpenedRequest;
+import com.illch.calendar.dto.UpdateCalendarTitleRequest;
 import com.illch.global.config.auth.AppMember;
 import com.illch.global.config.auth.LoginMember;
+import com.illch.schedule.dto.SchedulesResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +26,15 @@ public class CalendarController {
     }
 
     @GetMapping("/{id}/subscribers")
-    public ResponseEntity<SubscribersResponse> findSubscribers(@PathVariable Long id, @LoginMember AppMember appMember) {
-         SubscribersResponse subscribersResponse =  calendarService.findSubscribers(id, appMember);
-         return ResponseEntity.ok(subscribersResponse);
+    public ResponseEntity<SubscribersResponse> findSubscribers(@PathVariable Long id) {
+        SubscribersResponse subscribersResponse = calendarService.findSubscribers(id);
+        return ResponseEntity.ok(subscribersResponse);
+    }
+
+    @GetMapping("/{id}/schedules")
+    public ResponseEntity<SchedulesResponse> findSchedules(@PathVariable Long id) {
+        SchedulesResponse schedulesResponse = calendarService.findSchedules(id);
+        return ResponseEntity.ok(schedulesResponse);
     }
 
     @PatchMapping("/{id}/title")
