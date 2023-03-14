@@ -1,8 +1,12 @@
 package com.illch.auth.exception;
 
 import com.illch.global.exception.http.UnauthorizedException;
+import lombok.Getter;
 
+@Getter
 public class JwtTokenNullException extends UnauthorizedException {
 
-    private final String message = "토큰을 찾을 수 없습니다.";
+    public JwtTokenNullException() {
+        super("토큰을 찾을 수 없습니다.");
+    }
 }

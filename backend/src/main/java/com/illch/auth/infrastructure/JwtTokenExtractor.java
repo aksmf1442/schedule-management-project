@@ -1,5 +1,6 @@
 package com.illch.auth.infrastructure;
 
+import com.illch.auth.exception.InvalidBearerFormatException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.util.WebUtils;
 
@@ -19,7 +20,7 @@ public class JwtTokenExtractor {
         if (checkBearer(token)) {
             return token.substring(BEARER.length()).trim();
         }
-        throw new RuntimeException();
+        throw new InvalidBearerFormatException();
     }
 
     public static String extractRefreshToken(HttpServletRequest request) {
