@@ -1,5 +1,7 @@
 package com.illch.global.config.util;
 
+import com.illch.global.exception.common.MethodNotFoundException;
+
 import java.util.Arrays;
 
 public enum PathMethod {
@@ -9,7 +11,7 @@ public enum PathMethod {
         return Arrays.stream(values())
                 .filter(pathMethod -> pathMethod.name().equals(method))
                 .findFirst()
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(MethodNotFoundException::new);
     }
 
     public boolean validate(PathMethod value) {

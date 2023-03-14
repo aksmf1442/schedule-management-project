@@ -3,7 +3,6 @@ package com.illch.auth.exception;
 import com.illch.global.exception.http.UnauthorizedException;
 import lombok.Getter;
 
-@Getter
 public class FailedToGetProfileException extends UnauthorizedException {
 
     public FailedToGetProfileException() {

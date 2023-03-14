@@ -3,7 +3,6 @@ package com.illch.calendar.exception;
 import com.illch.global.exception.http.NotFoundException;
 import lombok.Getter;
 
-@Getter
 public class CalendarNotFoundException extends NotFoundException {
 
     public CalendarNotFoundException() {

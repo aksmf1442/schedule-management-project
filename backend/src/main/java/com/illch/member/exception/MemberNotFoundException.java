@@ -3,7 +3,6 @@ package com.illch.member.exception;
 import com.illch.global.exception.http.BadRequestException;
 import lombok.Getter;
 
-@Getter
 public class MemberNotFoundException extends BadRequestException {
 
     public MemberNotFoundException() {

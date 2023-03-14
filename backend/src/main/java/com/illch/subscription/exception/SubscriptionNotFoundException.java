@@ -3,7 +3,6 @@ package com.illch.subscription.exception;
 import com.illch.global.exception.http.NotFoundException;
 import lombok.Getter;
 
-@Getter
 public class SubscriptionNotFoundException extends NotFoundException {
 
     public SubscriptionNotFoundException() {

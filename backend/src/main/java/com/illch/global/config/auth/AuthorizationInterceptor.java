@@ -1,5 +1,7 @@
 package com.illch.global.config.auth;
 
+import com.illch.auth.exception.JwtAccessTokenRenewalException;
+import com.illch.auth.exception.JwtTokenExpiredException;
 import com.illch.auth.infrastructure.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,10 +31,10 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
         String refreshToken = JwtTokenExtractor.extractRefreshToken(request);
         if (validateToken(refreshToken, jwtRefreshToken)) {
-            throw new RuntimeException();
+            throw new JwtAccessTokenRenewalException();
         }
 
-        throw new RuntimeException();
+        throw new JwtTokenExpiredException("모든");
     }
 
     private boolean validateToken(String token, JwtToken jwtToken) {
