@@ -23,8 +23,7 @@ public class SearchService {
 
     public SearchSchedulesResponse searchSchedules(SearchSchedulesRequest searchSchedulesRequest, Long userId) {
         Member member = memberRepository.findById(userId).orElseThrow(RuntimeException::new);
-        List<Schedule> schedules = scheduleRepository.searchSchedules(searchSchedulesRequest, member)
-                .orElseThrow(RuntimeException::new);
+        List<Schedule> schedules = scheduleRepository.searchSchedules(searchSchedulesRequest, member);
         Long schedulesCount = scheduleRepository.countSchedulesByTitle(searchSchedulesRequest.getTitle(), member);
         Long maxPage = Math.floorDiv(Math.abs(schedulesCount - 1), searchSchedulesRequest.getLimit()) + 1;
         return SearchSchedulesResponse.of(schedules, maxPage);
