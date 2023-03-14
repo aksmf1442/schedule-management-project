@@ -1,7 +1,6 @@
 package com.illch.schedule.dto;
 
 import com.illch.calendar.domain.Calendar;
-import com.illch.member.domain.Member;
 import com.illch.schedule.domain.Schedule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

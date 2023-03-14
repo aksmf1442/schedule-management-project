@@ -4,7 +4,6 @@ import com.illch.schedule.domain.Schedule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDateTime;
 
