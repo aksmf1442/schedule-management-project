@@ -1,6 +1,9 @@
 package com.illch.auth.infrastructure;
 
+import com.illch.auth.exception.JwtTokenExpiredException;
+import com.illch.auth.exception.JwtTokenNullException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
@@ -37,19 +40,19 @@ public class JwtTokenProvider {
     }
 
     public void validateToken(String token, JwtToken jwtToken) {
+        validateNullToken(token);
         try {
-            validateNullToken(token);
             Jwts.parser()
                     .setSigningKey(jwtToken.getSecretKey())
                     .parseClaimsJws(token);
-        } catch (RuntimeException e) {
-            throw new RuntimeException();
+        } catch (ExpiredJwtException e) {
+            throw new JwtTokenExpiredException(jwtToken.getName());
         }
     }
 
     private void validateNullToken(String token) {
         if (Objects.isNull(token)) {
-            throw new RuntimeException();
+            throw new JwtTokenNullException();
         }
     }
 

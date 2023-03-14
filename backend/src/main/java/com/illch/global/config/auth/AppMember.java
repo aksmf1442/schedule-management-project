@@ -2,6 +2,7 @@ package com.illch.global.config.auth;
 
 import com.illch.member.domain.Member;
 import com.illch.member.domain.Role;
+import com.illch.member.exception.MemberUnauthorizedException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class AppMember {
 
     public void checkSameMember(Member member) {
         if (!member.checkSameUser(this.getId())) {
-            throw new RuntimeException();
+            throw new MemberUnauthorizedException();
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.illch.auth.infrastructure;
 
 import com.illch.auth.dto.OauthMemberResponse;
+import com.illch.auth.exception.FailedToGetAccessTokenException;
+import com.illch.auth.exception.FailedToGetProfileException;
 import com.illch.auth.infrastructure.dto.OauthTokenRequest;
 import com.illch.auth.infrastructure.dto.OauthTokenResponse;
 import com.illch.member.domain.Member;
@@ -54,7 +56,7 @@ public class GoogleOauthManager {
                 .headers(header -> header.setBearerAuth(oauthTokenResponse.getAccessToken()))
                 .exchangeToMono(response -> {
                     if (!response.statusCode().equals(HttpStatus.OK)) {
-                        throw new RuntimeException();
+                        throw new FailedToGetProfileException();
                     }
                     return response.bodyToMono(JSONObject.class);
                 });
@@ -81,7 +83,7 @@ public class GoogleOauthManager {
                 )
                 .exchangeToMono(response -> {
                     if (!response.statusCode().equals(HttpStatus.OK)) {
-                        throw new RuntimeException();
+                        throw new FailedToGetAccessTokenException();
                     }
                     return response.bodyToMono(OauthTokenResponse.class);
                 });
