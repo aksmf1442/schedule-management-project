@@ -1,6 +1,7 @@
 package com.illch.auth.infrastructure;
 
 import com.illch.auth.exception.InvalidBearerFormatException;
+import com.illch.auth.exception.JwtTokenNullException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.util.WebUtils;
 
@@ -33,7 +34,7 @@ public class JwtTokenExtractor {
 
     private static void validateNullToken(String token) {
         if (token == null) {
-            throw new RuntimeException();
+            throw new JwtTokenNullException();
         }
     }
 
